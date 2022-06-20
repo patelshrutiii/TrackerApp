@@ -1,0 +1,188 @@
+﻿@{
+    if (Session["UserLogo"] != null)
+    {
+        ViewBag.UserLogo = Session["UserLogo"].ToString();
+    }
+    else
+    {
+        ViewBag.UserLogo = "";
+    }
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" href="~/images/favicon.ico">
+    <link href="~/CSS/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/CSS/icons.css" rel="stylesheet" type="text/css" />
+    <link href="~/CSS/style.css" rel="stylesheet" type="text/css" />
+    <script src="~/js/modernizr.min.js"></script>
+
+</head>
+<body>
+
+    <div ng-app="Webapp">
+        <!-- Navigation Bar-->
+        <header id="topnav">
+            <div class="topbar-main">
+                <div class="container-fluid">
+
+                    <!-- Logo container-->
+                    <div class="logo">
+                        <!-- Text Logo -->
+                        <!--<a href="index.html" class="logo">-->
+                        <!--UBold-->
+                        <!--</a>-->
+                        <!-- Image Logo -->
+                        <h2><strong style="color:#797979">Tracker</strong></h2>
+
+                    </div>
+                    <!-- End Logo container-->
+
+
+                    <div class="menu-extras topbar-custom">
+
+                        <ul class="list-inline float-right mb-0">
+
+                            <li class="menu-item list-inline-item">
+                                <!-- Mobile menu toggle-->
+                                <a class="navbar-toggle nav-link">
+                                    <div class="lines">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </div>
+                                </a>
+                                <!-- End mobile menu toggle-->
+                            </li>
+
+                            <li class="list-inline-item dropdown notification-list">
+                                <a class="nav-link dropdown-toggle waves-effect waves-light nav-user disabled" data-toggle="dropdown" href="#" role="button"
+                                   aria-haspopup="false" aria-expanded="false">
+                                    <div class="btn btn-default btn-rounded waves-effect waves-light" style="padding: 1px 9px 0px 7px; line-height: 37px;">
+                                        @*@Session["Logo"].ToString()*@
+                                        @ViewBag.UserLogo
+                                    </div>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right profile-dropdown " aria-labelledby="Preview">
+                                    <!-- item-->
+                                    <a href="@Url.Action("List","Setting")" class="dropdown-item notify-item">
+                                        <i class="md md-account-circle"></i> <span>Profile</span>
+                                    </a>
+
+                                    <!-- item-->
+                                    <a href="@Url.Action("LogOut","Company")" class="dropdown-item notify-item">
+                                        <i class="md md-settings-power"></i> <span>Logout</span>
+                                    </a>
+
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <!-- end menu-extras -->
+
+                    <div class="clearfix"></div>
+
+                </div> <!-- end container -->
+            </div>
+            <!-- end topbar-main -->
+
+            <div class="navbar-custom">
+                <div class="container-fluid">
+                    <div id="navigation">
+                        <!-- Navigation Menu-->
+                        <ul class="navigation-menu">
+
+                            <li class="has-submenu">
+                                <a href="@Url.Action("List","DashBoard")" class="nav-link disabled"><i class="md md-dashboard"></i>Dashboard</a>
+                            </li>
+
+                            <li class="has-submenu">
+                                <a><i class="md md-description disabled"></i>REPORTS</a>                              
+                            </li>
+
+                            <li class="has-submenu">
+                                <a href="@Url.Action("List","ScreenShot")" class="nav-link disabled"><i class="md md-my-library-books"></i>SCREENSHOTS</a>
+                            </li>
+
+                            <li class="has-submenu">
+                                <a><i class="md md-people disabled"></i>MANAGE</a>                               
+                            </li>
+
+
+                            <li class="has-submenu">
+                                <a href="@Url.Action("List","Setting")" class="nav-link disabled"><i class="md md-settings"></i>SETTINGS</a>
+                            </li>
+
+                        </ul>
+                        <!-- End navigation menu -->
+                    </div> <!-- end #navigation -->
+                </div> <!-- end container -->
+            </div> <!-- end navbar-custom -->
+        </header>
+        <!-- End Navigation Bar-->
+
+
+        <div class="wrapper">
+            <div class="container-fluid">
+
+                <!-- Page-Title -->
+                @*<div class="row">
+                    <div class="col-sm-12">
+                        <div class="page-title-box">
+                            <div class="btn-group pull-right">
+                                <ol class="breadcrumb hide-phone p-0 m-0">
+                                    <li class="breadcrumb-item"><a href="#">Ubold</a></li>
+                                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                                    <li class="breadcrumb-item active">Dashboard</li>
+                                </ol>
+                            </div>
+                        </div>*@
+
+                <div ng-cloak>
+                    @RenderBody()
+                </div>
+                @*</div>
+                    </div>*@
+                <!-- end page title end breadcrumb -->
+
+            </div> <!-- end container -->
+        </div>
+        <!-- end wrapper -->
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        © 2021-2022 Tracker.com
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- End Footer -->
+        <!-- jQuery  -->
+        @*<script src="~/js/jquery.min.js"></script>*@
+        <script src="~/js/popper.min.js"></script> @*Popper for Bootstrap*@
+        <script src="~/js/bootstrap.min.js"></script>
+        <script src="~/js/waves.js"></script>
+        <script src="~/js/jquery.slimscroll.js"></script>
+        <script src="~/js/jquery.scrollTo.min.js"></script>
+        <script src="~/Scripts/angular.min.js"></script>
+        <script src="~/plugins/moment/moment.js"></script>
+        <script src="~/Scripts/sweetalert.min.js"></script>
+
+        <!-- App js -->
+        <script src="~/js/dirPagination.js"></script>
+        <script type="text/javascript" src="https://cdn3.devexpress.com/jslib/21.1.6/js/dx.all.js"></script>
+        <script src="~/Scripts/Module/app.js"></script>
+        <script src="~/js/jquery.core.js"></script>
+        <script src="~/js/jquery.app.js"></script>
+
+        @RenderSection("script", required: false)
+
+    </div>
+</body>
+</html>
+

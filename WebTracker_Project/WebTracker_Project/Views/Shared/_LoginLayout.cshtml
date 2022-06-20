@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/CSS/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/CSS/icons.css" rel="stylesheet" type="text/css" />
+    <link href="~/CSS/style.css" rel="stylesheet" type="text/css" />
+    <script src="~/js/modernizr.min.js"></script>
+</head>
+<body>
+    <div ng-app="Webapp">
+        <div ng-cloak>
+            @RenderBody()
+        </div>
+        <script src="~/js/popper.min.js"></script> @*Popper for Bootstrap*@
+        <script src="~/js/bootstrap.min.js"></script>
+        <script src="~/js/waves.js"></script>
+        <script src="~/js/jquery.slimscroll.js"></script>
+        <script src="~/js/jquery.scrollTo.min.js"></script>
+        <script src="~/Scripts/angular.min.js"></script>
+        <script src="~/plugins/moment/moment.js"></script>
+        <script src="~/Scripts/sweetalert.min.js"></script>
+        <script src="~/js/dirPagination.js"></script>
+        @*<script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>*@
+
+        <script type="text/javascript" src="https://cdn3.devexpress.com/jslib/21.1.6/js/dx.all.js"></script>
+
+        <!-- App js -->
+
+        <script src="~/js/jquery.core.js"></script>
+        <script src="~/js/jquery.app.js"></script>
+        <script src="~/Scripts/Module/app.js"></script>
+        @RenderSection("script", required: false)
+    </div>
+
+    
+</body>
+</html>

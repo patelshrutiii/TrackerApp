@@ -1,0 +1,207 @@
+﻿@{
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+<head>
+    <title>Archieve Teams</title>
+    <link href="~/CSS/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            font-size: 16px;
+        }
+
+        th {
+            background-color: #D8EAF6 !important;
+            color: #1C83A5;
+            cursor: pointer;
+        }
+
+        td {
+            background-color: #F6F6F6;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
+        .com {
+            padding: 5px;
+            margin: 1px 0;
+            font-family: sans-serif;
+            font-size: 15px;
+            color: #666;
+            outline: 0;
+            border: 0;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            background: transparent !important;
+        }
+
+        .arrow-up {
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 10px solid gray;
+            display: inline-block;
+            float: right;
+            margin-top: 5px;
+        }
+
+        .arrow-down {
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 10px solid gray;
+            display: inline-block;
+            float: right;
+            margin-top: 5px;
+        }
+
+        .tool1 {
+            cursor: help;
+            position: relative;
+        }
+
+            .tool1::before,
+            .tool1::after {
+                left: 50%;
+                opacity: 0;
+                position: absolute;
+                z-index: -100;
+            }
+
+            .tool1hover::before,
+            .tool1:focus::before,
+            .tool1:hover::after,
+            .tool1:focus::after {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+                z-index: 100;
+            }
+
+            .tool1::before {
+                border-style: solid;
+                border-width: 1em 0.75em 0 0.75em;
+                border-color: #3E474F transparent transparent transparent;
+                bottom: 120%;
+                content: "";
+                /*margin-left: -0.5em;*/
+                transition: all .65s cubic-bezier(.84,-0.18,.31,1.26), opacity .65s .5s;
+                transform: scale(.6) translateY(-90%);
+            }
+
+            .tool1:hover::before,
+            .tool1:focus::before {
+                transition: all .65s cubic-bezier(.84,-0.18,.31,1.26) .2s;
+            }
+
+
+            .tool1::after {
+                background: black;
+                border-radius: .25em;
+                bottom: 100%;
+                color: #EDEFF0;
+                content: attr(data-tip);
+                margin-left: -1.75em;
+                /*padding-left: 1em;*/
+                transition: all .65s cubic-bezier(.84,-0.18,.31,1.26) .2s;
+                transform: scale(.6) translateY(50%);
+                width: 4.75em;
+                height: 25px;
+            }
+
+            .tool1:hover::after,
+            .tool1:focus::after {
+                transition: all .65s cubic-bezier(.84,-0.18,.31,1.26);
+            }
+
+        @@media (max-width: 760px) {
+            .tool1::after {
+                font-size: .75em;
+                margin-left: -5em;
+                width: 10em;
+            }
+        }
+    </style>
+</head>
+
+<body style="background-color: #F6F6F6;">
+    <div ng-controller="TeamController" ng-init="ArchieveTeamList()">
+        @*LIST*@
+        <div class="container" ng-show="isshowtable==true">
+            <div style="height:70px;"></div>
+            <div class="card-box" style="background-color:white !important; box-shadow:none!important;">
+
+                <div class="row">
+                    <div class="col-4"><h1>Team Members</h1></div>
+                    <div class="col text-right pt-3">
+                        <button type="button" style="width:190px!important;color:black!important;" class="btn btn-primary btn-custom waves-effect waves-light"><i class="ion-android-arrow-back" style="padding-left: 10px !important;"></i>&nbsp;&nbsp;<a href="@Url.Action("List","Team")" style="color:black!important"> Team List</a></button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div style="height:-5px;"></div>
+            <div class="card-box" style="background-color: #F6F6F6 !important; box-shadow: none !important; padding-bottom: 0px; ">
+                <div class="row">
+                    <div class="col-md-3"><b>Number Of Team Members : {{archieveteams.length}}</b></div>
+                    <div class="col-md-7"></div>
+                    <div class="col-md-2"></div>
+                </div>
+            </div>
+
+            <div class="container">
+                <table cellpadding="12" class="table align-content-center">
+                    <tr>
+                        <th ng-click="sortData('FirstName')">
+                            Full Name <div ng-class="getSortClass('FirstName')"></div>
+                        </th>
+                        <th ng-click="sortData('Email')">
+                            Email <div ng-class="getSortClass('Email')"></div>
+                        </th>
+                        <th ng-click="sortData('RoleId')">
+                            Role <div ng-class="getSortClass('RoleId')"></div>
+                        </th>
+                        <th class="d-flex justify-center">
+                            Actions
+                        </th>
+                    </tr>
+
+                    <tr ng-repeat="team in archieveteams | orderBy:sortColumn:reverseSort">
+
+                        <td>
+                            {{team.FirstName +' '+ team.LastName}}
+                        </td>
+                        <td>
+                            {{team.Email}}
+                        </td>
+                        <td>
+                            {{team.RoleName}}
+                        </td>
+
+                        <td class="d-flex justify-center">
+
+                            <button type="submit" style="border:none!important;" class="tool1" data-tip="Restore" ng-click="Restore(team.UserId)"><i class="ti-import" style="color:forestgreen;font-size:20px;"></i></button>
+                            <button type="submit" style="border:none!important;" class="tool1" data-tip="Delete" ng-click="Trash(team.UserId)"><i class="fa fa-trash-o" style="color:red;font-size:20px;"></i></button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="~/js/jquery.min.js"></script>
+</body>
+@section script{
+
+    <script defer src="~/Scripts/Services/TeamService.js"></script>
+    <script src="~/Scripts/Services/DepartmentService.js"></script>
+    <script src="~/Scripts/Services/DesignationService.js"></script>
+    <script src="~/Scripts/Services/RoleService.js"></script>
+    <script defer src="~/Scripts/AngularController/TeamCtrl.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+}
+
+
+
+

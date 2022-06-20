@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d020e12349234029b314a6f7ee80e4c5" Name="Diagram1">
+        <EntityTypeShape EntityType="TrackerAppModel.CityMaster" Width="1.5" PointX="3" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrackerAppModel.CompanyMaster" Width="1.5" PointX="5.25" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrackerAppModel.DailySummary" Width="1.5" PointX="9.75" PointY="27.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrackerAppModel.DailyTimeDetail" Width="1.5" PointX="12.75" PointY="27.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrackerAppModel.Department" Width="1.5" PointX="7.5" PointY="23.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrackerAppModel.Designation" Width="1.5" PointX="7.5" PointY="27.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrackerAppModel.ManualTime" Width="1.5" PointX="15" PointY="26.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrackerAppModel.PriorityMaster" Width="1.5" PointX="7.5" PointY="40.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrackerAppModel.ProjectAssign" Width="1.5" PointX="12" PointY="22" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrackerAppModel.ProjectMaster" Width="1.5" PointX="7.5" PointY="34" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrackerAppModel.Role" Width="1.5" PointX="7.5" PointY="31.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrackerAppModel.ScreenShot" Width="1.5" PointX="12" PointY="32" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrackerAppModel.StateMaster" Width="1.5" PointX="0.75" PointY="21.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrackerAppModel.StatusMaster" Width="1.5" PointX="7.5" PointY="42.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrackerAppModel.TaskAssign" Width="1.5" PointX="15" PointY="32" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrackerAppModel.TaskMaster" Width="1.5" PointX="9.75" PointY="32.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrackerAppModel.UserMaster" Width="1.5" PointX="9.75" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrackerAppModel.AllCompanyDetail" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrackerAppModel.AllDeptDetail" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrackerAppModel.AllDesDetail" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrackerAppModel.AllRoleDetail" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrackerAppModel.AttendenceDetail" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="TrackerAppModel.FK_CityMaster_StateMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_CompanyMaster_CityMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_CompanyMaster_StateMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_DailySummary_CompanyMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_DailyTimeDetails_CompanyMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_Department_CompanyMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_Designation_CompanyMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_ManualTime_CompanyMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_ProjectAssign_CompanyMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_ProjectMaster_CompanyMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_Role_CompanyMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_ScreenShots_CompanyMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_TaskAssign_CompanyMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_TaskMaster_CompanyMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_UserMaster_CompanyMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_DailySummary_ProjectMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_DailySummary_TaskMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_DailySummary_UserMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_DailyTimeDetails_ProjectMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_DailyTimeDetails_TaskMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_DailyTimeDetails_UserMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_UserMaster_Department" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_UserMaster_Designation" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_ManualTime_ProjectMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_ManualTime_TaskMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_ManualTime_UserMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_TaskMaster_PriorityMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_ProjectAssign_ProjectMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_ProjectAssign_UserMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_ScreenShots_ProjectMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_TaskAssign_ProjectMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_TaskMaster_ProjectMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_UserMaster_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_ScreenShots_TaskMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_ScreenShots_UserMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_TaskMaster_StatusMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_TaskAssign_TaskMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TrackerAppModel.FK_TaskAssign_UserMaster" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

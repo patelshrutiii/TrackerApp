@@ -1,0 +1,404 @@
+﻿@{
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+<head>
+    <title>Teams</title>
+    <link href="~/CSS/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        body {
+            font-size: 16px;
+        }
+
+        th {
+            background-color: #D8EAF6 !important;
+            color: #1C83A5;
+            cursor: pointer;
+        }
+
+        td {
+            background-color: #F6F6F6;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
+        .com {
+            padding: 5px;
+            margin: 1px 0;
+            font-family: sans-serif;
+            font-size: 15px;
+            color: #666;
+            outline: 0;
+            border: 0;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            background: transparent !important;
+        }
+
+        .arrow-up {
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 10px solid gray;
+            display: inline-block;
+            float: right;
+            margin-top: 5px;
+        }
+
+        .arrow-down {
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 10px solid gray;
+            display: inline-block;
+            float: right;
+            margin-top: 5px;
+        }
+
+        .tool1 {
+            cursor: help;
+            position: relative;
+        }
+
+            .tool1::before,
+            .tool1::after {
+                left: 50%;
+                opacity: 0;
+                position: absolute;
+                z-index: -100;
+            }
+
+            .tool1hover::before,
+            .tool1:focus::before,
+            .tool1:hover::after,
+            .tool1:focus::after {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+                z-index: 100;
+            }
+
+            .tool1::before {
+                border-style: solid;
+                border-width: 1em 0.75em 0 0.75em;
+                border-color: #3E474F transparent transparent transparent;
+                bottom: 120%;
+                content: "";
+                /*margin-left: -0.5em;*/
+                transition: all .65s cubic-bezier(.84,-0.18,.31,1.26), opacity .65s .5s;
+                transform: scale(.6) translateY(-90%);
+            }
+
+            .tool1:hover::before,
+            .tool1:focus::before {
+                transition: all .65s cubic-bezier(.84,-0.18,.31,1.26) .2s;
+            }
+
+
+            .tool1::after {
+                background: black;
+                border-radius: .25em;
+                bottom: 100%;
+                color: #EDEFF0;
+                content: attr(data-tip);
+                margin-left: -1.75em;
+                /*padding-left: 1em;*/
+                transition: all .65s cubic-bezier(.84,-0.18,.31,1.26) .2s;
+                transform: scale(.6) translateY(50%);
+                width: 4.75em;
+                height: 25px;
+            }
+
+            .tool1:hover::after,
+            .tool1:focus::after {
+                transition: all .65s cubic-bezier(.84,-0.18,.31,1.26);
+            }
+
+        @@media (max-width: 760px) {
+            .tool1::after {
+                font-size: .75em;
+                margin-left: -5em;
+                width: 10em;
+            }
+        }
+    </style>
+</head>
+
+<body style="background-color: #F6F6F6;">
+    <div ng-controller="TeamController" ng-init="GetTeamList()">
+        @*LIST*@
+        <div class="container" ng-show="isshowtable==true">
+            <div style="height:70px;"></div>
+            <div class="card-box" style="background-color:white !important; box-shadow:none!important;">
+
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="row">
+                            <div class="col-4"><h2 style="font-weight: bold !important;">Team Members</h2></div>
+                            <div class="col pl-3 pt-2"><a href="@Url.Action("ArchieveList","Team")" style="color:cadetblue;font-size:16px;"><u>Go To Archieve</u></a></div>
+                        </div>
+                    </div>
+                    <div class="col text-right">
+                        @*<button type="button" class="btn btn-primary btn-custom waves-effect waves-light">Bulk Invite</button>*@
+                        <div class="form-group">
+                            <button type="submit" style="background-color:#7FBA00;color:#FFFFFF;height:40px;" class="form-control btn w-lg waves-effect waves-light" data-toggle="modal" data-target="#UserModal">
+                                <i class="fa fa-plus-circle"></i>
+                                &nbsp; Invite User
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div style="height:-5px;"></div>
+            <div class="card-box" style="background-color: #F6F6F6 !important; box-shadow: none !important; padding-bottom: 0px; ">
+                <div class="row">
+                    <div class="col-md-3"><b>Number Of Team Members : {{teams.length}}</b></div>
+                    <div class="col-md-6"></div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <input type="text" placeholder="Search" class="form-control" ng-model="search" style="border:none;" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <table cellpadding="12" class="table align-content-center">
+                    <tr>
+                        <th ng-click="sortData('FirstName')">
+                            Full Name <div ng-class="getSortClass('FirstName')"></div>
+                        </th>
+                        <th ng-click="sortData('Email')">
+                            Email <div ng-class="getSortClass('Email')"></div>
+                        </th>
+                        <th ng-click="sortData('RoleId')">
+                            Role <div ng-class="getSortClass('RoleId')"></div>
+                        </th>
+                        <th class="d-flex justify-center">
+                            Actions
+                        </th>
+                    </tr>
+
+                    <tr dir-paginate="team in teams | filter:search | orderBy:sortColumn:reverseSort | itemsPerPage:5" ng-model="search">
+
+                        <td>
+                            {{team.FirstName +' '+ team.LastName}}
+                        </td>
+                        <td>
+                            {{team.Email}}
+                        </td>
+                        <td>
+                            {{team.RoleName}}
+                        </td>
+                        @*<td>
+                    <center>∞</center>
+                </td>*@
+
+                        <td class="d-flex justify-center">
+
+                            <button type="submit" style="border:none!important;" class="tool1" data-tip="       " ng-click="Edit(team)"><i class="ti-pencil-alt" style="font-size: 20px; color: #0282A5"></i></button>
+                            @*<button type="submit" style="border:none!important;" data-toggle="modal" data-target="#UserModal"><i class="fa fa-unlock-alt" aria-hidden="true" style="font-size: 20px; color: #D14836"></i></button>*@
+                            <button type="submit" style="border:none!important;" class="tool1" data-tip="Delete" ng-click="Delete(team.UserId)"><i class="ti-close" style="font-size: 14px;font-weight:bold; color: #D14836"></i></button>
+                        </td>
+                    </tr>
+                </table>
+                <nav>
+                    <ul class="pagination pagination-split">    
+                        <dir-pagination-controls max-size="5"
+                                                 direction-links="true"
+                                                 boundary-links="true" style="padding:15px;">
+                        </dir-pagination-controls>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        @*ADD*@
+        <div class="modal fade" id="UserModal" role="dialog">
+            <form id="Teamform" data-parsley-validate="">
+                <div class="modal-dialog" id="myModal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>INVITE NEW USER</h3>
+                            <button type="button" class="close cls" ng-click="Close();" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body clearfix">
+                            <div class="form-group">
+                                <input class="form-control" placeholder="First name" ng-model="Team.FirstName" name="firstname" type="text" data-parsley-length="[2, 20]" required="" autofocus>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Last name" ng-model="Team.LastName" name="lastname" type="text" data-parsley-length="[2, 20]" required="" autofocus>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Email" ng-model="Team.Email" name="email" type="text" data-parsley-type="email" required="" autofocus>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Password" ng-model="Team.Password" type="password" value="" id="password1" data-parsley-length="[2, 20]" required="" autofocus>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Confirm Password" ng-model="Team.ConfirmPassword" id="cpass" type="password" data-parsley-length="[2, 20]" data-parsley-equalto="#password1" required="" autofocus>
+                            </div>
+                            <div class="form-group">
+                                <select ng-model="Team.RoleId" name="role" class="form-control " ng-options="rObj.RoleId as rObj.RoleName for rObj in roles" required="" autofocus>
+                                    <option value="">Select Role</option>
+                                </select>
+                            </div>
+                            <input type="hidden" name="" ng-model="Team.JobTitle">
+                            <input type="hidden" name="" ng-model="Team.JoiningDate">
+                            <input type="hidden" name="" ng-model="Team.PhoneNumber">
+                            <input type="hidden" name="" ng-model="Team.Address">
+                            <input type="hidden" name="" ng-model="Team.Addtionalinfo">
+                            <input type="hidden" name="" ng-model="Team.DepartmentId">
+                            <input type="hidden" name="" ng-model="Team.DesignationId">
+                            <input type="submit" class="btn btn-block btn-lg" value="Invite" id="initiate-invite-button" name="invite" style="background-color: #86b300;" ng-click="Create(Team)">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        @*UPDATE*@
+        <div class="container" ng-show="isshowtable==false">
+            <div class="card-box" style="background-color: #F6F6F6 !important; box-shadow: none !important; margin-top: 30px !important; margin-bottom: -10px !important; padding-left: 0px !important; padding-right: 0px !important;">
+                <div class="row">
+                    <div class="col-md-3"><h2 style="font-weight: bold !important;">Edit  User  Details</h2></div>
+                    <div class="col-md-7"></div>
+                    <div class="col-md-1">
+
+                        @*<button type="submit" style="border: none !important; background-color: transparent;" data-toggle="modal" data-target="#UserModal"><i class="fa fa-unlock-alt" aria-hidden="true" style="font-size: 20px; color: #D14836"></i></button>*@
+                        <button type="button" style="width:125px!important;margin-left:25px;" class="btn btn-primary btn-custom waves-effect waves-light" ng-click="InsertDiv()"><i class="ion-android-arrow-back" style="padding-left: 10px !important;"></i>&nbsp;&nbsp;Team List</button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-box" style="margin-top:-19px!important;">
+                <form novalidate name="f2">
+                    <div class="row">
+                        <div class="col-md-4">
+
+                            <div id="demo" style="margin-left:25px;height:140px;width:150px;background-color:antiquewhite;border-radius:100%;">
+                                <h1 style="padding-left: 30px;padding-top: 18px; font-size: 83px; }">{{fname}}</h1>
+                            </div>
+                            <br />
+                            <div style="margin-left: 25px;">
+                                <h3 id="fname" style="color: #487b87 !important;">{{Team.FirstName +'  '+Team.LastName}}</h3>
+                                <a href="mailto:{{Team.Email}}" class="text-decoration-none edit-detail-email">{{Team.Email}}</a><br />
+                                Member Since : {{Team.JoiningDate | date:'mediumDate'}}
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-8" style="padding-top:20px;">
+                            <div class="form-group">
+                                <label>Job Title</label>
+                                <div>
+                                    <input class="form-control" id="job_title" name="title" ng-model="Team.JobTitle" type="text" value="" required>
+                                    <span class="text-danger" ng-show="(f2.title.$touched || f2.title.$dirty)">
+                                        <span ng-show="f2.title.$error.required">job Title is required</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="phone_number">Phone Number</label>
+                                        <div>
+                                            <input class="form-control" id="phone_number" name="phone" ng-model="Team.PhoneNo" type="text" value="" ng-maxlength="10" ng-minlength="10" required>
+                                            <span class="text-danger" ng-show="((f2.phone.$error.required || f2.phone.$error.number) && f2.phone.$touched)">
+                                                Valid phone number is required
+                                            </span>
+                                            <span class="text-danger" ng-show="((f2.phone.$error.minlength || f2.phone.$error.maxlength) && f2.phone.$dirty) ">
+                                                phone number should be 10 digits
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Role</label>
+                                        <select ng-model="Team.RoleId" class="form-control " ng-options="rObj.RoleId as rObj.RoleName for rObj in roles">
+                                            <option value="">Select Role</option>
+                                        </select>
+                                        @*<span class="text-danger" ng-show="(f2.Team.RoleId.$touched || f2.Team.RoleId.$dirty)">
+                                                <span ng-show="f2.Team.RoleId.required">Please Select Role</span>
+                                            </span>*@
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <div>
+                                    <input class="form-control login-input" id="address" name="address" ng-model="Team.Address" type="text" value="" required>
+                                    <span class="text-danger" ng-show="(f2.address.$touched || f2.address.$dirty)">
+                                        <span ng-show="f2.address.$error.required">Address is required</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="additional-info">Additional info</label>
+                                <i class="icon icon-sm icon-info" data-toggle="tooltip" data-placement="top" title="" data-original-title="See the info while hovering over the user's name on the Team page."></i>
+                                <div>
+                                    <textarea class="form-control additional-info" id="additional-info" rows="2" ng-model="Team.Additionalinfo" name="info" cols="50" required ng-maxlength="350" ng-minlength="5"></textarea>
+                                    <span class="text-danger" ng-show="f2.info.$error.required && f2.info.$touched">
+                                        Additional Information is required
+                                    </span>
+                                    <span class="text-danger" ng-show="f2.info.$dirty && (f2.info.$error.minlength || f2.info.$error.maxlength)">
+                                        Information must be in range 5 to 350
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Department</label>
+                                        <select ng-model="Team.DepartmentId" class="form-control " ng-options="dObj.DepartmentId as dObj.DepartmentName for dObj in depts">
+                                            <option value="">Select Department</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Designation</label>
+                                        <select ng-model="Team.DesignationId" class="form-control " ng-options="deObj.DesignationId as deObj.DesignationName for deObj in deslist">
+                                            <option value="">Select Designation</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8"></div>
+
+                                <div class="col-md-3">
+                                    <button type="submit" class="btn btn-success btn-lg center-block" ng-click="Create(Team)" ng-disabled="f2.$invalid" style=" width: 180px!important; ">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+    <script src="~/js/jquery.min.js"></script>
+
+</body>
+@section script{
+
+    <script defer src="~/Scripts/Services/TeamService.js"></script>
+    <script src="~/Scripts/Services/DepartmentService.js"></script>
+    <script src="~/Scripts/Services/DesignationService.js"></script>
+    <script src="~/Scripts/Services/RoleService.js"></script>
+    <script defer src="~/Scripts/AngularController/TeamCtrl.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/parsley.min.js"></script>
+
+}
+
+
+
+

@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TrackerAppModelStoreContainer" CdmEntityContainer="TrackerAppEntities">
+    <EntitySetMapping Name="Daily_SummaryTb">
+      <EntityTypeMapping TypeName="TrackerAppModel.Daily_SummaryTb">
+        <MappingFragment StoreEntitySet="Daily_SummaryTb">
+          <ScalarProperty Name="Sid" ColumnName="Sid" />
+          <ScalarProperty Name="Start_Time" ColumnName="Start_Time" />
+          <ScalarProperty Name="Stop_Time" ColumnName="Stop_Time" />
+          <ScalarProperty Name="DateDiff" ColumnName="DateDiff" />
+          <ScalarProperty Name="TimeDiff" ColumnName="TimeDiff" />
+          <ScalarProperty Name="Total_Second" ColumnName="Total_Second" />
+          <ScalarProperty Name="Proj_id" ColumnName="Proj_id" />
+          <ScalarProperty Name="Task_id" ColumnName="Task_id" />
+          <ScalarProperty Name="Uid" ColumnName="Uid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Daily_TimeTb">
+      <EntityTypeMapping TypeName="TrackerAppModel.Daily_TimeTb">
+        <MappingFragment StoreEntitySet="Daily_TimeTb">
+          <ScalarProperty Name="Dl_id" ColumnName="Dl_id" />
+          <ScalarProperty Name="Uid" ColumnName="Uid" />
+          <ScalarProperty Name="KeyHit" ColumnName="KeyHit" />
+          <ScalarProperty Name="MouseHit" ColumnName="MouseHit" />
+          <ScalarProperty Name="AppName" ColumnName="AppName" />
+          <ScalarProperty Name="Start_Time" ColumnName="Start_Time" />
+          <ScalarProperty Name="Proj_id" ColumnName="Proj_id" />
+          <ScalarProperty Name="Task_id" ColumnName="Task_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DepartmentTbs">
+      <EntityTypeMapping TypeName="TrackerAppModel.DepartmentTb">
+        <MappingFragment StoreEntitySet="DepartmentTb">
+          <ScalarProperty Name="Dept_id" ColumnName="Dept_id" />
+          <ScalarProperty Name="Dname" ColumnName="Dname" />
+          <ScalarProperty Name="Uid" ColumnName="Uid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DesignationTbs">
+      <EntityTypeMapping TypeName="TrackerAppModel.DesignationTb">
+        <MappingFragment StoreEntitySet="DesignationTb">
+          <ScalarProperty Name="Desig_id" ColumnName="Desig_id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Uid" ColumnName="Uid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Manual_TimeTb">
+      <EntityTypeMapping TypeName="TrackerAppModel.Manual_TimeTb">
+        <MappingFragment StoreEntitySet="Manual_TimeTb">
+          <ScalarProperty Name="Manual_id" ColumnName="Manual_id" />
+          <ScalarProperty Name="Start_Time" ColumnName="Start_Time" />
+          <ScalarProperty Name="End_Time" ColumnName="End_Time" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="Accept" ColumnName="Accept" />
+          <ScalarProperty Name="Reject" ColumnName="Reject" />
+          <ScalarProperty Name="Pending" ColumnName="Pending" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Project_AssignTb">
+      <EntityTypeMapping TypeName="TrackerAppModel.Project_AssignTb">
+        <MappingFragment StoreEntitySet="Project_AssignTb">
+          <ScalarProperty Name="PAssign_id" ColumnName="PAssign_id" />
+          <ScalarProperty Name="Uid" ColumnName="Uid" />
+          <ScalarProperty Name="Proj_id" ColumnName="Proj_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Project_MasterTb">
+      <EntityTypeMapping TypeName="TrackerAppModel.Project_MasterTb">
+        <MappingFragment StoreEntitySet="Project_MasterTb">
+          <ScalarProperty Name="Proj_id" ColumnName="Proj_id" />
+          <ScalarProperty Name="Pname" ColumnName="Pname" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RoleTbs">
+      <EntityTypeMapping TypeName="TrackerAppModel.RoleTb">
+        <MappingFragment StoreEntitySet="RoleTb">
+          <ScalarProperty Name="Role_id" ColumnName="Role_id" />
+          <ScalarProperty Name="Rname" ColumnName="Rname" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ScreenShotTbs">
+      <EntityTypeMapping TypeName="TrackerAppModel.ScreenShotTb">
+        <MappingFragment StoreEntitySet="ScreenShotTb">
+          <ScalarProperty Name="SS_Id" ColumnName="SS_Id" />
+          <ScalarProperty Name="Start_Time" ColumnName="Start_Time" />
+          <ScalarProperty Name="End_Time" ColumnName="End_Time" />
+          <ScalarProperty Name="ScreenShot_Time" ColumnName="ScreenShot_Time" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="Proj_id" ColumnName="Proj_id" />
+          <ScalarProperty Name="Task_id" ColumnName="Task_id" />
+          <ScalarProperty Name="Uid" ColumnName="Uid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Task_MasterTb">
+      <EntityTypeMapping TypeName="TrackerAppModel.Task_MasterTb">
+        <MappingFragment StoreEntitySet="Task_MasterTb">
+          <ScalarProperty Name="Task_id" ColumnName="Task_id" />
+          <ScalarProperty Name="Tname" ColumnName="Tname" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Proj_id" ColumnName="Proj_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User_GroupTb">
+      <EntityTypeMapping TypeName="TrackerAppModel.User_GroupTb">
+        <MappingFragment StoreEntitySet="User_GroupTb">
+          <ScalarProperty Name="UGroup_id" ColumnName="UGroup_id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Uid" ColumnName="Uid" />
+          <ScalarProperty Name="Proj_id" ColumnName="Proj_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User_ProjectTb">
+      <EntityTypeMapping TypeName="TrackerAppModel.User_ProjectTb">
+        <MappingFragment StoreEntitySet="User_ProjectTb">
+          <ScalarProperty Name="UProject_id" ColumnName="UProject_id" />
+          <ScalarProperty Name="Uid" ColumnName="Uid" />
+          <ScalarProperty Name="Proj_id" ColumnName="Proj_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserTbs">
+      <EntityTypeMapping TypeName="TrackerAppModel.UserTb">
+        <MappingFragment StoreEntitySet="UserTb">
+          <ScalarProperty Name="Uid" ColumnName="Uid" />
+          <ScalarProperty Name="Uname" ColumnName="Uname" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="ConfirmPass" ColumnName="ConfirmPass" />
+          <ScalarProperty Name="Contact" ColumnName="Contact" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

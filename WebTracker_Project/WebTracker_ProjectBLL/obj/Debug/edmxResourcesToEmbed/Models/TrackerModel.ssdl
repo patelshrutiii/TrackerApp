@@ -1,0 +1,322 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TrackerAppModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Daily_SummaryTb">
+    <Key>
+      <PropertyRef Name="Sid" />
+    </Key>
+    <Property Name="Sid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Start_Time" Type="datetime" />
+    <Property Name="Stop_Time" Type="datetime" />
+    <Property Name="DateDiff" Type="date" />
+    <Property Name="TimeDiff" Type="time" Precision="0" />
+    <Property Name="Total_Second" Type="int" />
+    <Property Name="Proj_id" Type="int" />
+    <Property Name="Task_id" Type="int" />
+    <Property Name="Uid" Type="int" />
+  </EntityType>
+  <EntityType Name="Daily_TimeTb">
+    <Key>
+      <PropertyRef Name="Dl_id" />
+    </Key>
+    <Property Name="Dl_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Uid" Type="int" Nullable="false" />
+    <Property Name="KeyHit" Type="int" />
+    <Property Name="MouseHit" Type="int" />
+    <Property Name="AppName" Type="varchar(max)" />
+    <Property Name="Start_Time" Type="datetime" />
+    <Property Name="Proj_id" Type="int" />
+    <Property Name="Task_id" Type="int" />
+  </EntityType>
+  <EntityType Name="DepartmentTb">
+    <Key>
+      <PropertyRef Name="Dept_id" />
+    </Key>
+    <Property Name="Dept_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Dname" Type="varchar" MaxLength="50" />
+    <Property Name="Uid" Type="int" />
+  </EntityType>
+  <EntityType Name="DesignationTb">
+    <Key>
+      <PropertyRef Name="Desig_id" />
+    </Key>
+    <Property Name="Desig_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="50" />
+    <Property Name="Uid" Type="int" />
+  </EntityType>
+  <EntityType Name="Manual_TimeTb">
+    <Key>
+      <PropertyRef Name="Manual_id" />
+    </Key>
+    <Property Name="Manual_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Start_Time" Type="datetime" />
+    <Property Name="End_Time" Type="datetime" />
+    <Property Name="Reason" Type="varchar" MaxLength="50" />
+    <Property Name="Accept" Type="varchar" MaxLength="5" />
+    <Property Name="Reject" Type="varchar" MaxLength="5" />
+    <Property Name="Pending" Type="varchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="Project_AssignTb">
+    <Key>
+      <PropertyRef Name="PAssign_id" />
+    </Key>
+    <Property Name="PAssign_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Uid" Type="int" />
+    <Property Name="Proj_id" Type="int" />
+  </EntityType>
+  <EntityType Name="Project_MasterTb">
+    <Key>
+      <PropertyRef Name="Proj_id" />
+    </Key>
+    <Property Name="Proj_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Pname" Type="varchar" MaxLength="50" />
+    <Property Name="Remark" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="RoleTb">
+    <Key>
+      <PropertyRef Name="Role_id" />
+    </Key>
+    <Property Name="Role_id" Type="int" Nullable="false" />
+    <Property Name="Rname" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ScreenShotTb">
+    <Key>
+      <PropertyRef Name="SS_Id" />
+    </Key>
+    <Property Name="SS_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Start_Time" Type="datetime2" Precision="0" />
+    <Property Name="End_Time" Type="datetime2" Precision="0" />
+    <Property Name="ScreenShot_Time" Type="datetime2" Precision="0" />
+    <Property Name="FileName" Type="varchar" MaxLength="50" />
+    <Property Name="Proj_id" Type="int" />
+    <Property Name="Task_id" Type="int" />
+    <Property Name="Uid" Type="int" />
+  </EntityType>
+  <EntityType Name="Task_MasterTb">
+    <Key>
+      <PropertyRef Name="Task_id" />
+    </Key>
+    <Property Name="Task_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tname" Type="varchar" MaxLength="50" />
+    <Property Name="Remark" Type="varchar" MaxLength="50" />
+    <Property Name="Proj_id" Type="int" />
+  </EntityType>
+  <EntityType Name="User_GroupTb">
+    <Key>
+      <PropertyRef Name="UGroup_id" />
+    </Key>
+    <Property Name="UGroup_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="50" />
+    <Property Name="Uid" Type="int" />
+    <Property Name="Proj_id" Type="int" />
+  </EntityType>
+  <EntityType Name="User_ProjectTb">
+    <Key>
+      <PropertyRef Name="UProject_id" />
+    </Key>
+    <Property Name="UProject_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Uid" Type="int" />
+    <Property Name="Proj_id" Type="int" />
+  </EntityType>
+  <EntityType Name="UserTb">
+    <Key>
+      <PropertyRef Name="Uid" />
+    </Key>
+    <Property Name="Uid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Uname" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="100" />
+    <Property Name="Password" Type="varchar" MaxLength="50" />
+    <Property Name="ConfirmPass" Type="varchar" MaxLength="50" />
+    <Property Name="Contact" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Daily_SummaryTb_Project_MasterTb">
+    <End Role="Project_MasterTb" Type="Self.Project_MasterTb" Multiplicity="0..1" />
+    <End Role="Daily_SummaryTb" Type="Self.Daily_SummaryTb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project_MasterTb">
+        <PropertyRef Name="Proj_id" />
+      </Principal>
+      <Dependent Role="Daily_SummaryTb">
+        <PropertyRef Name="Proj_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Daily_SummaryTb_Task_MasterTb">
+    <End Role="Task_MasterTb" Type="Self.Task_MasterTb" Multiplicity="0..1" />
+    <End Role="Daily_SummaryTb" Type="Self.Daily_SummaryTb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Task_MasterTb">
+        <PropertyRef Name="Task_id" />
+      </Principal>
+      <Dependent Role="Daily_SummaryTb">
+        <PropertyRef Name="Task_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Daily_TimeTb_Project_MasterTb">
+    <End Role="Project_MasterTb" Type="Self.Project_MasterTb" Multiplicity="0..1" />
+    <End Role="Daily_TimeTb" Type="Self.Daily_TimeTb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project_MasterTb">
+        <PropertyRef Name="Proj_id" />
+      </Principal>
+      <Dependent Role="Daily_TimeTb">
+        <PropertyRef Name="Proj_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Daily_TimeTb_Task_MasterTb">
+    <End Role="Task_MasterTb" Type="Self.Task_MasterTb" Multiplicity="0..1" />
+    <End Role="Daily_TimeTb" Type="Self.Daily_TimeTb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Task_MasterTb">
+        <PropertyRef Name="Task_id" />
+      </Principal>
+      <Dependent Role="Daily_TimeTb">
+        <PropertyRef Name="Task_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Daily_TimeTb_UserTb">
+    <End Role="UserTb" Type="Self.UserTb" Multiplicity="1" />
+    <End Role="Daily_TimeTb" Type="Self.Daily_TimeTb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserTb">
+        <PropertyRef Name="Uid" />
+      </Principal>
+      <Dependent Role="Daily_TimeTb">
+        <PropertyRef Name="Uid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Project_AssignTb_Project_MasterTb">
+    <End Role="Project_MasterTb" Type="Self.Project_MasterTb" Multiplicity="0..1" />
+    <End Role="Project_AssignTb" Type="Self.Project_AssignTb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project_MasterTb">
+        <PropertyRef Name="Proj_id" />
+      </Principal>
+      <Dependent Role="Project_AssignTb">
+        <PropertyRef Name="Proj_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Project_AssignTb_UserTb">
+    <End Role="UserTb" Type="Self.UserTb" Multiplicity="0..1" />
+    <End Role="Project_AssignTb" Type="Self.Project_AssignTb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserTb">
+        <PropertyRef Name="Uid" />
+      </Principal>
+      <Dependent Role="Project_AssignTb">
+        <PropertyRef Name="Uid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ScreenShotTb_Project_MasterTb">
+    <End Role="Project_MasterTb" Type="Self.Project_MasterTb" Multiplicity="0..1" />
+    <End Role="ScreenShotTb" Type="Self.ScreenShotTb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project_MasterTb">
+        <PropertyRef Name="Proj_id" />
+      </Principal>
+      <Dependent Role="ScreenShotTb">
+        <PropertyRef Name="Proj_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ScreenShotTb_Task_MasterTb">
+    <End Role="Task_MasterTb" Type="Self.Task_MasterTb" Multiplicity="0..1" />
+    <End Role="ScreenShotTb" Type="Self.ScreenShotTb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Task_MasterTb">
+        <PropertyRef Name="Task_id" />
+      </Principal>
+      <Dependent Role="ScreenShotTb">
+        <PropertyRef Name="Task_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ScreenShotTb_UserTb">
+    <End Role="UserTb" Type="Self.UserTb" Multiplicity="0..1" />
+    <End Role="ScreenShotTb" Type="Self.ScreenShotTb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserTb">
+        <PropertyRef Name="Uid" />
+      </Principal>
+      <Dependent Role="ScreenShotTb">
+        <PropertyRef Name="Uid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Task_MasterTb_ProjectTb">
+    <End Role="Project_MasterTb" Type="Self.Project_MasterTb" Multiplicity="0..1" />
+    <End Role="Task_MasterTb" Type="Self.Task_MasterTb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project_MasterTb">
+        <PropertyRef Name="Proj_id" />
+      </Principal>
+      <Dependent Role="Task_MasterTb">
+        <PropertyRef Name="Proj_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TrackerAppModelStoreContainer">
+    <EntitySet Name="Daily_SummaryTb" EntityType="Self.Daily_SummaryTb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Daily_TimeTb" EntityType="Self.Daily_TimeTb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DepartmentTb" EntityType="Self.DepartmentTb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DesignationTb" EntityType="Self.DesignationTb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Manual_TimeTb" EntityType="Self.Manual_TimeTb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Project_AssignTb" EntityType="Self.Project_AssignTb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Project_MasterTb" EntityType="Self.Project_MasterTb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RoleTb" EntityType="Self.RoleTb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ScreenShotTb" EntityType="Self.ScreenShotTb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Task_MasterTb" EntityType="Self.Task_MasterTb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User_GroupTb" EntityType="Self.User_GroupTb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User_ProjectTb" EntityType="Self.User_ProjectTb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserTb" EntityType="Self.UserTb" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Daily_SummaryTb_Project_MasterTb" Association="Self.FK_Daily_SummaryTb_Project_MasterTb">
+      <End Role="Project_MasterTb" EntitySet="Project_MasterTb" />
+      <End Role="Daily_SummaryTb" EntitySet="Daily_SummaryTb" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Daily_SummaryTb_Task_MasterTb" Association="Self.FK_Daily_SummaryTb_Task_MasterTb">
+      <End Role="Task_MasterTb" EntitySet="Task_MasterTb" />
+      <End Role="Daily_SummaryTb" EntitySet="Daily_SummaryTb" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Daily_TimeTb_Project_MasterTb" Association="Self.FK_Daily_TimeTb_Project_MasterTb">
+      <End Role="Project_MasterTb" EntitySet="Project_MasterTb" />
+      <End Role="Daily_TimeTb" EntitySet="Daily_TimeTb" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Daily_TimeTb_Task_MasterTb" Association="Self.FK_Daily_TimeTb_Task_MasterTb">
+      <End Role="Task_MasterTb" EntitySet="Task_MasterTb" />
+      <End Role="Daily_TimeTb" EntitySet="Daily_TimeTb" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Daily_TimeTb_UserTb" Association="Self.FK_Daily_TimeTb_UserTb">
+      <End Role="UserTb" EntitySet="UserTb" />
+      <End Role="Daily_TimeTb" EntitySet="Daily_TimeTb" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Project_AssignTb_Project_MasterTb" Association="Self.FK_Project_AssignTb_Project_MasterTb">
+      <End Role="Project_MasterTb" EntitySet="Project_MasterTb" />
+      <End Role="Project_AssignTb" EntitySet="Project_AssignTb" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Project_AssignTb_UserTb" Association="Self.FK_Project_AssignTb_UserTb">
+      <End Role="UserTb" EntitySet="UserTb" />
+      <End Role="Project_AssignTb" EntitySet="Project_AssignTb" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ScreenShotTb_Project_MasterTb" Association="Self.FK_ScreenShotTb_Project_MasterTb">
+      <End Role="Project_MasterTb" EntitySet="Project_MasterTb" />
+      <End Role="ScreenShotTb" EntitySet="ScreenShotTb" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ScreenShotTb_Task_MasterTb" Association="Self.FK_ScreenShotTb_Task_MasterTb">
+      <End Role="Task_MasterTb" EntitySet="Task_MasterTb" />
+      <End Role="ScreenShotTb" EntitySet="ScreenShotTb" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ScreenShotTb_UserTb" Association="Self.FK_ScreenShotTb_UserTb">
+      <End Role="UserTb" EntitySet="UserTb" />
+      <End Role="ScreenShotTb" EntitySet="ScreenShotTb" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Task_MasterTb_ProjectTb" Association="Self.FK_Task_MasterTb_ProjectTb">
+      <End Role="Project_MasterTb" EntitySet="Project_MasterTb" />
+      <End Role="Task_MasterTb" EntitySet="Task_MasterTb" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

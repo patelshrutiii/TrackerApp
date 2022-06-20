@@ -1,0 +1,746 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TrackerAppModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CompanyMaster">
+    <Key>
+      <PropertyRef Name="CompanyId" />
+    </Key>
+    <Property Name="CompanyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CompanyEmail" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="City" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="State" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="StreetAddress" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="MobileNo" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Name="PhoneNo" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Name="Extension" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="EntryUser" Type="Int32" />
+    <Property Name="ModifiedUser" Type="Int32" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="DailySummaries" Relationship="Self.FK_DailySummary_CompanyMaster" FromRole="CompanyMaster" ToRole="DailySummary" />
+    <NavigationProperty Name="DailyTimeDetails" Relationship="Self.FK_DailyTimeDetails_CompanyMaster" FromRole="CompanyMaster" ToRole="DailyTimeDetails" />
+    <NavigationProperty Name="Departments" Relationship="Self.FK_Department_CompanyMaster" FromRole="CompanyMaster" ToRole="Department" />
+    <NavigationProperty Name="Designations" Relationship="Self.FK_Designation_CompanyMaster" FromRole="CompanyMaster" ToRole="Designation" />
+    <NavigationProperty Name="ManualTimes" Relationship="Self.FK_ManualTime_CompanyMaster" FromRole="CompanyMaster" ToRole="ManualTime" />
+    <NavigationProperty Name="ProjectAssigns" Relationship="Self.FK_ProjectAssign_CompanyMaster" FromRole="CompanyMaster" ToRole="ProjectAssign" />
+    <NavigationProperty Name="ProjectMasters" Relationship="Self.FK_ProjectMaster_CompanyMaster" FromRole="CompanyMaster" ToRole="ProjectMaster" />
+    <NavigationProperty Name="ScreenShots" Relationship="Self.FK_ScreenShots_CompanyMaster" FromRole="CompanyMaster" ToRole="ScreenShots" />
+    <NavigationProperty Name="TaskAssigns" Relationship="Self.FK_TaskAssign_CompanyMaster" FromRole="CompanyMaster" ToRole="TaskAssign" />
+    <NavigationProperty Name="TaskMasters" Relationship="Self.FK_TaskMaster_CompanyMaster" FromRole="CompanyMaster" ToRole="TaskMaster" />
+    <NavigationProperty Name="UserMasters" Relationship="Self.FK_UserMaster_CompanyMaster" FromRole="CompanyMaster" ToRole="UserMaster" />
+  </EntityType>
+  <EntityType Name="DailySummary">
+    <Key>
+      <PropertyRef Name="DailySummaryId" />
+    </Key>
+    <Property Name="DailySummaryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProjectId" Type="Int32" />
+    <Property Name="TaskId" Type="Int32" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="StartTime" Type="DateTime" Precision="3" />
+    <Property Name="StopTime" Type="DateTime" Precision="3" />
+    <Property Name="DateDifference" Type="DateTime" Precision="0" />
+    <Property Name="TimeDifference" Type="Time" Precision="0" />
+    <Property Name="TotalSecond" Type="Int32" />
+    <NavigationProperty Name="CompanyMaster" Relationship="Self.FK_DailySummary_CompanyMaster" FromRole="DailySummary" ToRole="CompanyMaster" />
+    <NavigationProperty Name="ProjectMaster" Relationship="Self.FK_DailySummary_ProjectMaster" FromRole="DailySummary" ToRole="ProjectMaster" />
+    <NavigationProperty Name="TaskMaster" Relationship="Self.FK_DailySummary_TaskMaster" FromRole="DailySummary" ToRole="TaskMaster" />
+    <NavigationProperty Name="UserMaster" Relationship="Self.FK_DailySummary_UserMaster" FromRole="DailySummary" ToRole="UserMaster" />
+  </EntityType>
+  <EntityType Name="DailyTimeDetail">
+    <Key>
+      <PropertyRef Name="DailyTimeId" />
+    </Key>
+    <Property Name="DailyTimeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="ProjectId" Type="Int32" />
+    <Property Name="TaskId" Type="Int32" />
+    <Property Name="KeyHit" Type="Int32" />
+    <Property Name="MouseHit" Type="Int32" />
+    <Property Name="AppName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="StartTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="CompanyMaster" Relationship="Self.FK_DailyTimeDetails_CompanyMaster" FromRole="DailyTimeDetails" ToRole="CompanyMaster" />
+    <NavigationProperty Name="DailyTimeDetails1" Relationship="Self.FK_DailyTimeDetails_DailyTimeDetails" FromRole="DailyTimeDetails" ToRole="DailyTimeDetails1" />
+    <NavigationProperty Name="DailyTimeDetail1" Relationship="Self.FK_DailyTimeDetails_DailyTimeDetails" FromRole="DailyTimeDetails1" ToRole="DailyTimeDetails" />
+    <NavigationProperty Name="ProjectMaster" Relationship="Self.FK_DailyTimeDetails_ProjectMaster" FromRole="DailyTimeDetails" ToRole="ProjectMaster" />
+    <NavigationProperty Name="TaskMaster" Relationship="Self.FK_DailyTimeDetails_TaskMaster" FromRole="DailyTimeDetails" ToRole="TaskMaster" />
+    <NavigationProperty Name="UserMaster" Relationship="Self.FK_DailyTimeDetails_UserMaster" FromRole="DailyTimeDetails" ToRole="UserMaster" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="DepartmentId" />
+    </Key>
+    <Property Name="DepartmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="DepartmentName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="EntryUser" Type="Int32" />
+    <Property Name="ModifiedUser" Type="Int32" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="CompanyMaster" Relationship="Self.FK_Department_CompanyMaster" FromRole="Department" ToRole="CompanyMaster" />
+  </EntityType>
+  <EntityType Name="Designation">
+    <Key>
+      <PropertyRef Name="DesignationId" />
+    </Key>
+    <Property Name="DesignationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="DesignationName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="EntryUser" Type="Int32" />
+    <Property Name="ModifiedUser" Type="Int32" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="CompanyMaster" Relationship="Self.FK_Designation_CompanyMaster" FromRole="Designation" ToRole="CompanyMaster" />
+  </EntityType>
+  <EntityType Name="ManualTime">
+    <Key>
+      <PropertyRef Name="ManualId" />
+    </Key>
+    <Property Name="ManualId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="ProjectId" Type="Int32" />
+    <Property Name="TaskId" Type="Int32" />
+    <Property Name="StartTime" Type="DateTime" Precision="3" />
+    <Property Name="EndTime" Type="DateTime" Precision="3" />
+    <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="EntryUser" Type="Int32" />
+    <Property Name="ModifiedUser" Type="Int32" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="CompanyMaster" Relationship="Self.FK_ManualTime_CompanyMaster" FromRole="ManualTime" ToRole="CompanyMaster" />
+    <NavigationProperty Name="ProjectMaster" Relationship="Self.FK_ManualTime_ProjectMaster" FromRole="ManualTime" ToRole="ProjectMaster" />
+    <NavigationProperty Name="TaskMaster" Relationship="Self.FK_ManualTime_TaskMaster" FromRole="ManualTime" ToRole="TaskMaster" />
+    <NavigationProperty Name="UserMaster" Relationship="Self.FK_ManualTime_UserMaster" FromRole="ManualTime" ToRole="UserMaster" />
+  </EntityType>
+  <EntityType Name="ProjectAssign">
+    <Key>
+      <PropertyRef Name="ProjectAssignId" />
+    </Key>
+    <Property Name="ProjectAssignId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProjectId" Type="Int32" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="WeeklyLimit" Type="Int32" />
+    <Property Name="Rate" Type="Int32" />
+    <Property Name="EntryUser" Type="Int32" />
+    <Property Name="ModifiedUser" Type="Int32" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="CompanyMaster" Relationship="Self.FK_ProjectAssign_CompanyMaster" FromRole="ProjectAssign" ToRole="CompanyMaster" />
+    <NavigationProperty Name="ProjectMaster" Relationship="Self.FK_ProjectAssign_ProjectMaster" FromRole="ProjectAssign" ToRole="ProjectMaster" />
+    <NavigationProperty Name="UserMaster" Relationship="Self.FK_ProjectAssign_UserMaster" FromRole="ProjectAssign" ToRole="UserMaster" />
+  </EntityType>
+  <EntityType Name="ProjectMaster">
+    <Key>
+      <PropertyRef Name="ProjectId" />
+    </Key>
+    <Property Name="ProjectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="ProjectName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="StartDate" Type="DateTime" Precision="3" />
+    <Property Name="DeadLine" Type="DateTime" Precision="3" />
+    <Property Name="EstimationHour" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="EntryUser" Type="Int32" />
+    <Property Name="ModifiedUser" Type="Int32" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="CompanyMaster" Relationship="Self.FK_ProjectMaster_CompanyMaster" FromRole="ProjectMaster" ToRole="CompanyMaster" />
+    <NavigationProperty Name="DailySummaries" Relationship="Self.FK_DailySummary_ProjectMaster" FromRole="ProjectMaster" ToRole="DailySummary" />
+    <NavigationProperty Name="DailyTimeDetails" Relationship="Self.FK_DailyTimeDetails_ProjectMaster" FromRole="ProjectMaster" ToRole="DailyTimeDetails" />
+    <NavigationProperty Name="ManualTimes" Relationship="Self.FK_ManualTime_ProjectMaster" FromRole="ProjectMaster" ToRole="ManualTime" />
+    <NavigationProperty Name="ProjectAssigns" Relationship="Self.FK_ProjectAssign_ProjectMaster" FromRole="ProjectMaster" ToRole="ProjectAssign" />
+    <NavigationProperty Name="ScreenShots" Relationship="Self.FK_ScreenShots_ProjectMaster" FromRole="ProjectMaster" ToRole="ScreenShots" />
+    <NavigationProperty Name="TaskAssigns" Relationship="Self.FK_TaskAssign_ProjectMaster" FromRole="ProjectMaster" ToRole="TaskAssign" />
+    <NavigationProperty Name="TaskMasters" Relationship="Self.FK_TaskMaster_ProjectMaster" FromRole="ProjectMaster" ToRole="TaskMaster" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="ScreenShot">
+    <Key>
+      <PropertyRef Name="ScreenShotId" />
+    </Key>
+    <Property Name="ScreenShotId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="ProjectId" Type="Int32" />
+    <Property Name="TaskId" Type="Int32" />
+    <Property Name="FileName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="StartTime" Type="DateTime" Precision="3" />
+    <Property Name="EndTime" Type="DateTime" Precision="3" />
+    <Property Name="ScreenShotTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="CompanyMaster" Relationship="Self.FK_ScreenShots_CompanyMaster" FromRole="ScreenShots" ToRole="CompanyMaster" />
+    <NavigationProperty Name="ProjectMaster" Relationship="Self.FK_ScreenShots_ProjectMaster" FromRole="ScreenShots" ToRole="ProjectMaster" />
+    <NavigationProperty Name="TaskMaster" Relationship="Self.FK_ScreenShots_TaskMaster" FromRole="ScreenShots" ToRole="TaskMaster" />
+    <NavigationProperty Name="UserMaster" Relationship="Self.FK_ScreenShots_UserMaster" FromRole="ScreenShots" ToRole="UserMaster" />
+  </EntityType>
+  <EntityType Name="TaskAssign">
+    <Key>
+      <PropertyRef Name="TaskAssignId" />
+    </Key>
+    <Property Name="TaskAssignId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TaskId" Type="Int32" Nullable="false" />
+    <Property Name="ProjectId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <Property Name="Deadline" Type="DateTime" Precision="3" />
+    <Property Name="EntryUser" Type="Int32" />
+    <Property Name="ModifiedUser" Type="Int32" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="CompanyMaster" Relationship="Self.FK_TaskAssign_CompanyMaster" FromRole="TaskAssign" ToRole="CompanyMaster" />
+    <NavigationProperty Name="ProjectMaster" Relationship="Self.FK_TaskAssign_ProjectMaster" FromRole="TaskAssign" ToRole="ProjectMaster" />
+    <NavigationProperty Name="TaskMaster" Relationship="Self.FK_TaskAssign_TaskMaster" FromRole="TaskAssign" ToRole="TaskMaster" />
+    <NavigationProperty Name="UserMaster" Relationship="Self.FK_TaskAssign_UserMaster" FromRole="TaskAssign" ToRole="UserMaster" />
+  </EntityType>
+  <EntityType Name="TaskMaster">
+    <Key>
+      <PropertyRef Name="TaskId" />
+    </Key>
+    <Property Name="TaskId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProjectId" Type="Int32" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="TaskName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="EntryUser" Type="Int32" />
+    <Property Name="ModifiedUser" Type="Int32" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="CompanyMaster" Relationship="Self.FK_TaskMaster_CompanyMaster" FromRole="TaskMaster" ToRole="CompanyMaster" />
+    <NavigationProperty Name="DailySummaries" Relationship="Self.FK_DailySummary_TaskMaster" FromRole="TaskMaster" ToRole="DailySummary" />
+    <NavigationProperty Name="DailyTimeDetails" Relationship="Self.FK_DailyTimeDetails_TaskMaster" FromRole="TaskMaster" ToRole="DailyTimeDetails" />
+    <NavigationProperty Name="ManualTimes" Relationship="Self.FK_ManualTime_TaskMaster" FromRole="TaskMaster" ToRole="ManualTime" />
+    <NavigationProperty Name="ProjectMaster" Relationship="Self.FK_TaskMaster_ProjectMaster" FromRole="TaskMaster" ToRole="ProjectMaster" />
+    <NavigationProperty Name="ScreenShots" Relationship="Self.FK_ScreenShots_TaskMaster" FromRole="TaskMaster" ToRole="ScreenShots" />
+    <NavigationProperty Name="TaskAssigns" Relationship="Self.FK_TaskAssign_TaskMaster" FromRole="TaskMaster" ToRole="TaskAssign" />
+  </EntityType>
+  <EntityType Name="UserMaster">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ConfirmPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <NavigationProperty Name="CompanyMaster" Relationship="Self.FK_UserMaster_CompanyMaster" FromRole="UserMaster" ToRole="CompanyMaster" />
+    <NavigationProperty Name="DailySummaries" Relationship="Self.FK_DailySummary_UserMaster" FromRole="UserMaster" ToRole="DailySummary" />
+    <NavigationProperty Name="DailyTimeDetails" Relationship="Self.FK_DailyTimeDetails_UserMaster" FromRole="UserMaster" ToRole="DailyTimeDetails" />
+    <NavigationProperty Name="ManualTimes" Relationship="Self.FK_ManualTime_UserMaster" FromRole="UserMaster" ToRole="ManualTime" />
+    <NavigationProperty Name="ProjectAssigns" Relationship="Self.FK_ProjectAssign_UserMaster" FromRole="UserMaster" ToRole="ProjectAssign" />
+    <NavigationProperty Name="ScreenShots" Relationship="Self.FK_ScreenShots_UserMaster" FromRole="UserMaster" ToRole="ScreenShots" />
+    <NavigationProperty Name="TaskAssigns" Relationship="Self.FK_TaskAssign_UserMaster" FromRole="UserMaster" ToRole="TaskAssign" />
+  </EntityType>
+  <Association Name="FK_DailySummary_CompanyMaster">
+    <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="0..1" />
+    <End Role="DailySummary" Type="Self.DailySummary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompanyMaster">
+        <PropertyRef Name="CompanyId" />
+      </Principal>
+      <Dependent Role="DailySummary">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DailyTimeDetails_CompanyMaster">
+    <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="0..1" />
+    <End Role="DailyTimeDetails" Type="Self.DailyTimeDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompanyMaster">
+        <PropertyRef Name="CompanyId" />
+      </Principal>
+      <Dependent Role="DailyTimeDetails">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Department_CompanyMaster">
+    <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="0..1" />
+    <End Role="Department" Type="Self.Department" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompanyMaster">
+        <PropertyRef Name="CompanyId" />
+      </Principal>
+      <Dependent Role="Department">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Designation_CompanyMaster">
+    <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="0..1" />
+    <End Role="Designation" Type="Self.Designation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompanyMaster">
+        <PropertyRef Name="CompanyId" />
+      </Principal>
+      <Dependent Role="Designation">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ManualTime_CompanyMaster">
+    <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="0..1" />
+    <End Role="ManualTime" Type="Self.ManualTime" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompanyMaster">
+        <PropertyRef Name="CompanyId" />
+      </Principal>
+      <Dependent Role="ManualTime">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectAssign_CompanyMaster">
+    <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="0..1" />
+    <End Role="ProjectAssign" Type="Self.ProjectAssign" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompanyMaster">
+        <PropertyRef Name="CompanyId" />
+      </Principal>
+      <Dependent Role="ProjectAssign">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectMaster_CompanyMaster">
+    <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="0..1" />
+    <End Role="ProjectMaster" Type="Self.ProjectMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompanyMaster">
+        <PropertyRef Name="CompanyId" />
+      </Principal>
+      <Dependent Role="ProjectMaster">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ScreenShots_CompanyMaster">
+    <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="0..1" />
+    <End Role="ScreenShots" Type="Self.ScreenShot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompanyMaster">
+        <PropertyRef Name="CompanyId" />
+      </Principal>
+      <Dependent Role="ScreenShots">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaskAssign_CompanyMaster">
+    <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="1" />
+    <End Role="TaskAssign" Type="Self.TaskAssign" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompanyMaster">
+        <PropertyRef Name="CompanyId" />
+      </Principal>
+      <Dependent Role="TaskAssign">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaskMaster_CompanyMaster">
+    <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="0..1" />
+    <End Role="TaskMaster" Type="Self.TaskMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompanyMaster">
+        <PropertyRef Name="CompanyId" />
+      </Principal>
+      <Dependent Role="TaskMaster">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserMaster_CompanyMaster">
+    <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompanyMaster">
+        <PropertyRef Name="CompanyId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DailySummary_ProjectMaster">
+    <End Role="ProjectMaster" Type="Self.ProjectMaster" Multiplicity="0..1" />
+    <End Role="DailySummary" Type="Self.DailySummary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProjectMaster">
+        <PropertyRef Name="ProjectId" />
+      </Principal>
+      <Dependent Role="DailySummary">
+        <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DailySummary_TaskMaster">
+    <End Role="TaskMaster" Type="Self.TaskMaster" Multiplicity="0..1" />
+    <End Role="DailySummary" Type="Self.DailySummary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaskMaster">
+        <PropertyRef Name="TaskId" />
+      </Principal>
+      <Dependent Role="DailySummary">
+        <PropertyRef Name="TaskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DailySummary_UserMaster">
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="0..1" />
+    <End Role="DailySummary" Type="Self.DailySummary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserMaster">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="DailySummary">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DailyTimeDetails_DailyTimeDetails">
+    <End Role="DailyTimeDetails" Type="Self.DailyTimeDetail" Multiplicity="1" />
+    <End Role="DailyTimeDetails1" Type="Self.DailyTimeDetail" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="DailyTimeDetails">
+        <PropertyRef Name="DailyTimeId" />
+      </Principal>
+      <Dependent Role="DailyTimeDetails1">
+        <PropertyRef Name="DailyTimeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DailyTimeDetails_ProjectMaster">
+    <End Role="ProjectMaster" Type="Self.ProjectMaster" Multiplicity="0..1" />
+    <End Role="DailyTimeDetails" Type="Self.DailyTimeDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProjectMaster">
+        <PropertyRef Name="ProjectId" />
+      </Principal>
+      <Dependent Role="DailyTimeDetails">
+        <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DailyTimeDetails_TaskMaster">
+    <End Role="TaskMaster" Type="Self.TaskMaster" Multiplicity="0..1" />
+    <End Role="DailyTimeDetails" Type="Self.DailyTimeDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaskMaster">
+        <PropertyRef Name="TaskId" />
+      </Principal>
+      <Dependent Role="DailyTimeDetails">
+        <PropertyRef Name="TaskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DailyTimeDetails_UserMaster">
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="0..1" />
+    <End Role="DailyTimeDetails" Type="Self.DailyTimeDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserMaster">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="DailyTimeDetails">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ManualTime_ProjectMaster">
+    <End Role="ProjectMaster" Type="Self.ProjectMaster" Multiplicity="0..1" />
+    <End Role="ManualTime" Type="Self.ManualTime" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProjectMaster">
+        <PropertyRef Name="ProjectId" />
+      </Principal>
+      <Dependent Role="ManualTime">
+        <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ManualTime_TaskMaster">
+    <End Role="TaskMaster" Type="Self.TaskMaster" Multiplicity="0..1" />
+    <End Role="ManualTime" Type="Self.ManualTime" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaskMaster">
+        <PropertyRef Name="TaskId" />
+      </Principal>
+      <Dependent Role="ManualTime">
+        <PropertyRef Name="TaskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ManualTime_UserMaster">
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="0..1" />
+    <End Role="ManualTime" Type="Self.ManualTime" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserMaster">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="ManualTime">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectAssign_ProjectMaster">
+    <End Role="ProjectMaster" Type="Self.ProjectMaster" Multiplicity="0..1" />
+    <End Role="ProjectAssign" Type="Self.ProjectAssign" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProjectMaster">
+        <PropertyRef Name="ProjectId" />
+      </Principal>
+      <Dependent Role="ProjectAssign">
+        <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectAssign_UserMaster">
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="0..1" />
+    <End Role="ProjectAssign" Type="Self.ProjectAssign" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserMaster">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="ProjectAssign">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ScreenShots_ProjectMaster">
+    <End Role="ProjectMaster" Type="Self.ProjectMaster" Multiplicity="0..1" />
+    <End Role="ScreenShots" Type="Self.ScreenShot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProjectMaster">
+        <PropertyRef Name="ProjectId" />
+      </Principal>
+      <Dependent Role="ScreenShots">
+        <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaskAssign_ProjectMaster">
+    <End Role="ProjectMaster" Type="Self.ProjectMaster" Multiplicity="1" />
+    <End Role="TaskAssign" Type="Self.TaskAssign" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProjectMaster">
+        <PropertyRef Name="ProjectId" />
+      </Principal>
+      <Dependent Role="TaskAssign">
+        <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaskMaster_ProjectMaster">
+    <End Role="ProjectMaster" Type="Self.ProjectMaster" Multiplicity="0..1" />
+    <End Role="TaskMaster" Type="Self.TaskMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProjectMaster">
+        <PropertyRef Name="ProjectId" />
+      </Principal>
+      <Dependent Role="TaskMaster">
+        <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ScreenShots_TaskMaster">
+    <End Role="TaskMaster" Type="Self.TaskMaster" Multiplicity="0..1" />
+    <End Role="ScreenShots" Type="Self.ScreenShot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaskMaster">
+        <PropertyRef Name="TaskId" />
+      </Principal>
+      <Dependent Role="ScreenShots">
+        <PropertyRef Name="TaskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ScreenShots_UserMaster">
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="0..1" />
+    <End Role="ScreenShots" Type="Self.ScreenShot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserMaster">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="ScreenShots">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaskAssign_TaskMaster">
+    <End Role="TaskMaster" Type="Self.TaskMaster" Multiplicity="1" />
+    <End Role="TaskAssign" Type="Self.TaskAssign" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaskMaster">
+        <PropertyRef Name="TaskId" />
+      </Principal>
+      <Dependent Role="TaskAssign">
+        <PropertyRef Name="TaskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaskAssign_UserMaster">
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="1" />
+    <End Role="TaskAssign" Type="Self.TaskAssign" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserMaster">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="TaskAssign">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TrackerAppEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CompanyMasters" EntityType="Self.CompanyMaster" />
+    <EntitySet Name="DailySummaries" EntityType="Self.DailySummary" />
+    <EntitySet Name="DailyTimeDetails" EntityType="Self.DailyTimeDetail" />
+    <EntitySet Name="Departments" EntityType="Self.Department" />
+    <EntitySet Name="Designations" EntityType="Self.Designation" />
+    <EntitySet Name="ManualTimes" EntityType="Self.ManualTime" />
+    <EntitySet Name="ProjectAssigns" EntityType="Self.ProjectAssign" />
+    <EntitySet Name="ProjectMasters" EntityType="Self.ProjectMaster" />
+    <EntitySet Name="Roles" EntityType="Self.Role" />
+    <EntitySet Name="ScreenShots" EntityType="Self.ScreenShot" />
+    <EntitySet Name="TaskAssigns" EntityType="Self.TaskAssign" />
+    <EntitySet Name="TaskMasters" EntityType="Self.TaskMaster" />
+    <EntitySet Name="UserMasters" EntityType="Self.UserMaster" />
+    <AssociationSet Name="FK_DailySummary_CompanyMaster" Association="Self.FK_DailySummary_CompanyMaster">
+      <End Role="CompanyMaster" EntitySet="CompanyMasters" />
+      <End Role="DailySummary" EntitySet="DailySummaries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DailyTimeDetails_CompanyMaster" Association="Self.FK_DailyTimeDetails_CompanyMaster">
+      <End Role="CompanyMaster" EntitySet="CompanyMasters" />
+      <End Role="DailyTimeDetails" EntitySet="DailyTimeDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Department_CompanyMaster" Association="Self.FK_Department_CompanyMaster">
+      <End Role="CompanyMaster" EntitySet="CompanyMasters" />
+      <End Role="Department" EntitySet="Departments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Designation_CompanyMaster" Association="Self.FK_Designation_CompanyMaster">
+      <End Role="CompanyMaster" EntitySet="CompanyMasters" />
+      <End Role="Designation" EntitySet="Designations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ManualTime_CompanyMaster" Association="Self.FK_ManualTime_CompanyMaster">
+      <End Role="CompanyMaster" EntitySet="CompanyMasters" />
+      <End Role="ManualTime" EntitySet="ManualTimes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectAssign_CompanyMaster" Association="Self.FK_ProjectAssign_CompanyMaster">
+      <End Role="CompanyMaster" EntitySet="CompanyMasters" />
+      <End Role="ProjectAssign" EntitySet="ProjectAssigns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectMaster_CompanyMaster" Association="Self.FK_ProjectMaster_CompanyMaster">
+      <End Role="CompanyMaster" EntitySet="CompanyMasters" />
+      <End Role="ProjectMaster" EntitySet="ProjectMasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ScreenShots_CompanyMaster" Association="Self.FK_ScreenShots_CompanyMaster">
+      <End Role="CompanyMaster" EntitySet="CompanyMasters" />
+      <End Role="ScreenShots" EntitySet="ScreenShots" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskAssign_CompanyMaster" Association="Self.FK_TaskAssign_CompanyMaster">
+      <End Role="CompanyMaster" EntitySet="CompanyMasters" />
+      <End Role="TaskAssign" EntitySet="TaskAssigns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskMaster_CompanyMaster" Association="Self.FK_TaskMaster_CompanyMaster">
+      <End Role="CompanyMaster" EntitySet="CompanyMasters" />
+      <End Role="TaskMaster" EntitySet="TaskMasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserMaster_CompanyMaster" Association="Self.FK_UserMaster_CompanyMaster">
+      <End Role="CompanyMaster" EntitySet="CompanyMasters" />
+      <End Role="UserMaster" EntitySet="UserMasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DailySummary_ProjectMaster" Association="Self.FK_DailySummary_ProjectMaster">
+      <End Role="ProjectMaster" EntitySet="ProjectMasters" />
+      <End Role="DailySummary" EntitySet="DailySummaries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DailySummary_TaskMaster" Association="Self.FK_DailySummary_TaskMaster">
+      <End Role="TaskMaster" EntitySet="TaskMasters" />
+      <End Role="DailySummary" EntitySet="DailySummaries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DailySummary_UserMaster" Association="Self.FK_DailySummary_UserMaster">
+      <End Role="UserMaster" EntitySet="UserMasters" />
+      <End Role="DailySummary" EntitySet="DailySummaries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DailyTimeDetails_DailyTimeDetails" Association="Self.FK_DailyTimeDetails_DailyTimeDetails">
+      <End Role="DailyTimeDetails" EntitySet="DailyTimeDetails" />
+      <End Role="DailyTimeDetails1" EntitySet="DailyTimeDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DailyTimeDetails_ProjectMaster" Association="Self.FK_DailyTimeDetails_ProjectMaster">
+      <End Role="ProjectMaster" EntitySet="ProjectMasters" />
+      <End Role="DailyTimeDetails" EntitySet="DailyTimeDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DailyTimeDetails_TaskMaster" Association="Self.FK_DailyTimeDetails_TaskMaster">
+      <End Role="TaskMaster" EntitySet="TaskMasters" />
+      <End Role="DailyTimeDetails" EntitySet="DailyTimeDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DailyTimeDetails_UserMaster" Association="Self.FK_DailyTimeDetails_UserMaster">
+      <End Role="UserMaster" EntitySet="UserMasters" />
+      <End Role="DailyTimeDetails" EntitySet="DailyTimeDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ManualTime_ProjectMaster" Association="Self.FK_ManualTime_ProjectMaster">
+      <End Role="ProjectMaster" EntitySet="ProjectMasters" />
+      <End Role="ManualTime" EntitySet="ManualTimes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ManualTime_TaskMaster" Association="Self.FK_ManualTime_TaskMaster">
+      <End Role="TaskMaster" EntitySet="TaskMasters" />
+      <End Role="ManualTime" EntitySet="ManualTimes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ManualTime_UserMaster" Association="Self.FK_ManualTime_UserMaster">
+      <End Role="UserMaster" EntitySet="UserMasters" />
+      <End Role="ManualTime" EntitySet="ManualTimes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectAssign_ProjectMaster" Association="Self.FK_ProjectAssign_ProjectMaster">
+      <End Role="ProjectMaster" EntitySet="ProjectMasters" />
+      <End Role="ProjectAssign" EntitySet="ProjectAssigns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectAssign_UserMaster" Association="Self.FK_ProjectAssign_UserMaster">
+      <End Role="UserMaster" EntitySet="UserMasters" />
+      <End Role="ProjectAssign" EntitySet="ProjectAssigns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ScreenShots_ProjectMaster" Association="Self.FK_ScreenShots_ProjectMaster">
+      <End Role="ProjectMaster" EntitySet="ProjectMasters" />
+      <End Role="ScreenShots" EntitySet="ScreenShots" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskAssign_ProjectMaster" Association="Self.FK_TaskAssign_ProjectMaster">
+      <End Role="ProjectMaster" EntitySet="ProjectMasters" />
+      <End Role="TaskAssign" EntitySet="TaskAssigns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskMaster_ProjectMaster" Association="Self.FK_TaskMaster_ProjectMaster">
+      <End Role="ProjectMaster" EntitySet="ProjectMasters" />
+      <End Role="TaskMaster" EntitySet="TaskMasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ScreenShots_TaskMaster" Association="Self.FK_ScreenShots_TaskMaster">
+      <End Role="TaskMaster" EntitySet="TaskMasters" />
+      <End Role="ScreenShots" EntitySet="ScreenShots" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ScreenShots_UserMaster" Association="Self.FK_ScreenShots_UserMaster">
+      <End Role="UserMaster" EntitySet="UserMasters" />
+      <End Role="ScreenShots" EntitySet="ScreenShots" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskAssign_TaskMaster" Association="Self.FK_TaskAssign_TaskMaster">
+      <End Role="TaskMaster" EntitySet="TaskMasters" />
+      <End Role="TaskAssign" EntitySet="TaskAssigns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskAssign_UserMaster" Association="Self.FK_TaskAssign_UserMaster">
+      <End Role="UserMaster" EntitySet="UserMasters" />
+      <End Role="TaskAssign" EntitySet="TaskAssigns" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

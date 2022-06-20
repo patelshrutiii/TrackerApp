@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TrackerAppModelStoreContainer" CdmEntityContainer="TrackerAppEntities">
+    <EntitySetMapping Name="ProjectTbs">
+      <EntityTypeMapping TypeName="TrackerAppModel.ProjectTb">
+        <MappingFragment StoreEntitySet="ProjectTb">
+          <ScalarProperty Name="Proj_id" ColumnName="Proj_id" />
+          <ScalarProperty Name="Pname" ColumnName="Pname" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

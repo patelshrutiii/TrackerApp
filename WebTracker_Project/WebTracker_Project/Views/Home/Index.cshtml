@@ -1,0 +1,652 @@
+﻿@{
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+<head>
+    <title>Projects</title>
+    <link href="~/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link href="~/plugins/clockpicker/css/bootstrap-clockpicker.min.css" rel="stylesheet">
+    <link href="~/CSS/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/CSS/icons.css" rel="stylesheet" type="text/css" />
+    <link href="~/CSS/style.css" rel="stylesheet" type="text/css" />
+    <script src="~/js/modernizr.min.js"></script>
+    <style>
+        body {
+            font-size: 16px;
+        }
+
+        .container {
+            margin-right: auto;
+            margin-left: auto;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        .section {
+            padding-top: 30px;
+            padding-bottom: 30px;
+        }
+
+        .table-border {
+            border: 1px solid #ddd;
+        }
+
+        .table {
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 20px;
+            background-color: transparent;
+            border-collapse: collapse;
+            display: table;
+            box-sizing: border-box;
+        }
+
+        thead {
+            color: #0083a5;
+            background-color: #D8EAF6;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
+        .d-flex {
+            display: flex;
+        }
+
+        .label {
+            font-size: 14px;
+            padding: 0;
+            font-weight: normal;
+            color: #1E1E1E;
+        }
+
+        [data-toggle="tooltip"] {
+            cursor: pointer;
+        }
+
+        .pull-right {
+            float: right !important;
+        }
+
+        .select2 {
+            border: 1px solid #ddd;
+            background: #F5F5D5;
+            margin: 0px 23px 3px 0px;
+            padding: 5px 22px 5px 5px;
+            border-radius: 10px;
+            float: none;
+            vertical-align: top;
+            word-break: break-all;
+        }
+
+        .select2-choice {
+            display: inline-block;
+            margin-right: 50px;
+        }
+
+        .contract-line {
+            vertical-align: middle;
+            color: #999;
+        }
+
+        .select2-choice2 {
+            display: inline-block;
+            margin-left: 10px;
+            margin-right: 50px;
+        }
+    </style>
+</head>
+<body>
+    <br />
+    <div ng-controller="ProjectController" ng-init="GetProjectList()" class="divList">
+
+        <div class="container section" ng-show="isshowtable == true">
+            <div class="row">
+                <h1>Projects</h1>
+                <div class="col-8"></div>
+                <div class="form-group">
+                    <button type="submit" style="background-color:#7FBA00;color:#FFFFFF;height:40px;font-size:18px;" class="form-control btn w-lg" id="btnAdd" ng-click="AddNew()">
+                        <i class="fa fa-plus-circle"></i>
+                        &nbsp; <span>Add New Project</span>
+                    </button>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <input type="text" placeholder="Search By Project Name" class="form-control" ng-model="search" />
+                    </div>
+                </div>
+            </div>
+            <br />
+            <table class="table table-border">
+                <thead>
+                    <tr>
+                        <th class="w-25">
+                            <b>Project Name</b>
+                        </th>
+                        <th class="w-50">
+                            <b>Contracts</b>
+                        </th>
+                        <th>
+                            <b>Project Notes</b>
+                        </th>
+                        <th class="text-center">
+                            <b>Actions</b>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="proj in projects | filter:search" ng-model="search">
+                        <td>
+                            {{proj.ProjectName}}
+                        </td>
+                        <td>
+                            <a href="#" class="label pull-right">
+                                <small> <i class="fa fa-plus-circle" style="font-size:20px;margin-top:5px;"></i></small>
+                            </a>
+                            <div class="select2" ng-repeat="a in proj.assign">
+                                <div class="row">
+                                    <div class="col-5">
+                                        <div class="select2-choice" data-toggle="tooltip" data-placement="top" title="Tooltip on top">{{a.UserName}}</div>
+                                    </div>
+                                    <span class="contract-line">
+                                        <small>|</small>
+                                    </span>
+                                    <div class="col-3" style="text-align:center;">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<div class="select2-choice2">{{a.WeeklyLimit}}</div>
+                                    </div>
+                                    <span class="contract-line">
+                                        <small>|</small>
+                                    </span>
+                                    <div class="col-3" style="text-align:center;">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<div class="select2-choice2">{{a.Rate}}</div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </td>
+                        <td>
+                            {{proj.Remark}}
+                        </td>
+                        <td class="d-flex justify-center">
+                            <a class="edit block-all td-actions-inner" style="display: inline-block;cursor:pointer" ng-click="Edit(proj)"><i class="fa fa-edit" style="color:forestgreen;font-size:20px;"></i></a>
+                            &nbsp;&nbsp;<a class="delete block-all td-actions-inner" style="display: inline-block;cursor:pointer" ng-click="Delete(proj.ProjectId)" name="delete" data-original-title="Delete"><i class="fa fa-close block-all" style="color:red;font-size:20px;"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="container" ng-show="isshowadd == true">
+            <br />
+            <h2 id="spn">Add New Project</h2>
+            <div class="card-box">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <label class="control-label">Project Name</label>
+                            <input type="text" style="background-color:#F6F6F6" ng-model="Project.ProjectName" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label">Additional information</label>
+                            <div class="card-box" style="background-color:#F6F6F6;">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <i class="icon icon-sm icon-calender form-group icon-left-space"></i>
+                                        <label class="control-label">StartDate</label>
+                                        <div>
+                                            <div class="input-group">
+                                                <input type="text" ng-model="Project.StartDate" class="form-control" id="datepicker-autoclose">
+                                            </div> @*input-group*@
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <i class="icon icon-sm icon-calender form-group icon-left-space"></i>
+                                        <label class="control-label">DeadLine</label>
+                                        <div>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" ng-model="Project.DeadLine" id="datepicker">
+                                            </div> @*input-group*@
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <i class="icon icon-sm icon-clock form-group icon-left-space"></i>
+                                        <label class="control-label">Estimation</label>
+                                        <div class="row">
+                                            <div class="col-1"></div>
+                                            <input type="text" ng-model="Project.EstimationHour" class="form-control w-50" />
+                                            &nbsp; hours
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label">Project Notes</label>
+                            <textarea id="textarea" style="background-color:#F6F6F6" class="form-control" maxlength="225" rows="2" ng-model="Project.Remark"></textarea>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <h4><b>&nbsp; Contracts</b></h4>
+                            <div class="col-7"></div>
+                            <h4><a href=""><i class="fa fa-trash" ng-click="DeleteAll()" style="color:red;"></i></a></h4>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-10">
+                                <table class="table">
+                                    <tr class="table-primary">
+                                        <th width="150">Assign to</th>
+                                        <th>Weekly limit</th>
+                                        <th>Rate($)</th>
+                                        <th></th>
+                                    </tr>
+                                    <tr ng-repeat="items in Project.assign">
+                                        <td style="width:200px">
+                                            <select ng-model="items.UserId" name="Project.UserId" class="form-control " ng-options="tObj.UserId as tObj.FirstName + ' ' + tObj.LastName for tObj in teams">
+                                                <option value="">Select User</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <div class="form-group w-50">
+                                                <input type="text" class="form-control" placeholder="50" ng-model="items.WeeklyLimit" name="Project.WeeklyLimit" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group w-50">
+                                                <input type="text" class="form-control" placeholder="0" ng-model="items.Rate" name="Project.Rate" />
+                                            </div>
+
+                                        </td>
+                                        <td>
+                                            <a name="delete" style="cursor:pointer;" ng-click="DeleteOne()"><i class=" fa fa-remove fa-lg" style="color:red"></i></a>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-4"></div>
+                                        <div class="col-4">
+                                            <input type="button" class="form-control btn-custom btn-inverse " value="Assign to all users" data-toggle="modal" data-target="#assignUser" />
+                                        </div>
+                                        <div class="col-4">
+                                            <button type="submit" class="form-control btn-inverse" ng-click="AddOne()">
+                                                <i class="fa fa-plus-circle"></i>
+                                                <span>Add new contract</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal fade" id="assignUser" role="dialog">
+                                    <div class="modal-dialog modal-dialog-centered">
+
+                                        @*Modal content*@
+
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+
+                                                <h4 class="modal-title">ADD CONTRACTS</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <label class="control-label">Weekly Limit</label>
+                                                <div>
+                                                    <div class="input-group">
+                                                        <input type="text" ng-model="txtWeeklyLimit" name="Project.WeeklyLimit" class="form-control w-75">
+                                                    </div>
+                                                </div>
+                                                <br />
+                                                <label class="control-label">Rate($)</label>
+                                                <div>
+                                                    <div class="input-group">
+                                                        <input type="text" ng-model="txtRate" name="Project.Rate" class="form-control w-75">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div>
+                                                <button type="button" class="btn btn-default btn-block" data-ng-click="AssignAll()" data-dismiss="modal">ADD</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-1"></div>
+                            <div style="height:110px;width:100%;"></div>
+                            <div style="width:67%;"></div>
+                            <div class="form-group">
+                                <input type="button" class="form-control btn btn-success w-lg float-right " id="save" value="Save" ng-click="Create(Project)" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container" ng-show="isshowedit == true">
+            <h2 id="spn">Edit New Project</h2>
+            <div class="card-box">
+                <div class="row ml-5 mr-5">
+                    <div class="col-md-6">
+                        <div class="p-20">
+                            <div class="form-group">
+                                <label class="control-label">Project Name</label>
+                                <input type="text" ng-model="Project.ProjectName" style="background-color:#F6F6F6" class="form-control" />
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Additional information</label>
+                                <div class="card-box" style="background-color:#F6F6F6;">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <i class="icon icon-sm icon-calender form-group icon-left-space"></i>
+                                            <label class="control-label">StartDate</label>
+                                            <div>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" ng-model="Project.StartDate" id="datepicker-autoclose">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <i class="icon icon-sm icon-calender form-group icon-left-space"></i>
+                                            <label class="control-label">DeadLine</label>
+                                            <div>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" ng-model="Project.DeadLine" id="datepicker">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <i class="icon icon-sm icon-clock form-group icon-left-space"></i>
+                                            <label class="control-label">Estimation</label>
+                                            <div class="row">
+                                                <div class="col-1"></div>
+                                                <input type="text" ng-model="Project.EstimationHour" class="form-control w-50" />
+                                                &nbsp; hours
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Project Notes</label>
+                                <textarea id="textarea" style="background-color:#F6F6F6" ng-model="Project.Remark" class="form-control" maxlength="225" rows="2"></textarea>
+                            </div>
+
+                            <div class="form-group text-right" style="height:50px; ">
+                                <button class="btn btn-success btn-lg h-100 w-50" style="font-size: 20px" ng-click="Create(Project)">Save</button>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="col-md-6 mt-5">
+                        <div class="row ml-20">
+                            <div class="col-6 p-10">
+                                <div class="card">
+                                    <div class="card-body">
+                                        Created
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        Created
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3 ">
+                            <div class="col-6">
+                                <div class="card" style="height:150px; background-color: #F6F6F6">
+                                    <div class="card-body">
+                                        Created
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="card" style="height:150px; background-color: #F6F6F6">
+                                    <div class="card-body">
+                                        Created
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col">
+                    <div class="row">
+                        <div class="col" style="color:black"><h2>Contracts</h2></div>
+                        <div class="col text-right">
+                            <h1>
+                                <i class="fa fa-plus-circle" style="font-size:large" data-toggle="modal" data-target="#addnew"></i>
+                                <i class="fa fa-trash" style="font-size:x-large; color:red" data-toggle="modal" data-target="#DeleteContracts"></i>
+                            </h1>
+                        </div>
+                    </div>
+
+                    <div class="card-box">
+                        <table class="table">
+                            <thead>
+                                <tr class="table-primary">
+                                    <th>Assign to</th>
+                                    <th>Weekly Limit</th>
+                                    <th>Rate($)</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="items in Project.assign">
+                                    <td>
+                                        <div class="form-group w-50">
+                                            <input type="text" name="Project.UserId" class="form-control" readonly ng-model="items.UserName" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group " style="width:55px;">
+                                            <input type="text" class="form-control" ng-model="items.WeeklyLimit" name="Project.WeeklyLimit" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group " style="width:55px;">
+                                            <input type="text" class="form-control" ng-model="items.Rate" name="Project.Rate" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <i class="fa fa-close" style="color: red;" data-toggle="modal" data-target="#DeleteOneContracts"></i>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="form-group text-right">
+                            <div class="row">
+                                <div class="col-4"></div>
+                                <div class="col-8" style="height: 50px;">
+                                    <button class="col btn btn-outline-primary h-100" style="font-size:larger;width:200px;" data-toggle="modal" data-target="#assignAll">
+                                        Assign to all users
+                                    </button>
+
+                                    <button class="col btn btn-primary h-100" style="font-size:larger;width:200px;" data-toggle="modal" data-target="#addnew">
+                                        <i class="fa fa-plus-circle"></i>
+                                        <span>Add new contract</span>
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Modal Delete Contracts -->
+                <div id="DeleteContracts" class="modal fade" role="dialog">
+                    <div class="modal-dialog modal-dialog-centered ">
+
+                        <!-- Modal content-->
+                        <div class="modal-content ">
+
+                            <div class="modal-body">
+                                <h5 style="color:black">Are you sure you want to unassign all users?</h5>
+
+                            </div>
+                            <div class="modal-footer text-right ">
+                                <button type="button" class="btn btn-danger btn-lg w-25 font-600" ng-click="DeleteAll()" data-dismiss="modal">Unassign</button>
+                                <button type="button" class="btn btn-default btn-lg w-25 font-600" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Modal End-->
+                <!-- Modal Delete One Contracts -->
+                <div id="DeleteOneContracts" class="modal fade" role="dialog">
+                    <div class="modal-dialog modal-dialog-centered ">
+
+                        <!-- Modal content-->
+                        <div class="modal-content ">
+
+                            <div class="modal-body">
+                                <h5 style="color:black">Are you sure you want to unassign " "?</h5>
+
+                            </div>
+                            <div class="modal-footer text-right ">
+                                <button type="button" ng-click="DeleteOne()" data-dismiss="modal" class="btn btn-danger btn-lg w-25 font-600">Unassign</button>
+                                <button type="button" class="btn btn-default btn-lg w-25 font-600" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Modal End-->
+                <!-- Modal Assign All User -->
+                <div class="modal fade" id="assignAll" role="dialog">
+                    <div class="modal-dialog modal-dialog-centered">
+
+                        <div class="modal-content">
+                            <div class="modal-header">
+
+                                <h4 class="modal-title">ADD CONTRACTS</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body" style="color:black; font-size:larger">
+                                <label class="control-label">Weekly Limit</label>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" ng-model="txtWeeklyLimit" name="Project.WeeklyLimit" class="form-control w-75">
+                                    </div>
+                                </div>
+                                <br />
+                                <label class="control-label">Rate($)</label>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" ng-model="txtRate" name="Project.Rate" class="form-control w-75">
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <button type="button" data-ng-click="AssignAll()" class="btn btn-default btn-block" style="height:50px; font-size:larger" data-dismiss="modal">ADD</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Modal End-->
+                <!-- Modal Add New -->
+                <div class="modal fade" id="addnew" role="dialog">
+                    <div class="modal-dialog modal-dialog-centered">
+
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">ADD CONTRACTS</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <div class="modal-body" style="color:black; font-size:larger">
+                                <label class="control-label">Users</label>
+                                <select ng-model="usersid" ng-change="GetValue()" name="Project.UserId" class="form-control " ng-options="tObj.UserId as tObj.FirstName + ' ' + tObj.LastName for tObj in teams" style="height:40px; font-size:large">
+                                    <option value="">Select User</option>
+                                </select>
+                                <br />
+                                <label class="control-label">Weekly Limit</label>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control w-75" ng-model="weeklylimit">
+                                    </div>
+                                </div>
+                                <br />
+
+                                <label class="control-label">Rate($)</label>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control w-75" ng-model="rate">
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div>
+                                <button type="button" ng-click="addnewrow()" class="btn btn-default btn-block" style="height:50px; font-size:larger" data-dismiss="modal">ADD</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Modal End-->
+
+            </div>
+        </div>
+    </div>
+    <script src="~/js/jquery.min.js"></script>
+    <script>
+        $('#assignUser').on('hidden.bs.modal', function () {
+            $(this).find("input").val('').end();
+        });
+
+        $('#assignAll').on('hidden.bs.modal', function () {
+            $(this).find("input").val('').end();
+        });
+
+
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+    </script>
+</body>
+@section script {
+    <script defer src="~/Scripts/Services/ProjectService.js"></script>
+    <script src="~/Scripts/Services/TeamService.js"></script>
+    <script defer src="~/Scripts/AngularController/ProjectCtrl.js"></script>
+
+    <script src="~/plugins/moment/moment.js"></script>
+    <script src="~/plugins/timepicker/bootstrap-timepicker.js"></script>
+    <script src="~/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+    <script src="~/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/plugins/clockpicker/js/bootstrap-clockpicker.min.js"></script>
+    <script src="~/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="~/pages/jquery.form-pickers.init.js"></script>
+}

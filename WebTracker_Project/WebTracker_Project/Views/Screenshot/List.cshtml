@@ -1,0 +1,228 @@
+﻿@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<head>
+    <title>ScreenShots</title>
+    <link href="~/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link href="~/plugins/clockpicker/css/bootstrap-clockpicker.min.css" rel="stylesheet">
+    <link href="~/CSS/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/CSS/icons.css" rel="stylesheet" type="text/css" />
+    <link href="~/CSS/style.css" rel="stylesheet" type="text/css" />
+    <script src="~/js/modernizr.min.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+    <style>
+        .btn {
+            border: none;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+        .button2 {
+            background: #8c69c9;
+            /*background-image: linear-gradient(#8c69c9 50%, #8c69c9 50%, #8c69c9 95%, #8c69c9 95%);*/
+            color: white;
+            width: 125px;
+            height: 35px;
+            /*border: 2px solid #008CBA;*/
+            border: none;
+            box-shadow: 5px;
+        }
+
+            .button2:hover {
+                background: white;
+                color: black;
+            }
+
+        .no-padding {
+            padding: 0 !important;
+        }
+
+        .block-round-hour {
+            vertical-align: middle !important;
+        }
+
+        .mt-add-input {
+            height: 45px;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
+        .d-flex {
+            display: flex;
+        }
+
+        .button:hover {
+            background-color: #00B8E6;
+        }
+    </style>
+
+</head>
+<body>
+    <br />
+    <div ng-controller="ScreenshotController" class="divList">
+        <br />
+        <div class="row">
+            <div class="col-1 text-right pt-2">
+                <i class="fa fa-circle" style="font-size:x-large"></i>
+            </div>
+            <div class="col-3">
+                <select class="form-control mt-add-input" style="background:#f6f6f6" ng-model="userId" ng-change="GetSSByUser()"
+                        ng-options="uObj.UserId as (uObj.FirstName + ' ' + uObj.LastName) for uObj  in teams">
+                </select>
+            </div>
+            <div class="col-3">
+                <select class="form-control mt-add-input" style="background:#f6f6f6" ng-model="projectId" ng-change="GetSSByUser()"
+                        ng-options="pObj.ProjectId as pObj.ProjectName for pObj  in projects">
+                    <option value="">All</option>
+                </select>
+            </div>
+            <div class="col-3"></div>
+            <div class="col text-center pr-5 pt-2">
+                <a href="@Url.Action("ArchieveList","Screenshot")" style="color:cadetblue;font-size:16px;"><u>Go To Archieve</u></a>
+            </div>
+            @*< class="col text-right pt-2">
+                    <a href="" style="color:rebeccapurple"><h5>See Manual Time Requests</h5></a>
+                </div>*@
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-3">
+                <i class="fa fa-chevron-left" style="font-size:20px; color:rebeccapurple" ng-click="PrevDate()"></i>
+                &emsp;<input type="date" ng-model="sdate" id="dateto1" name="SS.ScreenShotTime" ng-change="GetSSByUser()" class="form-control-sm" style="border:none;background:#f6f6f6 " date-input />
+                &emsp;
+                <i class="fa fa-chevron-right" style="font-size:20px; color:rebeccapurple" ng-click="nextDate()"></i>
+            </div>
+            <div class="col-3"></div>
+            <div class="col pt-1">
+                <button class="btn button2" ng-click="SelectAll()">Select All</button>
+                <button class="btn button2" ng-click="DeselectAll()">Deselect All</button>
+                <button class="btn button2" ng-click="Delete()">Delete</button>
+            </div>
+        </div>
+        <br /><br />
+
+        <div class="row" ng-repeat="s in returnArry">
+            <div class="col-1 pt-lg-5" style="color:rebeccapurple; font-size:20px"><b>{{s.hour}}   : 00 </b></div>
+            <div class="row" ng-repeat="h in s.detail">
+                <div class="col-1 pl-lg-5" style="color:rebeccapurple; font-size:20px;" ng-show="{{$index}}==6"></div>
+                <div class="col-2">
+                    <div>
+                        <input type="checkbox" class="scid" value="{{h.ScreenShotId}}" @*ng-true-value="{{h.ScreenShotId}}" ng-false-value="''" ng-model="h.selected"*@ />
+                    </div>
+                    <img ng-src="~/Content/Screenshots/{{h.FileName}}" ng-click="GetDailyTimeDetails(h.ScreenShotId)" height="250" width="200" data-toggle="modal" data-target="#myModal" />&emsp;
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header" ng-repeat="d in ssdetails">
+                        <h4 class="modal-title">Project : {{d.ProjectName}}</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-10" ng-repeat="d in ssdetails">
+                                <img src="~/Content/Screenshots/{{d.FileName}}" height="950" width="950" style="margin-left: 77px;" />
+                            </div>
+                            <div class="col-2"></div>
+                        </div>
+                        <br />
+                        <div class="row" style="margin-top:-257px;">
+                            <table class="table table-striped table-bordere">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th style="background-color:#D8EAF6;color:#0083A5">Time</th>
+                                        <th style="background-color:#D8EAF6;color:#0083A5">Keyooard</th>
+                                        <th style="background-color:#D8EAF6;color:#0083A5">Mouse</th>
+                                        <th style="background-color:#D8EAF6;color:#0083A5">App/Website</th>
+                                        <th style="background-color:#D8EAF6;color:#0083A5">Project</th>
+                                        <th style="background-color:#D8EAF6;color:#0083A5">Task</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody ng-repeat="d in ssdetails">
+                                    <tr ng-repeat="s in d.assign">
+                                        <td>
+                                            {{s.StartTime | date : "HH:mm"}}
+                                        </td>
+                                        <td>
+                                            {{s.KeyHit}}
+                                        </td>
+                                        <td>
+                                            {{s.MouseHit}}
+                                        </td>
+                                        <td>
+                                            {{s.AppName}}
+                                        </td>
+                                        <td>
+                                            {{s.ProjectName}}
+                                        </td>
+                                        <td>
+                                            {{s.TaskName}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="~/js/jquery.min.js"></script>
+    <script>
+        var today = new Date();
+
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+
+        if (dd < 10) {
+            dd = '0' + dd
+        }
+
+        if (mm < 10) {
+            mm = '0' + mm
+        }
+
+        // today = yyyy + '/' + mm + '/' + dd;
+        today = yyyy + '-' + mm + '-' + dd;
+        document.getElementById('dateto1').value = today;
+    </script>
+</body>
+
+@section script {
+
+    <script src="~/Scripts/AngularController/ScreenshotCtrl.js"></script>
+    <script src="~/Scripts/Services/ScreenshotService.js"></script>
+    <script src="~/Scripts/Services/TeamService.js"></script>
+    <script src="~/Scripts/Services/ProjectService.js"></script>
+    <script src="~/plugins/moment/moment.js"></script>
+    <script src="~/plugins/timepicker/bootstrap-timepicker.js"></script>
+    <script src="~/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+    <script src="~/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/plugins/clockpicker/js/bootstrap-clockpicker.min.js"></script>
+    <script src="~/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="~/pages/jquery.form-pickers.init.js"></script>
+}

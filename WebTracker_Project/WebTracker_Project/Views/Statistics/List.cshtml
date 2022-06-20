@@ -1,0 +1,129 @@
+﻿@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<head>
+    <title>Statistics</title>
+    <link href="~/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link href="~/plugins/clockpicker/css/bootstrap-clockpicker.min.css" rel="stylesheet">
+    <link href="~/CSS/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/CSS/icons.css" rel="stylesheet" type="text/css" />
+    <link href="~/CSS/style.css" rel="stylesheet" type="text/css" />
+    <script src="~/js/modernizr.min.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+    <style>
+        .gobtn {
+            border: none !important;
+            height: 41px;
+            color: white;
+            width: 100px;
+            background-color: #7EB900;
+            font-size: 20px;
+        }
+
+        .no-padding {
+            padding: 0 !important;
+        }
+
+        .block-round-hour {
+            vertical-align: middle !important;
+        }
+
+        .mt-add-input {
+            height: 40px;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
+        .d-flex {
+            display: flex;
+        }
+
+        .button:hover {
+            background-color: #00B8E6;
+        }
+    </style>
+
+</head>
+<body>
+    <div ng-controller="StatisticsController">
+        <div class="container">
+            <div class="card-box" style="background-color: #EBEFF2 !important; box-shadow: none !important; padding:0px!important;">
+                <h2 style="  color: black; font-size: 36px;padding-left:8px; ">Statistics</h2>
+            </div>
+        </div>
+        <div class="container">
+            <div class="card-box">
+                <div class="row">
+                    <div class="col-4">
+                        <select class="form-control mt-add-input w-75" style="background:#f6f6f6" ng-model="userId"
+                                ng-options="uObj.UserId as (uObj.FirstName + ' ' + uObj.LastName) for uObj  in teams">
+                            <option value="">Select User</option>
+
+                        </select>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
+                        <select class="form-control mt-add-input" style="background: #f6f6f6; font-size: 16px;" ng-model="deptId"
+                                ng-options="deObj.DepartmentId as deObj.DepartmentName for deObj  in depts">
+                            <option value="">Departments</option>
+                        </select>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
+                        <select class="form-control mt-add-input" style="background: #f6f6f6; font-size: 16px;" ng-model="desId"
+                                ng-options="dObj.DesignationId as dObj.DesignationName for dObj  in deslist">
+                            <option value="">Designations</option>
+                        </select>
+                    </div>
+
+                </div>
+                <br />
+                <br />
+                <div class="row">
+
+                    <div class="col-md-3"> </div>
+                    <div class="col-md-7">
+                        <div class="d-flex row">
+                            <div class="col-xs-3">
+                                <input type="date" style="background: #f6f6f6; font-size: 16px;" class="form-control" ng-model="sdate" date-input />
+                            </div>
+                            <div class="col-xs-2">&nbsp;&nbsp;<i class="fa fa-calendar" style="font-size:30px;"></i>&nbsp;&nbsp;</div>
+                            <div class="col-xs-3">
+                                <input type="date" style="background: #f6f6f6; font-size: 16px;" class="form-control" ng-model="edate" date-input />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <button class="gobtn" ng-click="GetList()">Go</button>
+                    </div>
+
+                </div>
+            </div> <!-- end  container -->
+        </div>
+    </div>
+    <script src="~/js/jquery.min.js"></script>
+
+
+</body>
+@section script {
+    <script src="~/Scripts/Services/StatisticsService.js"></script>
+    <script src="~/Scripts/Services/TeamService.js"></script>
+    <script src="~/Scripts/Services/ProjectService.js"></script>
+    <script src="~/Scripts/Services/DepartmentService.js"></script>
+    <script src="~/Scripts/Services/DesignationService.js"></script>
+    <script src="~/Scripts/AngularController/StatisticsCtrl.js"></script>
+
+    <script src="~/plugins/moment/moment.js"></script>
+    <script src="~/plugins/timepicker/bootstrap-timepicker.js"></script>
+    <script src="~/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+    <script src="~/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/plugins/clockpicker/js/bootstrap-clockpicker.min.js"></script>
+    <script src="~/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="~/pages/jquery.form-pickers.init.js"></script>
+}

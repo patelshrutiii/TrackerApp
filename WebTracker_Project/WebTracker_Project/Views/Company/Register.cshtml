@@ -1,0 +1,270 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
+    <meta name="author" content="Coderthemes">
+
+    <title>Register</title>
+
+    <link href="~/CSS/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/CSS/icons.css" rel="stylesheet" type="text/css" />
+    <link href="~/CSS/style.css" rel="stylesheet" type="text/css" />
+
+    <script src="~/js/modernizr.min.js"></script>
+
+</head>
+<body>
+
+    <div ng-controller="CompanyController">
+
+        <form novalidate name="f1" id="register" data-parsley-validate="">
+
+            <table>
+                <!-- Here  ng-show="!IsLogedIn" means I want to hide table after loged in-->
+
+                <div class="wrapper-page">
+                    <div class="card-box">
+                        <div class="panel-heading">
+                            <h4 class="text-center"> Sign Up to <strong class="text-custom">Tracker</strong></h4>
+                        </div>
+
+                        <div class="p-30">
+                            <div class="form-group ">
+                                <div class="col-12">
+                                    <input type="text" class="form-control" placeholder="Company Name" ng-model="Company.CompanyName" data-parsley-length="[4, 20]" required="" autofocus />
+                                </div>
+                            </div>
+
+                            <div class="form-group ">
+                                <div class="col-12">
+                                    <input type="text" class="form-control" placeholder="Last Name" ng-model="Company.CompanyLastName" data-parsley-length="[4, 20]" required="" autofocus />
+                                </div>
+                            </div>
+
+                            <div class="form-group ">
+                                <div class="col-12">
+                                    <input type="text" class="form-control" placeholder="Street-Address" ng-model="Company.StreetAddress" data-parsley-length="[4, 20]" required="" autofocus />
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <div class="col-12">
+                                    <select ng-model="Company.StateId" name="role" class="form-control" ng-options="sObj.StateId as sObj.StateName for sObj in states" ng-change="CityList(Company.StateId)" required>
+                                        <option value="">Select State</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <div class="col-12">
+                                    <select ng-model="Company.CityId" name="role" class="form-control " ng-options="cObj.CityId as cObj.CityName for cObj in cities" required>
+                                        <option value="">Select City</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group ">
+                                <div class="row">
+                                    &nbsp;&nbsp;
+                                    <div class="col-3 ">
+                                        @*<input type="text" parsley-type="phone" class="form-control" placeholder="+91" data-parsley-minlength="10" data-parsley-minlength-message="Invalid" data-parsley-maxlength="2" data-parsley-maxlength-message="Not valid" ng-model="Company.Extension" data-parsley-type="digits" data-parsley-type-message="only numbers" maxlength="2" required="" />*@
+                                        <input type="text" parsley-type="phone" class="form-control" placeholder="+91" ng-model="Company.Extension" data-parsley-minlength="2" data-parsley-minlength-message="minlength two number" data-parsley-maxlength="2" data-parsley-maxlength-message="maxlength 2 number" data-parsley-type="digits" data-parsley-type-message="only numbers" maxlength="2" required="" autofocus />
+
+                                    </div>
+                                    <div class="col-8">
+                                        <input type="text" parsley-type="phone" class="form-control" placeholder="Mobile No." ng-model="Company.MobileNo" data-parsley-minlength="10" data-parsley-minlength-message="Mobile Number must be 10 digits " data-parsley-maxlength="10" data-parsley-maxlength-message="Mobile Number must be 10 digits" data-parsley-type="digits" data-parsley-type-message="only numbers" maxlength="10" required="" autofocus />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group ">
+                                <div class="col-12">
+                                    <input type="text" id="phoneno" parsley-type="phone" class="form-control" placeholder="Phone No. (Optional)" ng-model="Company.PhoneNo" data-parsley-trigger="keyup" data-parsley-minlength="10" data-parsley-minlength-message="Phone Number must be 10 digits" data-parsley-maxlength="10" data-parsley-maxlength-message="Phone Number must be 10 digits" data-parsley-type="digits" data-parsley-type-message="only numbers" maxlength="10" autofocus />
+                                </div>
+                            </div>
+
+                            <div class="form-group ">
+                                <div class="col-12">
+                                    <input data-parsley-type="email" data-parsley-email-message="must be a valid email address" name="email" type="text" class="form-control" placeholder="Email" ng-model="Company.CompanyEmail" data-parsley-trigger="change" required="" autofocus />
+                                </div>
+                            </div>
+
+                            <div class="form-group ">
+                                <div class="col-12">
+                                    <input id="password1" name="password" type="password" class="form-control" placeholder="Password" ng-model="Company.CompanyPassword" required=""
+                                           data-parsley-minlength="8"
+                                           data-parsley-errors-container=".errorspannewpassinput"
+                                           data-parsley-required-message="Please enter your new password."
+                                           data-parsley-uppercase="1"
+                                           data-parsley-lowercase="1"
+                                           data-parsley-number="1"
+                                           data-parsley-special="1"
+                                           data-parsley-required />
+                                    <span class="errorspannewpassinput"></span>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group text-center m-t-40 invalid-form-error-message">
+                                <div class="col-12">
+                                    <input value="Register" id="submitsignup" class="btn btn-pink btn-block text-uppercase fa-bold btn-default validate"
+                                           type="submit" ng-click="CreateCompany(Company)" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 text-center">
+                            <p>
+                                Already have an account? <a href="@Url.Action("Login","Company")" class="text-primary m-l-5"><b>Sign in</b></a>
+                            </p>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+            </table>
+        </form>
+    </div>
+
+
+
+
+    <!-- jQuery  -->
+    <script src="~/js/jquery.min.js"></script>
+    <script type="text/javascript">
+        //       $(function () {
+        //  $('#demo-form').parsley().on('field:validated', function() {
+        //    var ok = $('.parsley-error').length === 0;
+        //    $('.bs-callout-info').toggleClass('hidden', !ok);
+        //    $('.bs-callout-warning').toggleClass('hidden', ok);
+        //  })
+        //  .on('form:submit', function() {
+        //    return false; // Don't submit form for this demo
+        //  });
+        //});
+
+        //        $(function () {
+        //            $('.demo-form').parsley().on('form:validate', function (formInstance) {
+        //                var ok = formInstance.isValid({ group: 'block1', force: true }) || formInstance.isValid({ group: 'block2', force: true });
+        //                $('.invalid-form-error-message')
+        //                    .html(ok ? '' : 'You must correctly fill *at least one of these two blocks!')
+        //                    .toggleClass('filled', !ok);
+        //                if (!ok)
+        //                    formInstance.validationResult = false;
+        //            });
+        //        });
+        //has uppercase
+        window.Parsley.addValidator('uppercase', {
+            requirementType: 'number',
+            validateString: function (value, requirement) {
+                var uppercases = value.match(/[A-Z]/g) || [];
+                return uppercases.length >= requirement;
+            },
+            messages: {
+                en: 'Your password must contain at least (%s) uppercase letter.'
+            }
+        });
+
+        //has lowercase
+        window.Parsley.addValidator('lowercase', {
+            requirementType: 'number',
+            validateString: function (value, requirement) {
+                var lowecases = value.match(/[a-z]/g) || [];
+                return lowecases.length >= requirement;
+            },
+            messages: {
+                en: 'Your password must contain at least (%s) lowercase letter.'
+            }
+        });
+
+        //has number
+        window.Parsley.addValidator('number', {
+            requirementType: 'number',
+            validateString: function (value, requirement) {
+                var numbers = value.match(/[0-9]/g) || [];
+                return numbers.length >= requirement;
+            },
+            messages: {
+                en: 'Your password must contain at least (%s) number.'
+            }
+        });
+
+        //has special char
+        window.Parsley.addValidator('special', {
+            requirementType: 'number',
+            validateString: function (value, requirement) {
+                var specials = value.match(/[^a-zA-Z0-9]/g) || [];
+                return specials.length >= requirement;
+            },
+            messages: {
+                en: 'Your password must contain at least (%s) special characters.'
+            }
+        });
+    </script>
+</body>
+@section script{
+    <script src="~/Scripts/AngularController/CompanyCtrl.js"></script>
+    <script src="~/Scripts/Services/CompanyService.js"></script>
+    <script src="~/js/parsley.min.js"></script>
+    <script type="text/javascript">
+
+        //has uppercase
+        window.Parsley.addValidator('uppercase', {
+            requirementType: 'number',
+            validateString: function (value, requirement) {
+                var uppercases = value.match(/[A-Z]/g) || [];
+                return uppercases.length >= requirement;
+            },
+            messages: {
+                en: 'Your password must contain at least (%s) uppercase letter.'
+            }
+        });
+
+        //has lowercase
+        window.Parsley.addValidator('lowercase', {
+            requirementType: 'number',
+            validateString: function (value, requirement) {
+                var lowecases = value.match(/[a-z]/g) || [];
+                return lowecases.length >= requirement;
+            },
+            messages: {
+                en: 'Your password must contain at least (%s) lowercase letter.'
+            }
+        });
+
+        //has number
+        window.Parsley.addValidator('number', {
+            requirementType: 'number',
+            validateString: function (value, requirement) {
+                var numbers = value.match(/[0-9]/g) || [];
+                return numbers.length >= requirement;
+            },
+            messages: {
+                en: 'Your password must contain at least (%s) number.'
+            }
+        });
+
+        //has special char
+        window.Parsley.addValidator('special', {
+            requirementType: 'number',
+            validateString: function (value, requirement) {
+                var specials = value.match(/[^a-zA-Z0-9]/g) || [];
+                return specials.length >= requirement;
+            },
+            messages: {
+                en: 'Your password must contain at least (%s) special characters.'
+            }
+        });
+    </script>
+}
+
+

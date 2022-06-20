@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TrackerAppModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Project_MasterTb">
+    <Key>
+      <PropertyRef Name="Proj_id" />
+    </Key>
+    <Property Name="Proj_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Pname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="TrackerAppEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Project_MasterTb" EntityType="Self.Project_MasterTb" />
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,189 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+<link href="~/CSS/bootstrap.min.css" rel="stylesheet" />
+<style>
+   
+
+    .button2 {
+        background-color: white;
+        color: black;
+        width: 100%;
+        height: 55px;
+        /*border: 2px solid #008CBA;*/
+        border: none;
+    }
+
+        .active1, .button2:hover {
+            background-image: linear-gradient(to bottom, #8c69c9 50%, #8c69c9 50%, #8c69c9 95%, #432970 95%);
+            color: white;
+        }
+
+      /*  .button2:hover {
+            background-image: linear-gradient(to bottom, #8c69c9 50%, #8c69c9 50%, #8c69c9 95%, #432970 95%);
+            color: white;
+        }*/
+</style>
+<body>
+    <div class="container" ng-controller="SettingController">
+        <br />
+        <div class="Row" style="background-color: #efefef; ">
+            <div class="card-box" style="display: flex; box-shadow: none !important; margin-bottom: 60px !important; padding-left: 0px !important;">
+                <div class="col-md-4"></div>
+                <div class="col-md-2">
+                    <button class="button2 active1" id="mybtn" ng-click="GetCompanyById()"><i class="fa fa-signal" style="font-size:20px;padding:5px;border-bottom:grey;"></i>Profile</button>
+                </div>
+
+                <div class="col-md-2">
+                    <button class="button2" id="mybtn2" ng-click="GetAccountInfo()"><i class="fa fa-address-book " style="font-size: 20px; padding: 10px;"></i>Account</button>
+                </div>
+                @*<div class="col-md-2">
+                        <button class="button button2" ng-click="Report()"><i class="fa fa-user-circle-o" style="font-size: 20px; padding: 10px;"></i>Billing</button>
+
+                    </div>*@
+
+            </div>
+        </div>
+
+        <div class="container" ng-show="ProfileForm==true">
+            <form novalidate name="f1" id="register" data-parsley-validate="">
+
+                <div class="card-box" style="margin-top:-19px!important;">
+                    <div class="row">
+                        <div class="col-md-4">
+
+                            <div id="demo" style="margin-left:50px;height:150px;width:150px;background-color:antiquewhite;border-radius:100%;">
+                                <h1 style="padding-left:23px; padding-top:27px; font-size:80px;">{{cname}}</h1>
+                            </div>
+
+                        </div>
+                        <div class="col-md-8" style="padding-top:20px;">
+                            @*<div class="row"><a>change Password</a></div>*@
+                            <div class="row">
+                                <div class="col-6">
+                                    <label>Company Name</label>
+                                    <div class="form-group">
+                                        <input class="form-control" id="job_title" name="job_title" ng-model="company.CompanyName" type="text" value="" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <label>Company Last Name</label>
+                                    <div class="form-group">
+                                        <input class="form-control" id="job_title" name="job_title" ng-model="company.CompanyLastName" type="text" value="" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <label>Company Email</label>
+                                    <div class="form-group">
+                                        <input class="form-control" required="" autofocus ng-model="company.CompanyEmail" type="email" data-parsley-type="email" data-parsley-email-message="must be a valid email address" value="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+
+                                    <label>State</label>
+                                    <div class="form-group">
+                                        <select ng-model="company.StateId" class="form-control" ng-options="sObj.StateId as sObj.StateName for sObj in states" ng-change="CityList(company.StateId)" required="" autofocus>
+                                            <option value="">Select State</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <label>City</label>
+                                    <div class="form-group ">
+                                        <select ng-model="company.CityId" class="form-control " ng-options="cObj.CityId as cObj.CityName for cObj in cities" required="" autofocus>
+                                            <option value="">Select City</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <label for="address">Address</label>
+                                    <div class="form-group">
+                                        <input class="form-control login-input" required="" autofocus ng-model="company.StreetAddress" type="text" value="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+
+                                    <label>Mobile No</label>
+                                    <div class="form-group">
+                                        <input class="form-control" required="" autofocus ng-model="company.MobileNo" type="text" value="">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <label for="phone_number">Phone No</label>
+                                    <div class="form-group ">
+                                        <input class="form-control" required="" autofocus ng-model="company.PhoneNo" type="text" value="">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-8"></div>
+
+                                <div class="col-md-3">
+                                    <button type="submit" class="btn btn-success btn-lg center-block" ng-click="CreateCompany(company)" style=" width: 180px!important; ">Save</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <div class="container" ng-show="AccountInfo==true">
+
+            <div class="card-box" style="margin-top:-19px!important;">
+                <div class="row">
+
+                    <div class="col-md-12" style="padding-top:20px;">
+                        @*<div class="row"><a>change Password</a></div>*@
+                        <div class="row">
+                            <div class="col-3"></div>
+                            <div class="col-9">
+                                <label>{{Accounts.CompanyName}} {{Accounts.CompanyLastName}}</label>
+                                <div class="row">
+                                    <div class="col-2">Role : </div>
+                                    <div>
+                                        <b> {{Accounts.RoleName}}</b>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/js/jquery.min.js"></script>
+    <script>
+
+        $("#mybtn2").on("click", function () {
+            $(".button2").removeClass("active1");
+            $(this).addClass("active1");
+        })
+        $("#mybtn").on("click", function () {
+            $(".button2").removeClass("active1");
+            $(this).addClass("active1");
+        })
+
+    </script>
+</body>
+@section script{
+    <script src="~/Scripts/AngularController/SettingCtrl.js"></script>
+    <script src="~/Scripts/Services/CompanyService.js"></script>
+    <script src="~/Scripts/Services/SettingService.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/parsley.min.js"></script>
+
+}

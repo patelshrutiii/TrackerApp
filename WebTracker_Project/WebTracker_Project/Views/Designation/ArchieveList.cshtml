@@ -1,0 +1,192 @@
+﻿@{
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+<head>
+    <title>Archieved Designations</title>
+    <style>
+        body {
+            font-size: 16px;
+        }
+
+        .no-padding {
+            padding: 0 !important;
+        }
+
+        .block-round-hour {
+            vertical-align: middle !important;
+        }
+
+        .department-add-input {
+            height: 34px;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
+        .d-flex {
+            display: flex;
+        }
+
+        th {
+            cursor: pointer;
+        }
+
+        .arrow-up {
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 10px solid gray;
+            display: inline-block;
+            float: right;
+            margin-top: 5px;
+        }
+
+        .arrow-down {
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 10px solid gray;
+            display: inline-block;
+            float: right;
+            margin-top: 5px;
+        }
+
+        .tool1 {
+            cursor: help;
+            position: relative;
+        }
+
+            .tool1::before,
+            .tool1::after {
+                left: 50%;
+                opacity: 0;
+                position: absolute;
+                z-index: -100;
+            }
+
+            .tool1hover::before,
+            .tool1:focus::before,
+            .tool1:hover::after,
+            .tool1:focus::after {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+                z-index: 100;
+            }
+
+            .tool1::before {
+                border-style: solid;
+                border-width: 1em 0.75em 0 0.75em;
+                border-color: #3E474F transparent transparent transparent;
+                bottom: 120%;
+                content: "";
+                margin-left: -0.5em;
+                transition: all .65s cubic-bezier(.84,-0.18,.31,1.26), opacity .65s .5s;
+                transform: scale(.6) translateY(-90%);
+            }
+
+            .tool1:hover::before,
+            .tool1:focus::before {
+                transition: all .65s cubic-bezier(.84,-0.18,.31,1.26) .2s;
+            }
+
+
+            .tool1::after {
+                background: black;
+                border-radius: .25em;
+                bottom: 100%;
+                color: #EDEFF0;
+                content: attr(data-tip);
+                margin-left: -1.75em;
+                padding-left: 1em;
+                transition: all .65s cubic-bezier(.84,-0.18,.31,1.26) .2s;
+                transform: scale(.6) translateY(50%);
+                width: 4.75em;
+                height: 25px;
+            }
+
+            .tool1:hover::after,
+            .tool1:focus::after {
+                transition: all .65s cubic-bezier(.84,-0.18,.31,1.26);
+            }
+
+        @@media (max-width: 760px) {
+            .tool1::after {
+                font-size: .75em;
+                margin-left: -5em;
+                width: 10em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <br />
+    <div ng-controller="DesignationController" ng-init="ArchieveDesList()" class="divList">
+        <div class="container">
+            <br />
+
+            <div class="row">
+                <div class="col-7">
+                    <h1 id="spn">Designations</h1>
+                </div>
+                <div class="col text-right pt-4">
+                    <button type="button" style="width:190px!important;color:black!important;" class="btn btn-primary btn-custom waves-effect waves-light"><i class="ion-android-arrow-back" style="padding-left: 10px !important;"></i>&nbsp;&nbsp;<a href="@Url.Action("List","Designation")" style="color:black!important"> Designation List</a></button>
+                </div>
+
+            </div>
+            <div style="height:30px;"></div>
+            <div class="card-box">
+               <br />
+                <div class="row">
+                    <div class="col-2"></div>
+                    <div class="col-8">
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th style="width:70%;background-color:#D8EAF6;color:#0083A5">
+                                        Designation Name
+                                    </th>
+                                    <th class="text-center" style="background-color: #D8EAF6; color: #0083A5">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="d in archievedess">
+                                    <td class="no-padding block-round-hour">
+                                        <span style="margin-left:5px;" ng-show="d.DesignationId>0 && d.DesignationId != selectedDesId">{{d.DesignationName}}</span>
+                                        <input type="text" ng-show="d.DesignationId==0" class="form-control department-add-input" ng-model="d.DesignationName" ng-keyup="$event.keyCode == 13 ? Create(d) : null" name="designation" placeholder="e.g. Web Developer" autofocus />
+                                        <input type="text" ng-show="d.DesignationId>0 && d.DesignationId == selectedDesId" class="form-control department-add-input" ng-model="d.DesignationName" ng-keyup="$event.keyCode == 13 ? Create(d) : null" name="designation" autofocus />
+                                    </td>
+                                    <td class="d-flex justify-center">
+                                        <div class="tool1" data-tip="Restore">
+                                            <a id="edit-{{d.DesignationId}}" ng-show="d.DesignationId > 0" class="edit block-all td-actions-inner" style="display: inline-block;cursor:pointer;" ng-click="Restore(d.DesignationId)">
+                                                <i class="ti-import" style="color:forestgreen;font-size:20px;"></i>
+                                            </a>
+                                        </div>
+                                        <div class="tool1" data-tip="Delete">
+                                            &nbsp;&nbsp;
+                                            <a class="delete block-all td-actions-inner" style="display: inline-block;cursor:pointer;" ng-click="Trash(d.DesignationId)" name="delete" data-original-title="Delete">
+                                                <i class="fa fa-trash-o block-all" style="color:red;font-size:20px;"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="~/js/jquery.min.js"></script>
+</body>
+
+@section script{
+
+    <script src="~/Scripts/Services/DesignationService.js"></script>
+    <script src="~/Scripts/AngularController/DesignationCtrl.js"></script>
+}

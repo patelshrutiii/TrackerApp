@@ -1,0 +1,207 @@
+﻿@{
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+<head>
+    <title>TimeSheet</title>
+    <link href="~/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link href="~/plugins/clockpicker/css/bootstrap-clockpicker.min.css" rel="stylesheet">
+    <link href="~/CSS/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/CSS/icons.css" rel="stylesheet" type="text/css" />
+    <link href="~/CSS/style.css" rel="stylesheet" type="text/css" />
+    <script src="~/js/modernizr.min.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+
+    <!-- DevExtreme theme -->
+    <link rel="stylesheet" href="https://cdn3.devexpress.com/jslib/21.1.6/css/dx.light.css">
+
+    <!-- DevExtreme library -->
+    @*<script type="text/javascript" src="https://cdn3.devexpress.com/jslib/21.1.6/js/dx.all.js"></script>*@
+
+
+    <style>
+        .btn2 {
+            background-color: white;
+            color: black;
+            width: 170px;
+            height: 55px;
+            /*border: 2px solid #008CBA;*/
+            border: none;
+        }
+
+            /* Style the active class, and buttons on mouse-over */
+            .active1, .btn2:hover {
+                background-color: #008CBA;
+                color: white;
+            }
+
+        .gobtn {
+            border: none !important;
+            height: 41px;
+            color: white;
+            width: 100px;
+            background-color: #7EB900;
+            font-size: 20px;
+        }
+
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div ng-controller="TimesheetController" ng-init="ProjectReportSP()">
+        <br />
+        <div class="container">
+            <div class="card-box" style="background-color: #EBEFF2 !important; box-shadow: none !important; padding:0px!important;">
+                <h1 style="  color: black; font-size: 36px;padding-left:8px; ">Timesheet</h1>
+            </div>
+
+            <div class="row myDIV">
+
+                <div class="col-lg-2">
+                    <button class="btn2 active1" id="mybtn" ng-click="Project();ProjectReportSP()"><i class="fa fa-address-book " style="font-size: 20px; padding: 10px;"></i>Project Reports</button>
+                </div>
+
+                <div class="col-lg-2">
+                    <button class="btn2" id="mybtn2" ng-click="Report();UserReportSP();"><i class="fa fa-user-circle-o" style="font-size: 20px; padding: 10px;"></i>User Reports</button>
+
+                </div>
+
+            </div>
+        </div>      <!--first container div-->
+        <br />
+
+        <div class="container">
+
+            <div ng-show="ProjectReportForm == true">
+                <div class="card-box">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <select class="form-control mt-add-input" style="background: #f6f6f6; font-size: 16px;" ng-model="projectId"
+                                    ng-options="pObj.ProjectId as pObj.ProjectName for pObj  in projects">
+                                <option value="">Projects</option>
+                            </select>
+                        </div>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-4">
+                            <div class="d-flex">
+                                <input type="date" style="background: #f6f6f6; border: none;height:40px;padding:5px;" ng-model="Todate" />&nbsp;&nbsp;
+                                <i class="fa fa-calendar" style="font-size:30px;"></i>&nbsp;&nbsp;
+                                <input type="date" style="background: #f6f6f6; border: none; padding: 5px; " ng-model="fromdate" />
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-2">
+                            <button class="gobtn" ng-click="ProjectReportSP()">Go</button>
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div style="background-color: #EBEFF2!important;" id="gridContainer1" dx-data-grid="dataGridOptions"></div>
+                    </div>
+                </div>
+            </div> <!--Project Report Div-->
+            <div ng-show="UserReportForm==true">
+                <div class="card-box">
+                    <div class="row">
+                        <div class="col-md-3" ng-init="GetUserList()">
+                            <select class="form-control mt-add-input" style="background: #f6f6f6; font-size: 16px;" ng-model="userId"
+                                    ng-options="tObj.UserId as (tObj.FirstName + ' ' + tObj.LastName) for tObj  in teams">
+                                <option value="">Users</option>
+                            </select>
+                        </div>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                            <select class="form-control mt-add-input" style="background: #f6f6f6; font-size: 16px;" ng-model="designationId"
+                                    ng-options="dObj.DesignationId as dObj.DesignationName for dObj  in deslist">
+                                <option value="">Designations</option>
+                            </select>
+                        </div>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                            <select class="form-control mt-add-input" style="background: #f6f6f6; font-size: 16px;" ng-model="departmentId"
+                                    ng-options="deObj.DepartmentId as deObj.DepartmentName for deObj  in depts">
+                                <option value="">Departments</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <br />
+                    <br />
+                    <div class="row">
+
+
+                        <div class="col-md-4">
+                            <div class="d-flex">
+                                <input type="date" style="background: #f6f6f6; border: none; height: 40px; padding: 5px;" ng-model="Todate" />&nbsp;&nbsp;
+                                <i class="fa fa-calendar" style="font-size:30px;"></i>&nbsp;&nbsp;
+                                <input type="date" style="background: #f6f6f6; border: none; padding: 5px; " ng-model="fromdate" />
+                            </div>
+                        </div>
+                        <div class="col-md-6"></div>
+                        <div class="col-md-2">
+                            <button class="gobtn" ng-click="UserReportSP()">Go</button>
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div style="background-color: #EBEFF2!important;" id="gridContainer" dx-data-grid="dataGridOptions"></div>
+                    </div>
+                </div>
+            </div><!--User Report Div-->
+
+
+
+        </div> <!-- end  container -->
+
+    </div>  <!--ng-controller div-->
+    <br />
+    <script src="~/js/jquery.min.js"></script>
+    <script>
+
+        $("#mybtn2").on("click", function () {
+            $(".btn2").removeClass("active1");
+            $(this).addClass("active1");
+        })
+        $("#mybtn").on("click", function () {
+            $(".btn2").removeClass("active1");
+            $(this).addClass("active1");
+        })
+
+    </script>
+</body>
+@section script {
+
+    <script src="~/Scripts/Services/TimesheetService.js"></script>
+    <script src="~/Scripts/Services/TeamService.js"></script>
+    <script src="~/Scripts/Services/ProjectService.js"></script>
+    <script src="~/Scripts/Services/DepartmentService.js"></script>
+    <script src="~/Scripts/Services/DesignationService.js"></script>
+    <script src="~/Scripts/AngularController/TimesheetCtrl.js"></script>
+
+    <script src="~/plugins/moment/moment.js"></script>
+    <script src="~/plugins/timepicker/bootstrap-timepicker.js"></script>
+    <script src="~/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+    <script src="~/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/plugins/clockpicker/js/bootstrap-clockpicker.min.js"></script>
+    <script src="~/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="~/pages/jquery.form-pickers.init.js"></script>
+}

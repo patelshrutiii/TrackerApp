@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{96518EC5-2E41-4047-BD4F-341E3E64CB3E}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>WebTracker</RootNamespace>
+    <AssemblyName>WebTracker</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationClient" />
+    <Reference Include="UIAutomationTypes" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Worker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Worker.Designer.cs">
+      <DependentUpon>Worker.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="obj\Debug\WebTracker.Login.resources" />
+    <EmbeddedResource Include="obj\Debug\WebTracker.Properties.Resources.resources" />
+    <EmbeddedResource Include="obj\Debug\WebTracker.Worker.resources" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Worker.resx">
+      <DependentUpon>Worker.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="bin\Debug\WebTracker.exe.config" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\WebTracker.csproj.AssemblyReference.cache" />
+    <None Include="obj\Debug\WebTracker.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\WebTracker.csproj.GenerateResource.cache" />
+    <None Include="obj\Debug\WebTracker.csprojAssemblyReference.cache" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
+    <Folder Include="obj\Debug\TempPE\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\images\202181914305380.bmp" />
+    <Content Include="bin\Debug\images\2021819143126684.bmp" />
+    <Content Include="bin\Debug\images\2021819143140377.bmp" />
+    <Content Include="bin\Debug\images\2021819143140965.bmp" />
+    <Content Include="bin\Debug\images\2021819143141943.bmp" />
+    <Content Include="bin\Debug\images\2021819143142974.bmp" />
+    <Content Include="bin\Debug\images\2021819143143981.bmp" />
+    <Content Include="bin\Debug\images\2021819143144938.bmp" />
+    <Content Include="bin\Debug\images\2021819143145948.bmp" />
+    <Content Include="bin\Debug\images\2021819143146981.bmp" />
+    <Content Include="bin\Debug\images\2021819143147937.bmp" />
+    <Content Include="bin\Debug\images\2021819143148939.bmp" />
+    <Content Include="bin\Debug\images\2021819143149934.bmp" />
+    <Content Include="bin\Debug\images\2021819143150957.bmp" />
+    <Content Include="bin\Debug\images\2021819143151978.bmp" />
+    <Content Include="bin\Debug\images\2021819143152928.bmp" />
+    <Content Include="bin\Debug\images\2021819143153998.bmp" />
+    <Content Include="bin\Debug\images\2021819143154981.bmp" />
+    <Content Include="bin\Debug\images\2021819143155939.bmp" />
+    <Content Include="bin\Debug\images\2021819143156962.bmp" />
+    <Content Include="bin\Debug\images\202181914315889.bmp" />
+    <Content Include="bin\Debug\images\2021819143158967.bmp" />
+    <Content Include="bin\Debug\images\2021819143159932.bmp" />
+    <Content Include="bin\Debug\images\202181914320975.bmp" />
+    <Content Include="bin\Debug\images\20218191432107.bmp" />
+    <Content Include="bin\Debug\images\2021819143210942.bmp" />
+    <Content Include="bin\Debug\images\2021819143211966.bmp" />
+    <Content Include="bin\Debug\images\2021819143212975.bmp" />
+    <Content Include="bin\Debug\images\2021819143213966.bmp" />
+    <Content Include="bin\Debug\images\2021819143214977.bmp" />
+    <Content Include="bin\Debug\images\2021819143215967.bmp" />
+    <Content Include="bin\Debug\images\2021819143216949.bmp" />
+    <Content Include="bin\Debug\images\2021819143218971.bmp" />
+    <Content Include="bin\Debug\images\202181914321952.bmp" />
+    <Content Include="bin\Debug\images\2021819143219940.bmp" />
+    <Content Include="bin\Debug\images\2021819143220986.bmp" />
+    <Content Include="bin\Debug\images\2021819143221967.bmp" />
+    <Content Include="bin\Debug\images\2021819143222974.bmp" />
+    <Content Include="bin\Debug\images\2021819143223969.bmp" />
+    <Content Include="bin\Debug\images\2021819143224949.bmp" />
+    <Content Include="bin\Debug\images\2021819143225960.bmp" />
+    <Content Include="bin\Debug\images\2021819143226940.bmp" />
+    <Content Include="bin\Debug\images\2021819143227965.bmp" />
+    <Content Include="bin\Debug\images\2021819143228975.bmp" />
+    <Content Include="bin\Debug\images\202181914322923.bmp" />
+    <Content Include="bin\Debug\images\2021819143229976.bmp" />
+    <Content Include="bin\Debug\images\2021819143230933.bmp" />
+    <Content Include="bin\Debug\images\2021819143231956.bmp" />
+    <Content Include="bin\Debug\images\2021819143232942.bmp" />
+    <Content Include="bin\Debug\images\2021819143233952.bmp" />
+    <Content Include="bin\Debug\images\2021819143234966.bmp" />
+    <Content Include="bin\Debug\images\2021819143235977.bmp" />
+    <Content Include="bin\Debug\images\2021819143236961.bmp" />
+    <Content Include="bin\Debug\images\2021819143237970.bmp" />
+    <Content Include="bin\Debug\images\2021819143238948.bmp" />
+    <Content Include="bin\Debug\images\202181914323941.bmp" />
+    <Content Include="bin\Debug\images\2021819143239980.bmp" />
+    <Content Include="bin\Debug\images\2021819143240966.bmp" />
+    <Content Include="bin\Debug\images\2021819143241970.bmp" />
+    <Content Include="bin\Debug\images\2021819143242948.bmp" />
+    <Content Include="bin\Debug\images\2021819143243975.bmp" />
+    <Content Include="bin\Debug\images\2021819143244985.bmp" />
+    <Content Include="bin\Debug\images\2021819143245932.bmp" />
+    <Content Include="bin\Debug\images\2021819143246946.bmp" />
+    <Content Include="bin\Debug\images\2021819143247953.bmp" />
+    <Content Include="bin\Debug\images\2021819143248970.bmp" />
+    <Content Include="bin\Debug\images\202181914324972.bmp" />
+    <Content Include="bin\Debug\images\2021819143249972.bmp" />
+    <Content Include="bin\Debug\images\2021819143251960.bmp" />
+    <Content Include="bin\Debug\images\2021819143252963.bmp" />
+    <Content Include="bin\Debug\images\2021819143253978.bmp" />
+    <Content Include="bin\Debug\images\2021819143254937.bmp" />
+    <Content Include="bin\Debug\images\2021819143255952.bmp" />
+    <Content Include="bin\Debug\images\20218191432575.bmp" />
+    <Content Include="bin\Debug\images\2021819143258977.bmp" />
+    <Content Include="bin\Debug\images\202181914325949.bmp" />
+    <Content Include="bin\Debug\images\2021819143259949.bmp" />
+    <Content Include="bin\Debug\images\202181914326967.bmp" />
+    <Content Include="bin\Debug\images\202181914327965.bmp" />
+    <Content Include="bin\Debug\images\202181914328955.bmp" />
+    <Content Include="bin\Debug\images\2021819144518934.bmp" />
+    <Content Include="bin\Debug\images\2021819144519946.bmp" />
+    <Content Include="bin\Debug\images\2021819144520971.bmp" />
+    <Content Include="bin\Debug\images\2021819144639394.bmp" />
+    <Content Include="bin\Debug\images\2021819144733311.bmp" />
+    <Content Include="bin\Debug\images\2021819144734333.bmp" />
+    <Content Include="bin\Debug\images\2021819144747576.bmp" />
+    <Content Include="bin\Debug\images\2021819144749600.bmp" />
+    <Content Include="bin\Debug\images\2021819144750623.bmp" />
+    <Content Include="bin\Debug\images\2021819144751602.bmp" />
+    <Content Include="bin\Debug\images\2021819144752594.bmp" />
+    <Content Include="bin\Debug\images\2021819144753602.bmp" />
+    <Content Include="bin\Debug\images\2021819144754623.bmp" />
+    <Content Include="bin\Debug\images\2021819144755623.bmp" />
+    <Content Include="bin\Debug\WebTracker.exe" />
+    <Content Include="bin\Debug\WebTracker.pdb" />
+    <Content Include="Images\Green.png" />
+    <Content Include="Images\Red1.png" />
+    <Content Include="obj\Debug\WebTracker.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\WebTracker.exe" />
+    <Content Include="obj\Debug\WebTracker.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebTrackerBLL\WebTrackerBLL.csproj">
+      <Project>{ecf95bc8-adf9-4031-bdf7-6fd4821d6e5d}</Project>
+      <Name>WebTrackerBLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebTrackerCl\WebTrackerCl.csproj">
+      <Project>{79d2a2f2-bc83-4ad6-adb2-11c07f392a32}</Project>
+      <Name>WebTrackerCl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebTrackerDLL\WebTrackerDLL.csproj">
+      <Project>{016af4d0-200a-4f65-b1d3-663a334b0d71}</Project>
+      <Name>WebTrackerDLL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

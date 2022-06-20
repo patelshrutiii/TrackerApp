@@ -1,0 +1,393 @@
+﻿@{
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+<head>
+    <title>Archieve Projects</title>
+    <link href="~/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link href="~/plugins/clockpicker/css/bootstrap-clockpicker.min.css" rel="stylesheet">
+    <link href="~/CSS/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/CSS/icons.css" rel="stylesheet" type="text/css" />
+    <link href="~/CSS/style.css" rel="stylesheet" type="text/css" />
+    <script src="~/js/modernizr.min.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <style>
+        body {
+            font-size: 16px;
+        }
+
+        .container {
+            margin-right: auto;
+            margin-left: auto;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        .section {
+            padding-top: 30px;
+            padding-bottom: 30px;
+        }
+
+        .table-border {
+            border: 1px solid #ddd;
+        }
+
+        .table {
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 20px;
+            background-color: transparent;
+            border-collapse: collapse;
+            display: table;
+            box-sizing: border-box;
+        }
+
+        thead {
+            color: #0083a5;
+            background-color: #D8EAF6;
+        }
+
+        th {
+            cursor: pointer;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
+        .d-flex {
+            display: flex;
+        }
+
+        .label {
+            font-size: 14px;
+            padding: 0;
+            font-weight: normal;
+            color: #1E1E1E;
+        }
+
+        /* [data-toggle="tooltip"] {
+            cursor: pointer;
+        }*/
+
+        .pull-right {
+            float: right !important;
+        }
+
+        .select2 {
+            border: 1px solid #ddd;
+            background: #F5F5D5;
+            margin: 0px 23px 3px 0px;
+            padding: 5px 22px 5px 5px;
+            border-radius: 10px;
+            float: none;
+            vertical-align: top;
+            word-break: break-all;
+        }
+
+        .select2-choice {
+            display: inline-block;
+            margin-right: 50px;
+        }
+
+        .contract-line {
+            vertical-align: middle;
+            color: #999;
+        }
+
+        .select2-choice2 {
+            display: inline-block;
+            margin-left: 10px;
+            margin-right: 50px;
+        }
+
+        /*  ToolTip CSS  */
+        .tool {
+            cursor: help;
+            position: relative;
+        }
+
+            .tool::before,
+            .tool::after {
+                left: 50%;
+                opacity: 0;
+                position: absolute;
+                z-index: -100;
+            }
+
+            .tool:hover::before,
+            .tool:focus::before,
+            .tool:hover::after,
+            .tool:focus::after {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+                z-index: 100;
+            }
+
+            .tool::before {
+                border-style: solid;
+                border-width: 1em 0.75em 0 0.75em;
+                border-color: #3E474F transparent transparent transparent;
+                bottom: 100%;
+                content: "";
+                margin-left: -0.5em;
+                transition: all .65s cubic-bezier(.84,-0.18,.31,1.26), opacity .65s .5s;
+                transform: scale(.6) translateY(-90%);
+            }
+
+            .tool:hover::before,
+            .tool:focus::before {
+                transition: all .65s cubic-bezier(.84,-0.18,.31,1.26) .2s;
+            }
+
+
+            .tool::after {
+                background: #46899a;
+                border-radius: .25em;
+                bottom: 180%;
+                color: #EDEFF0;
+                content: attr(data-tip);
+                margin-left: -4.75em;
+                /*padding-left: 1em;*/
+                transition: all .65s cubic-bezier(.84,-0.18,.31,1.26) .2s;
+                transform: scale(.6) translateY(50%);
+                width: 9.5em;
+                height: 25px;
+            }
+
+            .tool:hover::after,
+            .tool:focus::after {
+                transition: all .65s cubic-bezier(.84,-0.18,.31,1.26);
+            }
+
+        @@media (max-width: 760px) {
+            .tool::after {
+                font-size: .75em;
+                margin-left: -5em;
+                width: 10em;
+            }
+        }
+
+        /*  Tool Tip End  */
+
+
+        .tool1 {
+            cursor: help;
+            position: relative;
+        }
+
+            .tool1::before,
+            .tool1::after {
+                left: 50%;
+                opacity: 0;
+                position: absolute;
+                z-index: -100;
+            }
+
+            .tool1hover::before,
+            .tool1:focus::before,
+            .tool1:hover::after,
+            .tool1:focus::after {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+                z-index: 100;
+            }
+
+            .tool1::before {
+                border-style: solid;
+                border-width: 1em 0.75em 0 0.75em;
+                border-color: #3E474F transparent transparent transparent;
+                bottom: 120%;
+                content: "";
+                margin-left: -0.5em;
+                transition: all .65s cubic-bezier(.84,-0.18,.31,1.26), opacity .65s .5s;
+                transform: scale(.6) translateY(-90%);
+            }
+
+            .tool1:hover::before,
+            .tool1:focus::before {
+                transition: all .65s cubic-bezier(.84,-0.18,.31,1.26) .2s;
+            }
+
+
+            .tool1::after {
+                background: black;
+                border-radius: .25em;
+                bottom: 100%;
+                color: #EDEFF0;
+                content: attr(data-tip);
+                margin-left: -4.75em;
+                padding-left: 1em;
+                transition: all .65s cubic-bezier(.84,-0.18,.31,1.26) .2s;
+                transform: scale(.6) translateY(50%);
+                width: 10.5em;
+                height: 25px;
+            }
+
+            .tool1:hover::after,
+            .tool1:focus::after {
+                transition: all .65s cubic-bezier(.84,-0.18,.31,1.26);
+            }
+
+        @@media (max-width: 760px) {
+            .tool1::after {
+                font-size: .75em;
+                margin-left: -5em;
+                width: 10em;
+            }
+        }
+
+        .arrow-up {
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 10px solid gray;
+            display: inline-block;
+            float: right;
+            margin-top: 5px;
+        }
+
+        .arrow-down {
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 10px solid gray;
+            display: inline-block;
+            float: right;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <br />
+    <div ng-controller="ProjectController" ng-init="ArchieveProjList()" class="divList">
+        @*@Session["CName"]
+        @Session["Cid"]*@
+        @*LIST*@        
+
+        <div class="container" ng-show="isshowtable == true">
+            <div class="row">
+                <div class="col-9">
+                    <div class="row">
+                        <div class="col-2"><h1>Projects</h1></div>
+                    </div>
+                </div>
+
+
+                <div class="form-group col-3 text-right">
+                    <button type="button" style="width:170px!important;color:black!important;" class="btn btn-primary btn-custom waves-effect waves-light"><i class="ion-android-arrow-back" style="padding-left: 10px !important;"></i>&nbsp;&nbsp;
+                    <a href="@Url.Action("List","Project")" style="color:black!important"> Project List</a>
+                    </button>
+                </div>
+            </div>
+
+            <br />
+            <div class="row">
+                <div class="col-sm-9"></div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <input type="text" placeholder="Search" class="form-control" ng-model="search" style="background:#ddd;" />
+                    </div>
+                </div>
+            </div>
+            <br />
+            <table class="table table-border">
+                <thead>
+                    <tr>
+                        <th class="w-25" ng-click="sortData('ProjectName')">
+                            <b>Project Name</b> <div ng-class="getSortClass('ProjectName')"></div>
+                        </th>
+                        <th class="w-50">
+                            <b>Contracts </b>
+                        </th>
+                        <th ng-click="sortData('StartDate')">
+                            <b>Project Notes </b><div ng-class="getSortClass('StartDate')"></div>
+                        </th>
+                        <th class="text-center">
+                            <b>Actions</b>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="proj in archieveprojects | filter:search | orderBy:sortColumn:reverseSort" ng-model="search">
+                        <td>
+                            {{proj.ProjectName}}
+                        </td>
+                        <td>
+                            @*<a href="#" class="label pull-right">
+                            <small> <i class="fa fa-plus-circle" style="font-size:20px;margin-top:5px;"></i></small>
+                        </a>*@
+                            <div class="select2" ng-repeat="a in proj.assign">
+                                <div class="row">
+                                    <div class="col-5">
+                                        <div class="select2-choice">{{a.UserName}}</div>
+                                    </div>
+                                    <span class="contract-line">
+                                        <small>|</small>
+                                    </span>
+                                    <div class="col-3" style="text-align:center;">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<div class="select2-choice2 tool" data-tip="Weekly limit">{{a.WeeklyLimit}}</div>
+                                    </div>
+                                    <span class="contract-line">
+                                        <small>|</small>
+                                    </span>
+                                    <div class="col-3" style="text-align:center;">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<div class="select2-choice2 tool" data-tip="Rate">{{a.Rate}}</div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </td>
+                        <td>
+                            <div class="tool1" data-tip="StartDate - Deadline">
+                                <i class="fa fa-calendar" style="color:cadetblue;font-size:20px;"></i>
+                                {{proj.StartDate | date:'mediumDate'}}&nbsp; - &nbsp;
+                                {{proj.DeadLine | date:'mediumDate'}}
+                            </div>
+                            <div class="tool1" data-tip="Estimation Hour">
+                                <i class="fa fa-clock-o" style="color:cadetblue;font-size:20px;"></i>
+                                &nbsp;{{proj.EstimationHour}}
+                            </div>
+                            <div class="tool1" data-tip="Notes">
+                                <i class="ti-notepad" style="color:cadetblue;font-size:20px;"></i>
+                                {{proj.Remark}}
+                            </div>
+                        </td>
+                        <td class="d-flex justify-center">
+                            <a class="edit block-all td-actions-inner" style="display: inline-block;cursor:pointer" ng-click="Restore(proj.ProjectId)"><i class="ti-import" style="color:forestgreen;font-size:20px;"></i></a>
+                            &nbsp;&nbsp;<a class="delete block-all td-actions-inner" style="display: inline-block;cursor:pointer" ng-click="Trash(proj.ProjectId)" name="delete" data-original-title="Delete"><i class="fa fa-trash-o" style="color:red;font-size:20px;"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="~/js/jquery.min.js"></script>
+    <script>
+        $('#assignUser').on('hidden.bs.modal', function () {
+            $(this).find("input").val('').end();
+        });
+        $('#assignAll').on('hidden.bs.modal', function () {
+            $(this).find("input").val('').end();
+        });
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+    </script>
+
+</body>
+@section script {
+    <script defer src="~/Scripts/Services/ProjectService.js"></script>
+    <script src="~/Scripts/Services/TeamService.js"></script>
+    <script defer src="~/Scripts/AngularController/ProjectCtrl.js"></script>
+
+    <script src="~/plugins/moment/moment.js"></script>
+    <script src="~/plugins/timepicker/bootstrap-timepicker.js"></script>
+    <script src="~/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+    <script src="~/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/plugins/clockpicker/js/bootstrap-clockpicker.min.js"></script>
+    <script src="~/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="~/pages/jquery.form-pickers.init.js"></script>
+}

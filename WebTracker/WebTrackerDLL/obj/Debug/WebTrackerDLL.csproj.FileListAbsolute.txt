@@ -1,0 +1,12 @@
+D:\Welngenious\ASP Work\WebTracker\WebTrackerDLL\bin\Debug\WebTrackerDLL.dll
+D:\Welngenious\ASP Work\WebTracker\WebTrackerDLL\bin\Debug\WebTrackerDLL.pdb
+D:\Welngenious\ASP Work\WebTracker\WebTrackerDLL\obj\Debug\WebTrackerDLL.csproj.CoreCompileInputs.cache
+D:\Welngenious\ASP Work\WebTracker\WebTrackerDLL\obj\Debug\WebTrackerDLL.dll
+D:\Welngenious\ASP Work\WebTracker\WebTrackerDLL\obj\Debug\WebTrackerDLL.pdb
+D:\Welngenious\ASP Work\WebTracker\WebTrackerDLL\obj\Debug\WebTrackerDLL.csprojAssemblyReference.cache
+E:\Weingenious\ASP Work\WebTracker\WebTrackerDLL\bin\Debug\WebTrackerDLL.dll
+E:\Weingenious\ASP Work\WebTracker\WebTrackerDLL\bin\Debug\WebTrackerDLL.pdb
+E:\Weingenious\ASP Work\WebTracker\WebTrackerDLL\obj\Debug\WebTrackerDLL.csproj.AssemblyReference.cache
+E:\Weingenious\ASP Work\WebTracker\WebTrackerDLL\obj\Debug\WebTrackerDLL.csproj.CoreCompileInputs.cache
+E:\Weingenious\ASP Work\WebTracker\WebTrackerDLL\obj\Debug\WebTrackerDLL.dll
+E:\Weingenious\ASP Work\WebTracker\WebTrackerDLL\obj\Debug\WebTrackerDLL.pdb

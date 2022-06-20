@@ -1,0 +1,124 @@
+﻿@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    if (HttpContext.Current.Request.Cookies["users"] != null) {
+        ViewBag.userName = HttpContext.Current.Request.Cookies["users"].Values[0];
+        ViewBag.pass = HttpContext.Current.Request.Cookies["users"].Values[1];
+        ViewBag.rem = HttpContext.Current.Request.Cookies["users"].Values[2];
+    }
+    else
+    {
+        ViewBag.userName = "";
+        ViewBag.pass = "";
+        ViewBag.rem = "";
+    }
+}
+
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
+    <meta name="author" content="Coderthemes">
+
+    <title>Login</title>
+
+    <link href="~/CSS/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/CSS/icons.css" rel="stylesheet" type="text/css" />
+    <link href="~/CSS/style.css" rel="stylesheet" type="text/css" />
+
+    <script src="~/js/modernizr.min.js"></script>
+
+</head>
+<body>
+    <div id="preloader"></div>
+    <div ng-controller="CompanyController" data-ng-init="setDefaultVal('@ViewBag.userName','@ViewBag.pass','@ViewBag.rem')">
+
+        <form novalidate name="f1" ng-submit="Login()">
+            <table ng-show="!IsLogedIn">
+                <!-- Here  ng-show="!IsLogedIn" means I want to hide table after loged in-->
+
+
+                <div class="wrapper-page">
+                    <div class="card-box">
+                        <div class="panel-heading">
+                            <h4 class="text-center"> Sign In to <strong class="text-custom">Tracker</strong></h4>
+                        </div>
+
+
+                        <div class="p-20">
+
+
+                            <div class="form-group ">
+                                <div class="col-12">
+                                    <input type="text" class="form-control" ng-model="LoginData.CompanyEmail" name="cUsername" placeholder="Email" ng-class="Submitted?'ng-dirty':''" required autofocus />
+                                    <span class="error" ng-show="(f1.cUsername.$dirty || Submitted) && f1.cUsername.$error.required">Username required</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-12">
+                                    <input type="password" class="form-control" ng-model="LoginData.Password" name="cPassword" placeholder="Password" ng-class="Submitted?'ng-dirty':''" required autofocus />
+                                    <span class="error" ng-show="(f1.cPassword.$dirty || Submitted) && f1.cPassword.$error.required">Password required</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group ">
+                                <div class="col-12">
+                                    <div class="checkbox checkbox-primary">
+                                        <input id="checkbox-signup" type="checkbox" ng-model="LoginData.RememberMe">
+                                        <label for="checkbox-signup">
+                                            Remember me
+                                        </label>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group text-center m-t-40">
+                                <div class="col-12">
+                                    <input value="Login" class="btn btn-pink btn-block  text-uppercase "
+                                           type="submit" />
+                                </div>
+                            </div>
+
+                            <div class="form-group m-t-30 m-b-0">
+                                <div class="col-12">
+                                    <a href="@Url.Action("ForgetPassword","Company")" class="text-dark">
+                                        <i class="fa fa-lock m-r-5"></i> Forgot
+                                        your password?
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 text-center">
+                            <p>
+                                Don't have an account? <a href="@Url.Action("Register","Company")" class="text-primary m-l-5"><b>Sign Up</b></a>
+                            </p>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </table>
+        </form>
+    </div>
+    <script src="~/js/jquery.min.js"></script>
+    <!-- jQuery  -->
+    <script>
+        var loader = document.getElementById("preloader");
+
+        window.addEventListener("load", function () {
+            loader.style.display = "none";
+        })
+    </script>
+</body>
+@section script{
+    <script src="~/Scripts/AngularController/CompanyCtrl.js"></script>
+    <script src="~/Scripts/Services/CompanyService.js"></script>
+
+}

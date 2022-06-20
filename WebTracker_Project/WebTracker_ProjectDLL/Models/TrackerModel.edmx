@@ -1,0 +1,3043 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TrackerAppModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CityMaster">
+          <Key>
+            <PropertyRef Name="CityId" />
+          </Key>
+          <Property Name="CityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StateId" Type="int" />
+          <Property Name="CityName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CompanyMaster">
+          <Key>
+            <PropertyRef Name="CompanyId" />
+          </Key>
+          <Property Name="CompanyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CompanyLastName" Type="varchar" MaxLength="50" />
+          <Property Name="CompanyEmail" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="CompanyPassword" Type="varchar" MaxLength="50" />
+          <Property Name="StateId" Type="int" />
+          <Property Name="CityId" Type="int" />
+          <Property Name="StreetAddress" Type="varchar" MaxLength="70" />
+          <Property Name="MobileNo" Type="varchar" MaxLength="11" />
+          <Property Name="PhoneNo" Type="varchar" MaxLength="11" />
+          <Property Name="Extension" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="EntryDate" Type="datetime" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="DailySummary">
+          <Key>
+            <PropertyRef Name="DailySummaryId" />
+          </Key>
+          <Property Name="DailySummaryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectId" Type="int" />
+          <Property Name="TaskId" Type="int" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="StopTime" Type="datetime" />
+          <Property Name="DateDifference" Type="date" />
+          <Property Name="TimeDifference" Type="time" Precision="0" />
+          <Property Name="TotalSecond" Type="int" />
+        </EntityType>
+        <EntityType Name="DailyTimeDetails">
+          <Key>
+            <PropertyRef Name="DailyTimeId" />
+          </Key>
+          <Property Name="DailyTimeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="ProjectId" Type="int" />
+          <Property Name="TaskId" Type="int" />
+          <Property Name="KeyHit" Type="int" />
+          <Property Name="MouseHit" Type="int" />
+          <Property Name="AppName" Type="varchar(max)" />
+          <Property Name="StartTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="DepartmentName" Type="varchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="EntryUser" Type="int" />
+          <Property Name="ModifiedUser" Type="int" />
+          <Property Name="EntryDate" Type="datetime" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="Designation">
+          <Key>
+            <PropertyRef Name="DesignationId" />
+          </Key>
+          <Property Name="DesignationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="DesignationName" Type="varchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="EntryUser" Type="int" />
+          <Property Name="ModifiedUser" Type="int" />
+          <Property Name="EntryDate" Type="datetime" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="ManualTime">
+          <Key>
+            <PropertyRef Name="ManualId" />
+          </Key>
+          <Property Name="ManualId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="ProjectId" Type="int" />
+          <Property Name="TaskId" Type="int" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="EndTime" Type="datetime" />
+          <Property Name="Reason" Type="varchar(max)" />
+          <Property Name="Status" Type="varchar" MaxLength="30" />
+          <Property Name="EntryUser" Type="int" />
+          <Property Name="ModifiedUser" Type="int" />
+          <Property Name="EntryDate" Type="datetime" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PriorityMaster">
+          <Key>
+            <PropertyRef Name="PriorityId" />
+          </Key>
+          <Property Name="PriorityId" Type="int" Nullable="false" />
+          <Property Name="PriorityName" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="ProjectAssign">
+          <Key>
+            <PropertyRef Name="ProjectAssignId" />
+          </Key>
+          <Property Name="ProjectAssignId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectId" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="WeeklyLimit" Type="int" />
+          <Property Name="Rate" Type="int" />
+          <Property Name="EntryUser" Type="int" />
+          <Property Name="ModifiedUser" Type="int" />
+          <Property Name="EntryDate" Type="datetime" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="ProjectMaster">
+          <Key>
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="ProjectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="ProjectName" Type="varchar" MaxLength="500" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="DeadLine" Type="datetime" />
+          <Property Name="EstimationHour" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="Remark" Type="varchar" MaxLength="500" />
+          <Property Name="EntryUser" Type="int" />
+          <Property Name="ModifiedUser" Type="int" />
+          <Property Name="EntryDate" Type="datetime" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" MaxLength="50" />
+          <Property Name="CompanyId" Type="int" />
+        </EntityType>
+        <EntityType Name="ScreenShots">
+          <Key>
+            <PropertyRef Name="ScreenShotId" />
+          </Key>
+          <Property Name="ScreenShotId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="ProjectId" Type="int" />
+          <Property Name="TaskId" Type="int" />
+          <Property Name="FileName" Type="varchar" MaxLength="100" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="EndTime" Type="datetime" />
+          <Property Name="ScreenShotTime" Type="datetime" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="StateMaster">
+          <Key>
+            <PropertyRef Name="StateId" />
+          </Key>
+          <Property Name="StateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StateName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="StatusMaster">
+          <Key>
+            <PropertyRef Name="StatusId" />
+          </Key>
+          <Property Name="StatusId" Type="int" Nullable="false" />
+          <Property Name="StatusName" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="TaskAssign">
+          <Key>
+            <PropertyRef Name="TaskAssignId" />
+          </Key>
+          <Property Name="TaskAssignId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TaskId" Type="int" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+          <Property Name="EntryUser" Type="int" />
+          <Property Name="ModifiedUser" Type="int" />
+          <Property Name="EntryDate" Type="datetime" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="TaskMaster">
+          <Key>
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="TaskId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectId" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="TaskName" Type="varchar" MaxLength="100" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="Deadline" Type="datetime" />
+          <Property Name="StatusId" Type="int" />
+          <Property Name="PriorityId" Type="int" />
+          <Property Name="TaskNotes" Type="varchar(max)" />
+          <Property Name="EntryUser" Type="int" />
+          <Property Name="ModifiedUser" Type="int" />
+          <Property Name="EntryDate" Type="datetime" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="UserMaster">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="DepartmentId" Type="int" />
+          <Property Name="DesignationId" Type="int" />
+          <Property Name="RoleId" Type="int" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="80" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="ConfirmPassword" Type="varchar" MaxLength="50" />
+          <Property Name="JobTitle" Type="varchar" MaxLength="50" />
+          <Property Name="PhoneNo" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="varchar" MaxLength="100" />
+          <Property Name="Additionalinfo" Type="varchar" MaxLength="100" />
+          <Property Name="JoiningDate" Type="datetime" />
+          <Property Name="ResetPasswordCode" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="EntryUser" Type="int" />
+          <Property Name="ModifiedUser" Type="int" />
+          <Property Name="EntryDate" Type="datetime" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TrackerAppDb.dbo.AllCompanyDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AllCompanyDetails">
+          <Key>
+            <PropertyRef Name="CompanyId" />
+            <PropertyRef Name="CompanyName" />
+            <PropertyRef Name="CompanyEmail" />
+          </Key>
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CompanyLastName" Type="varchar" MaxLength="50" />
+          <Property Name="CompanyEmail" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="CompanyPassword" Type="varchar" MaxLength="50" />
+          <Property Name="StateId" Type="int" />
+          <Property Name="CityId" Type="int" />
+          <Property Name="StreetAddress" Type="varchar" MaxLength="70" />
+          <Property Name="MobileNo" Type="varchar" MaxLength="11" />
+          <Property Name="PhoneNo" Type="varchar" MaxLength="11" />
+          <Property Name="Extension" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="EntryDate" Type="datetime" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="StateName" Type="varchar" MaxLength="50" />
+          <Property Name="CityName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TrackerAppDb.dbo.AllDeptDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AllDeptDetails">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="DepartmentId" Type="int" />
+          <Property Name="DepartmentName" Type="varchar" MaxLength="50" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TrackerAppDb.dbo.AllDesDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AllDesDetails">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="DesignationId" Type="int" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="DesignationName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'TrackerAppDb.dbo.AllProjectDetails' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="AllProjectDetails">
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="ProjectName" Type="varchar" MaxLength="500" />
+          <Property Name="TotalSecond" Type="int" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TrackerAppDb.dbo.AllRoleDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AllRoleDetails">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="CompanyName" />
+          </Key>
+          <Property Name="RoleId" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="RoleName" Type="varchar" MaxLength="50" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'TrackerAppDb.dbo.AllTaskDetails' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="AllTaskDetails">
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="TaskName" Type="varchar" MaxLength="100" />
+          <Property Name="TotalSecond" Type="int" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'TrackerAppDb.dbo.AllUserDetails' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="AllUserDetails">
+          <Property Name="UserId" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="TotalSecond" Type="int" />
+          <Property Name="UserName" Type="varchar" MaxLength="101" />
+          <Property Name="DateDifference" Type="date" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TrackerAppDb.dbo.AttendenceDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AttendenceDetails">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+            <PropertyRef Name="DesignationId" />
+          </Key>
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+          <Property Name="DesignationId" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="101" />
+          <Property Name="TotalSecond" Type="int" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="StopTime" Type="datetime" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'TrackerAppDb.dbo.UserwiseCombo' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="UserwiseCombo">
+          <Property Name="ProjectId" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="ProjectName" Type="varchar" MaxLength="500" />
+          <Property Name="UserId" Type="int" />
+        </EntityType>-->
+        <Association Name="FK_CityMaster_StateMaster">
+          <End Role="StateMaster" Type="Self.StateMaster" Multiplicity="0..1" />
+          <End Role="CityMaster" Type="Self.CityMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StateMaster">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="CityMaster">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyMaster_CityMaster">
+          <End Role="CityMaster" Type="Self.CityMaster" Multiplicity="0..1" />
+          <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CityMaster">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="CompanyMaster">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyMaster_StateMaster">
+          <End Role="StateMaster" Type="Self.StateMaster" Multiplicity="0..1" />
+          <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StateMaster">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="CompanyMaster">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DailySummary_CompanyMaster">
+          <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="0..1" />
+          <End Role="DailySummary" Type="Self.DailySummary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyMaster">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="DailySummary">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DailySummary_ProjectMaster">
+          <End Role="ProjectMaster" Type="Self.ProjectMaster" Multiplicity="0..1" />
+          <End Role="DailySummary" Type="Self.DailySummary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectMaster">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="DailySummary">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DailySummary_TaskMaster">
+          <End Role="TaskMaster" Type="Self.TaskMaster" Multiplicity="0..1" />
+          <End Role="DailySummary" Type="Self.DailySummary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskMaster">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="DailySummary">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DailySummary_UserMaster">
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="0..1" />
+          <End Role="DailySummary" Type="Self.DailySummary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DailySummary">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DailyTimeDetails_CompanyMaster">
+          <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="0..1" />
+          <End Role="DailyTimeDetails" Type="Self.DailyTimeDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyMaster">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="DailyTimeDetails">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DailyTimeDetails_ProjectMaster">
+          <End Role="ProjectMaster" Type="Self.ProjectMaster" Multiplicity="0..1" />
+          <End Role="DailyTimeDetails" Type="Self.DailyTimeDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectMaster">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="DailyTimeDetails">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DailyTimeDetails_TaskMaster">
+          <End Role="TaskMaster" Type="Self.TaskMaster" Multiplicity="0..1" />
+          <End Role="DailyTimeDetails" Type="Self.DailyTimeDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskMaster">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="DailyTimeDetails">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DailyTimeDetails_UserMaster">
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="0..1" />
+          <End Role="DailyTimeDetails" Type="Self.DailyTimeDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DailyTimeDetails">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Department_CompanyMaster">
+          <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="0..1" />
+          <End Role="Department" Type="Self.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyMaster">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Designation_CompanyMaster">
+          <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="0..1" />
+          <End Role="Designation" Type="Self.Designation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyMaster">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="Designation">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManualTime_CompanyMaster">
+          <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="0..1" />
+          <End Role="ManualTime" Type="Self.ManualTime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyMaster">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="ManualTime">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManualTime_ProjectMaster">
+          <End Role="ProjectMaster" Type="Self.ProjectMaster" Multiplicity="0..1" />
+          <End Role="ManualTime" Type="Self.ManualTime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectMaster">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ManualTime">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManualTime_TaskMaster">
+          <End Role="TaskMaster" Type="Self.TaskMaster" Multiplicity="0..1" />
+          <End Role="ManualTime" Type="Self.ManualTime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskMaster">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="ManualTime">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManualTime_UserMaster">
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="0..1" />
+          <End Role="ManualTime" Type="Self.ManualTime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ManualTime">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectAssign_CompanyMaster">
+          <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="0..1" />
+          <End Role="ProjectAssign" Type="Self.ProjectAssign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyMaster">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="ProjectAssign">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectAssign_ProjectMaster">
+          <End Role="ProjectMaster" Type="Self.ProjectMaster" Multiplicity="0..1" />
+          <End Role="ProjectAssign" Type="Self.ProjectAssign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectMaster">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ProjectAssign">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectAssign_UserMaster">
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="0..1" />
+          <End Role="ProjectAssign" Type="Self.ProjectAssign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ProjectAssign">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectMaster_CompanyMaster">
+          <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="0..1" />
+          <End Role="ProjectMaster" Type="Self.ProjectMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyMaster">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="ProjectMaster">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Role_CompanyMaster">
+          <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="0..1" />
+          <End Role="Role" Type="Self.Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyMaster">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="Role">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScreenShots_CompanyMaster">
+          <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="0..1" />
+          <End Role="ScreenShots" Type="Self.ScreenShots" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyMaster">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="ScreenShots">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScreenShots_ProjectMaster">
+          <End Role="ProjectMaster" Type="Self.ProjectMaster" Multiplicity="0..1" />
+          <End Role="ScreenShots" Type="Self.ScreenShots" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectMaster">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ScreenShots">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScreenShots_TaskMaster">
+          <End Role="TaskMaster" Type="Self.TaskMaster" Multiplicity="0..1" />
+          <End Role="ScreenShots" Type="Self.ScreenShots" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskMaster">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="ScreenShots">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScreenShots_UserMaster">
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="0..1" />
+          <End Role="ScreenShots" Type="Self.ScreenShots" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ScreenShots">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskAssign_CompanyMaster">
+          <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="1" />
+          <End Role="TaskAssign" Type="Self.TaskAssign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyMaster">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="TaskAssign">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskAssign_ProjectMaster">
+          <End Role="ProjectMaster" Type="Self.ProjectMaster" Multiplicity="1" />
+          <End Role="TaskAssign" Type="Self.TaskAssign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectMaster">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="TaskAssign">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskAssign_TaskMaster">
+          <End Role="TaskMaster" Type="Self.TaskMaster" Multiplicity="1" />
+          <End Role="TaskAssign" Type="Self.TaskAssign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskMaster">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="TaskAssign">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskAssign_UserMaster">
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="1" />
+          <End Role="TaskAssign" Type="Self.TaskAssign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="TaskAssign">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskMaster_CompanyMaster">
+          <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="0..1" />
+          <End Role="TaskMaster" Type="Self.TaskMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyMaster">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="TaskMaster">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskMaster_PriorityMaster">
+          <End Role="PriorityMaster" Type="Self.PriorityMaster" Multiplicity="0..1" />
+          <End Role="TaskMaster" Type="Self.TaskMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PriorityMaster">
+              <PropertyRef Name="PriorityId" />
+            </Principal>
+            <Dependent Role="TaskMaster">
+              <PropertyRef Name="PriorityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskMaster_ProjectMaster">
+          <End Role="ProjectMaster" Type="Self.ProjectMaster" Multiplicity="0..1" />
+          <End Role="TaskMaster" Type="Self.TaskMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectMaster">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="TaskMaster">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskMaster_StatusMaster">
+          <End Role="StatusMaster" Type="Self.StatusMaster" Multiplicity="0..1" />
+          <End Role="TaskMaster" Type="Self.TaskMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusMaster">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="TaskMaster">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserMaster_CompanyMaster">
+          <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="0..1" />
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyMaster">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="UserMaster">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserMaster_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="UserMaster">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserMaster_Designation">
+          <End Role="Designation" Type="Self.Designation" Multiplicity="0..1" />
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Designation">
+              <PropertyRef Name="DesignationId" />
+            </Principal>
+            <Dependent Role="UserMaster">
+              <PropertyRef Name="DesignationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserMaster_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="UserMaster">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AllCompanyDetailsSp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AllDepartmentDetailsSp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AllDesignationDetailsSp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AllProjectDetailsSp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AllRoleDetailsSp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AllTaskDetailsSp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AllUserDetailSp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AttendenceSp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cid" Type="int" Mode="In" />
+          <Parameter Name="uid" Type="int" Mode="In" />
+          <Parameter Name="did" Type="int" Mode="In" />
+          <Parameter Name="desid" Type="int" Mode="In" />
+          <Parameter Name="sdate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="DailySummaryInsertSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sid" Type="int" Mode="In" />
+          <Parameter Name="stime" Type="datetime" Mode="In" />
+          <Parameter Name="etime" Type="datetime" Mode="In" />
+          <Parameter Name="ddiff" Type="datetime" Mode="In" />
+          <Parameter Name="tdiff" Type="datetime" Mode="In" />
+          <Parameter Name="sec" Type="int" Mode="In" />
+          <Parameter Name="pid" Type="int" Mode="In" />
+          <Parameter Name="tid" Type="int" Mode="In" />
+          <Parameter Name="uid" Type="int" Mode="In" />
+          <Parameter Name="cid" Type="int" Mode="In" />
+          <Parameter Name="flag" Type="varchar(max)" Mode="InOut" />
+        </Function>
+        <Function Name="DailyTimeInsertSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="did" Type="int" Mode="In" />
+          <Parameter Name="uid" Type="int" Mode="In" />
+          <Parameter Name="key" Type="int" Mode="In" />
+          <Parameter Name="mouse" Type="int" Mode="In" />
+          <Parameter Name="app" Type="varchar(max)" Mode="In" />
+          <Parameter Name="stime" Type="datetime" Mode="In" />
+          <Parameter Name="projid" Type="int" Mode="In" />
+          <Parameter Name="tid" Type="int" Mode="In" />
+          <Parameter Name="cid" Type="int" Mode="In" />
+          <Parameter Name="flag" Type="varchar(max)" Mode="InOut" />
+        </Function>
+        <Function Name="FillProjectComboSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cid" Type="int" Mode="In" />
+          <Parameter Name="uid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="FillTaskComboSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pid" Type="int" Mode="In" />
+          <Parameter Name="cid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetDailyContractsSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="current" Type="date" Mode="In" />
+          <Parameter Name="uid" Type="int" Mode="In" />
+          <Parameter Name="cid" Type="int" Mode="In" />
+          <Parameter Name="sec" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="GetDailySummarySP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="current" Type="date" Mode="In" />
+          <Parameter Name="pid" Type="int" Mode="In" />
+          <Parameter Name="tid" Type="int" Mode="In" />
+          <Parameter Name="uid" Type="int" Mode="In" />
+          <Parameter Name="cid" Type="int" Mode="In" />
+          <Parameter Name="sec" Type="int" Mode="InOut" />
+          <Parameter Name="min" Type="int" Mode="InOut" />
+          <Parameter Name="hour" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="GetTotalDailyTimeSp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetTotalWeeklyTimeSp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetWeeklyContractsSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="uid" Type="int" Mode="In" />
+          <Parameter Name="cid" Type="int" Mode="In" />
+          <Parameter Name="sdate" Type="date" Mode="InOut" />
+          <Parameter Name="edate" Type="date" Mode="InOut" />
+          <Parameter Name="sec" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="GetWeeklySummarySP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pid" Type="int" Mode="In" />
+          <Parameter Name="tid" Type="int" Mode="In" />
+          <Parameter Name="uid" Type="int" Mode="In" />
+          <Parameter Name="cid" Type="int" Mode="In" />
+          <Parameter Name="sdate" Type="date" Mode="InOut" />
+          <Parameter Name="edate" Type="date" Mode="InOut" />
+          <Parameter Name="sec" Type="int" Mode="InOut" />
+          <Parameter Name="min" Type="int" Mode="InOut" />
+          <Parameter Name="hour" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="LoginDetailSp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="pass" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Project_AssignSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="email" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ProjectReportSp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Cid" Type="int" Mode="In" />
+          <Parameter Name="Pid" Type="int" Mode="In" />
+          <Parameter Name="Todate" Type="date" Mode="In" />
+          <Parameter Name="fromdate" Type="date" Mode="In" />
+        </Function>
+        <Function Name="ScreenShotInsertSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ss_id" Type="int" Mode="In" />
+          <Parameter Name="cid" Type="int" Mode="In" />
+          <Parameter Name="stime" Type="datetime" Mode="In" />
+          <Parameter Name="etime" Type="datetime" Mode="In" />
+          <Parameter Name="sstime" Type="datetime" Mode="In" />
+          <Parameter Name="filename" Type="varchar" Mode="In" />
+          <Parameter Name="projid" Type="int" Mode="In" />
+          <Parameter Name="tid" Type="int" Mode="In" />
+          <Parameter Name="uid" Type="int" Mode="In" />
+          <Parameter Name="isdelete" Type="bit" Mode="In" />
+          <Parameter Name="flag" Type="varchar(max)" Mode="InOut" />
+        </Function>
+        <Function Name="TaskReportSp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Cid" Type="int" Mode="In" />
+          <Parameter Name="Pid" Type="int" Mode="In" />
+          <Parameter Name="departid" Type="int" Mode="In" />
+          <Parameter Name="desigid" Type="int" Mode="In" />
+          <Parameter Name="sdate" Type="date" Mode="In" />
+          <Parameter Name="edate" Type="date" Mode="In" />
+        </Function>
+        <Function Name="TeamReportSp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Cid" Type="int" Mode="In" />
+          <Parameter Name="Uid" Type="int" Mode="In" />
+          <Parameter Name="Todate" Type="date" Mode="In" />
+          <Parameter Name="fromdate" Type="date" Mode="In" />
+        </Function>
+        <Function Name="UserReportSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Cid" Type="int" Mode="In" />
+          <Parameter Name="Uid" Type="int" Mode="In" />
+          <Parameter Name="designid" Type="int" Mode="In" />
+          <Parameter Name="deptid" Type="int" Mode="In" />
+          <Parameter Name="Todate" Type="date" Mode="In" />
+          <Parameter Name="fromdate" Type="date" Mode="In" />
+        </Function>
+        <EntityContainer Name="TrackerAppModelStoreContainer">
+          <EntitySet Name="CityMaster" EntityType="Self.CityMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyMaster" EntityType="Self.CompanyMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DailySummary" EntityType="Self.DailySummary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DailyTimeDetails" EntityType="Self.DailyTimeDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Designation" EntityType="Self.Designation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ManualTime" EntityType="Self.ManualTime" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PriorityMaster" EntityType="Self.PriorityMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectAssign" EntityType="Self.ProjectAssign" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectMaster" EntityType="Self.ProjectMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScreenShots" EntityType="Self.ScreenShots" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StateMaster" EntityType="Self.StateMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StatusMaster" EntityType="Self.StatusMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskAssign" EntityType="Self.TaskAssign" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskMaster" EntityType="Self.TaskMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserMaster" EntityType="Self.UserMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AllCompanyDetails" EntityType="Self.AllCompanyDetails" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AllCompanyDetails].[CompanyId] AS [CompanyId], 
+    [AllCompanyDetails].[CompanyName] AS [CompanyName], 
+    [AllCompanyDetails].[CompanyLastName] AS [CompanyLastName], 
+    [AllCompanyDetails].[CompanyEmail] AS [CompanyEmail], 
+    [AllCompanyDetails].[CompanyPassword] AS [CompanyPassword], 
+    [AllCompanyDetails].[StateId] AS [StateId], 
+    [AllCompanyDetails].[CityId] AS [CityId], 
+    [AllCompanyDetails].[StreetAddress] AS [StreetAddress], 
+    [AllCompanyDetails].[MobileNo] AS [MobileNo], 
+    [AllCompanyDetails].[PhoneNo] AS [PhoneNo], 
+    [AllCompanyDetails].[Extension] AS [Extension], 
+    [AllCompanyDetails].[IsActive] AS [IsActive], 
+    [AllCompanyDetails].[EntryDate] AS [EntryDate], 
+    [AllCompanyDetails].[ModifiedDate] AS [ModifiedDate], 
+    [AllCompanyDetails].[StateName] AS [StateName], 
+    [AllCompanyDetails].[CityName] AS [CityName]
+    FROM [dbo].[AllCompanyDetails] AS [AllCompanyDetails]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="AllDeptDetails" EntityType="Self.AllDeptDetails" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AllDeptDetails].[UserId] AS [UserId], 
+    [AllDeptDetails].[CompanyId] AS [CompanyId], 
+    [AllDeptDetails].[DepartmentId] AS [DepartmentId], 
+    [AllDeptDetails].[DepartmentName] AS [DepartmentName], 
+    [AllDeptDetails].[IsDeleted] AS [IsDeleted]
+    FROM [dbo].[AllDeptDetails] AS [AllDeptDetails]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="AllDesDetails" EntityType="Self.AllDesDetails" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AllDesDetails].[UserId] AS [UserId], 
+    [AllDesDetails].[CompanyId] AS [CompanyId], 
+    [AllDesDetails].[DesignationId] AS [DesignationId], 
+    [AllDesDetails].[IsDeleted] AS [IsDeleted], 
+    [AllDesDetails].[DesignationName] AS [DesignationName]
+    FROM [dbo].[AllDesDetails] AS [AllDesDetails]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="AllRoleDetails" EntityType="Self.AllRoleDetails" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AllRoleDetails].[RoleId] AS [RoleId], 
+    [AllRoleDetails].[CompanyId] AS [CompanyId], 
+    [AllRoleDetails].[RoleName] AS [RoleName], 
+    [AllRoleDetails].[UserId] AS [UserId], 
+    [AllRoleDetails].[IsDeleted] AS [IsDeleted], 
+    [AllRoleDetails].[CompanyName] AS [CompanyName]
+    FROM [dbo].[AllRoleDetails] AS [AllRoleDetails]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="AttendenceDetails" EntityType="Self.AttendenceDetails" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AttendenceDetails].[CompanyId] AS [CompanyId], 
+    [AttendenceDetails].[UserId] AS [UserId], 
+    [AttendenceDetails].[DepartmentId] AS [DepartmentId], 
+    [AttendenceDetails].[DesignationId] AS [DesignationId], 
+    [AttendenceDetails].[UserName] AS [UserName], 
+    [AttendenceDetails].[TotalSecond] AS [TotalSecond], 
+    [AttendenceDetails].[StartTime] AS [StartTime], 
+    [AttendenceDetails].[StopTime] AS [StopTime], 
+    [AttendenceDetails].[IsDeleted] AS [IsDeleted]
+    FROM [dbo].[AttendenceDetails] AS [AttendenceDetails]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_CityMaster_StateMaster" Association="Self.FK_CityMaster_StateMaster">
+            <End Role="StateMaster" EntitySet="StateMaster" />
+            <End Role="CityMaster" EntitySet="CityMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyMaster_CityMaster" Association="Self.FK_CompanyMaster_CityMaster">
+            <End Role="CityMaster" EntitySet="CityMaster" />
+            <End Role="CompanyMaster" EntitySet="CompanyMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyMaster_StateMaster" Association="Self.FK_CompanyMaster_StateMaster">
+            <End Role="StateMaster" EntitySet="StateMaster" />
+            <End Role="CompanyMaster" EntitySet="CompanyMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DailySummary_CompanyMaster" Association="Self.FK_DailySummary_CompanyMaster">
+            <End Role="CompanyMaster" EntitySet="CompanyMaster" />
+            <End Role="DailySummary" EntitySet="DailySummary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DailySummary_ProjectMaster" Association="Self.FK_DailySummary_ProjectMaster">
+            <End Role="ProjectMaster" EntitySet="ProjectMaster" />
+            <End Role="DailySummary" EntitySet="DailySummary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DailySummary_TaskMaster" Association="Self.FK_DailySummary_TaskMaster">
+            <End Role="TaskMaster" EntitySet="TaskMaster" />
+            <End Role="DailySummary" EntitySet="DailySummary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DailySummary_UserMaster" Association="Self.FK_DailySummary_UserMaster">
+            <End Role="UserMaster" EntitySet="UserMaster" />
+            <End Role="DailySummary" EntitySet="DailySummary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DailyTimeDetails_CompanyMaster" Association="Self.FK_DailyTimeDetails_CompanyMaster">
+            <End Role="CompanyMaster" EntitySet="CompanyMaster" />
+            <End Role="DailyTimeDetails" EntitySet="DailyTimeDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DailyTimeDetails_ProjectMaster" Association="Self.FK_DailyTimeDetails_ProjectMaster">
+            <End Role="ProjectMaster" EntitySet="ProjectMaster" />
+            <End Role="DailyTimeDetails" EntitySet="DailyTimeDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DailyTimeDetails_TaskMaster" Association="Self.FK_DailyTimeDetails_TaskMaster">
+            <End Role="TaskMaster" EntitySet="TaskMaster" />
+            <End Role="DailyTimeDetails" EntitySet="DailyTimeDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DailyTimeDetails_UserMaster" Association="Self.FK_DailyTimeDetails_UserMaster">
+            <End Role="UserMaster" EntitySet="UserMaster" />
+            <End Role="DailyTimeDetails" EntitySet="DailyTimeDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Department_CompanyMaster" Association="Self.FK_Department_CompanyMaster">
+            <End Role="CompanyMaster" EntitySet="CompanyMaster" />
+            <End Role="Department" EntitySet="Department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Designation_CompanyMaster" Association="Self.FK_Designation_CompanyMaster">
+            <End Role="CompanyMaster" EntitySet="CompanyMaster" />
+            <End Role="Designation" EntitySet="Designation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManualTime_CompanyMaster" Association="Self.FK_ManualTime_CompanyMaster">
+            <End Role="CompanyMaster" EntitySet="CompanyMaster" />
+            <End Role="ManualTime" EntitySet="ManualTime" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManualTime_ProjectMaster" Association="Self.FK_ManualTime_ProjectMaster">
+            <End Role="ProjectMaster" EntitySet="ProjectMaster" />
+            <End Role="ManualTime" EntitySet="ManualTime" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManualTime_TaskMaster" Association="Self.FK_ManualTime_TaskMaster">
+            <End Role="TaskMaster" EntitySet="TaskMaster" />
+            <End Role="ManualTime" EntitySet="ManualTime" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManualTime_UserMaster" Association="Self.FK_ManualTime_UserMaster">
+            <End Role="UserMaster" EntitySet="UserMaster" />
+            <End Role="ManualTime" EntitySet="ManualTime" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectAssign_CompanyMaster" Association="Self.FK_ProjectAssign_CompanyMaster">
+            <End Role="CompanyMaster" EntitySet="CompanyMaster" />
+            <End Role="ProjectAssign" EntitySet="ProjectAssign" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectAssign_ProjectMaster" Association="Self.FK_ProjectAssign_ProjectMaster">
+            <End Role="ProjectMaster" EntitySet="ProjectMaster" />
+            <End Role="ProjectAssign" EntitySet="ProjectAssign" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectAssign_UserMaster" Association="Self.FK_ProjectAssign_UserMaster">
+            <End Role="UserMaster" EntitySet="UserMaster" />
+            <End Role="ProjectAssign" EntitySet="ProjectAssign" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectMaster_CompanyMaster" Association="Self.FK_ProjectMaster_CompanyMaster">
+            <End Role="CompanyMaster" EntitySet="CompanyMaster" />
+            <End Role="ProjectMaster" EntitySet="ProjectMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Role_CompanyMaster" Association="Self.FK_Role_CompanyMaster">
+            <End Role="CompanyMaster" EntitySet="CompanyMaster" />
+            <End Role="Role" EntitySet="Role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScreenShots_CompanyMaster" Association="Self.FK_ScreenShots_CompanyMaster">
+            <End Role="CompanyMaster" EntitySet="CompanyMaster" />
+            <End Role="ScreenShots" EntitySet="ScreenShots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScreenShots_ProjectMaster" Association="Self.FK_ScreenShots_ProjectMaster">
+            <End Role="ProjectMaster" EntitySet="ProjectMaster" />
+            <End Role="ScreenShots" EntitySet="ScreenShots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScreenShots_TaskMaster" Association="Self.FK_ScreenShots_TaskMaster">
+            <End Role="TaskMaster" EntitySet="TaskMaster" />
+            <End Role="ScreenShots" EntitySet="ScreenShots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScreenShots_UserMaster" Association="Self.FK_ScreenShots_UserMaster">
+            <End Role="UserMaster" EntitySet="UserMaster" />
+            <End Role="ScreenShots" EntitySet="ScreenShots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskAssign_CompanyMaster" Association="Self.FK_TaskAssign_CompanyMaster">
+            <End Role="CompanyMaster" EntitySet="CompanyMaster" />
+            <End Role="TaskAssign" EntitySet="TaskAssign" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskAssign_ProjectMaster" Association="Self.FK_TaskAssign_ProjectMaster">
+            <End Role="ProjectMaster" EntitySet="ProjectMaster" />
+            <End Role="TaskAssign" EntitySet="TaskAssign" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskAssign_TaskMaster" Association="Self.FK_TaskAssign_TaskMaster">
+            <End Role="TaskMaster" EntitySet="TaskMaster" />
+            <End Role="TaskAssign" EntitySet="TaskAssign" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskAssign_UserMaster" Association="Self.FK_TaskAssign_UserMaster">
+            <End Role="UserMaster" EntitySet="UserMaster" />
+            <End Role="TaskAssign" EntitySet="TaskAssign" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskMaster_CompanyMaster" Association="Self.FK_TaskMaster_CompanyMaster">
+            <End Role="CompanyMaster" EntitySet="CompanyMaster" />
+            <End Role="TaskMaster" EntitySet="TaskMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskMaster_PriorityMaster" Association="Self.FK_TaskMaster_PriorityMaster">
+            <End Role="PriorityMaster" EntitySet="PriorityMaster" />
+            <End Role="TaskMaster" EntitySet="TaskMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskMaster_ProjectMaster" Association="Self.FK_TaskMaster_ProjectMaster">
+            <End Role="ProjectMaster" EntitySet="ProjectMaster" />
+            <End Role="TaskMaster" EntitySet="TaskMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskMaster_StatusMaster" Association="Self.FK_TaskMaster_StatusMaster">
+            <End Role="StatusMaster" EntitySet="StatusMaster" />
+            <End Role="TaskMaster" EntitySet="TaskMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserMaster_CompanyMaster" Association="Self.FK_UserMaster_CompanyMaster">
+            <End Role="CompanyMaster" EntitySet="CompanyMaster" />
+            <End Role="UserMaster" EntitySet="UserMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserMaster_Department" Association="Self.FK_UserMaster_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="UserMaster" EntitySet="UserMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserMaster_Designation" Association="Self.FK_UserMaster_Designation">
+            <End Role="Designation" EntitySet="Designation" />
+            <End Role="UserMaster" EntitySet="UserMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserMaster_Role" Association="Self.FK_UserMaster_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="UserMaster" EntitySet="UserMaster" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TrackerAppModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CityMaster">
+          <Key>
+            <PropertyRef Name="CityId" />
+          </Key>
+          <Property Name="CityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StateId" Type="Int32" />
+          <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="StateMaster" Relationship="Self.FK_CityMaster_StateMaster" FromRole="CityMaster" ToRole="StateMaster" />
+          <NavigationProperty Name="CompanyMasters" Relationship="Self.FK_CompanyMaster_CityMaster" FromRole="CityMaster" ToRole="CompanyMaster" />
+        </EntityType>
+        <EntityType Name="CompanyMaster">
+          <Key>
+            <PropertyRef Name="CompanyId" />
+          </Key>
+          <Property Name="CompanyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CompanyLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyEmail" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CompanyPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StateId" Type="Int32" />
+          <Property Name="CityId" Type="Int32" />
+          <Property Name="StreetAddress" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNo" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNo" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Extension" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="EntryDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CityMaster" Relationship="Self.FK_CompanyMaster_CityMaster" FromRole="CompanyMaster" ToRole="CityMaster" />
+          <NavigationProperty Name="StateMaster" Relationship="Self.FK_CompanyMaster_StateMaster" FromRole="CompanyMaster" ToRole="StateMaster" />
+          <NavigationProperty Name="DailySummaries" Relationship="Self.FK_DailySummary_CompanyMaster" FromRole="CompanyMaster" ToRole="DailySummary" />
+          <NavigationProperty Name="DailyTimeDetails" Relationship="Self.FK_DailyTimeDetails_CompanyMaster" FromRole="CompanyMaster" ToRole="DailyTimeDetails" />
+          <NavigationProperty Name="Departments" Relationship="Self.FK_Department_CompanyMaster" FromRole="CompanyMaster" ToRole="Department" />
+          <NavigationProperty Name="Designations" Relationship="Self.FK_Designation_CompanyMaster" FromRole="CompanyMaster" ToRole="Designation" />
+          <NavigationProperty Name="ManualTimes" Relationship="Self.FK_ManualTime_CompanyMaster" FromRole="CompanyMaster" ToRole="ManualTime" />
+          <NavigationProperty Name="ProjectAssigns" Relationship="Self.FK_ProjectAssign_CompanyMaster" FromRole="CompanyMaster" ToRole="ProjectAssign" />
+          <NavigationProperty Name="ProjectMasters" Relationship="Self.FK_ProjectMaster_CompanyMaster" FromRole="CompanyMaster" ToRole="ProjectMaster" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK_Role_CompanyMaster" FromRole="CompanyMaster" ToRole="Role" />
+          <NavigationProperty Name="ScreenShots" Relationship="Self.FK_ScreenShots_CompanyMaster" FromRole="CompanyMaster" ToRole="ScreenShots" />
+          <NavigationProperty Name="TaskAssigns" Relationship="Self.FK_TaskAssign_CompanyMaster" FromRole="CompanyMaster" ToRole="TaskAssign" />
+          <NavigationProperty Name="TaskMasters" Relationship="Self.FK_TaskMaster_CompanyMaster" FromRole="CompanyMaster" ToRole="TaskMaster" />
+          <NavigationProperty Name="UserMasters" Relationship="Self.FK_UserMaster_CompanyMaster" FromRole="CompanyMaster" ToRole="UserMaster" />
+        </EntityType>
+        <EntityType Name="DailySummary">
+          <Key>
+            <PropertyRef Name="DailySummaryId" />
+          </Key>
+          <Property Name="DailySummaryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Int32" />
+          <Property Name="TaskId" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="StartTime" Type="DateTime" Precision="3" />
+          <Property Name="StopTime" Type="DateTime" Precision="3" />
+          <Property Name="DateDifference" Type="DateTime" Precision="0" />
+          <Property Name="TimeDifference" Type="Time" Precision="0" />
+          <Property Name="TotalSecond" Type="Int32" />
+          <NavigationProperty Name="CompanyMaster" Relationship="Self.FK_DailySummary_CompanyMaster" FromRole="DailySummary" ToRole="CompanyMaster" />
+          <NavigationProperty Name="ProjectMaster" Relationship="Self.FK_DailySummary_ProjectMaster" FromRole="DailySummary" ToRole="ProjectMaster" />
+          <NavigationProperty Name="TaskMaster" Relationship="Self.FK_DailySummary_TaskMaster" FromRole="DailySummary" ToRole="TaskMaster" />
+          <NavigationProperty Name="UserMaster" Relationship="Self.FK_DailySummary_UserMaster" FromRole="DailySummary" ToRole="UserMaster" />
+        </EntityType>
+        <EntityType Name="DailyTimeDetail">
+          <Key>
+            <PropertyRef Name="DailyTimeId" />
+          </Key>
+          <Property Name="DailyTimeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="ProjectId" Type="Int32" />
+          <Property Name="TaskId" Type="Int32" />
+          <Property Name="KeyHit" Type="Int32" />
+          <Property Name="MouseHit" Type="Int32" />
+          <Property Name="AppName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="StartTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CompanyMaster" Relationship="Self.FK_DailyTimeDetails_CompanyMaster" FromRole="DailyTimeDetails" ToRole="CompanyMaster" />
+          <NavigationProperty Name="ProjectMaster" Relationship="Self.FK_DailyTimeDetails_ProjectMaster" FromRole="DailyTimeDetails" ToRole="ProjectMaster" />
+          <NavigationProperty Name="TaskMaster" Relationship="Self.FK_DailyTimeDetails_TaskMaster" FromRole="DailyTimeDetails" ToRole="TaskMaster" />
+          <NavigationProperty Name="UserMaster" Relationship="Self.FK_DailyTimeDetails_UserMaster" FromRole="DailyTimeDetails" ToRole="UserMaster" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="DepartmentName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="EntryUser" Type="Int32" />
+          <Property Name="ModifiedUser" Type="Int32" />
+          <Property Name="EntryDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="CompanyMaster" Relationship="Self.FK_Department_CompanyMaster" FromRole="Department" ToRole="CompanyMaster" />
+          <NavigationProperty Name="UserMasters" Relationship="Self.FK_UserMaster_Department" FromRole="Department" ToRole="UserMaster" />
+        </EntityType>
+        <EntityType Name="Designation">
+          <Key>
+            <PropertyRef Name="DesignationId" />
+          </Key>
+          <Property Name="DesignationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="DesignationName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="EntryUser" Type="Int32" />
+          <Property Name="ModifiedUser" Type="Int32" />
+          <Property Name="EntryDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="CompanyMaster" Relationship="Self.FK_Designation_CompanyMaster" FromRole="Designation" ToRole="CompanyMaster" />
+          <NavigationProperty Name="UserMasters" Relationship="Self.FK_UserMaster_Designation" FromRole="Designation" ToRole="UserMaster" />
+        </EntityType>
+        <EntityType Name="ManualTime">
+          <Key>
+            <PropertyRef Name="ManualId" />
+          </Key>
+          <Property Name="ManualId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="ProjectId" Type="Int32" />
+          <Property Name="TaskId" Type="Int32" />
+          <Property Name="StartTime" Type="DateTime" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" />
+          <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="EntryUser" Type="Int32" />
+          <Property Name="ModifiedUser" Type="Int32" />
+          <Property Name="EntryDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CompanyMaster" Relationship="Self.FK_ManualTime_CompanyMaster" FromRole="ManualTime" ToRole="CompanyMaster" />
+          <NavigationProperty Name="ProjectMaster" Relationship="Self.FK_ManualTime_ProjectMaster" FromRole="ManualTime" ToRole="ProjectMaster" />
+          <NavigationProperty Name="TaskMaster" Relationship="Self.FK_ManualTime_TaskMaster" FromRole="ManualTime" ToRole="TaskMaster" />
+          <NavigationProperty Name="UserMaster" Relationship="Self.FK_ManualTime_UserMaster" FromRole="ManualTime" ToRole="UserMaster" />
+        </EntityType>
+        <EntityType Name="PriorityMaster">
+          <Key>
+            <PropertyRef Name="PriorityId" />
+          </Key>
+          <Property Name="PriorityId" Type="Int32" Nullable="false" />
+          <Property Name="PriorityName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TaskMasters" Relationship="Self.FK_TaskMaster_PriorityMaster" FromRole="PriorityMaster" ToRole="TaskMaster" />
+        </EntityType>
+        <EntityType Name="ProjectAssign">
+          <Key>
+            <PropertyRef Name="ProjectAssignId" />
+          </Key>
+          <Property Name="ProjectAssignId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="WeeklyLimit" Type="Int32" />
+          <Property Name="Rate" Type="Int32" />
+          <Property Name="EntryUser" Type="Int32" />
+          <Property Name="ModifiedUser" Type="Int32" />
+          <Property Name="EntryDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="CompanyMaster" Relationship="Self.FK_ProjectAssign_CompanyMaster" FromRole="ProjectAssign" ToRole="CompanyMaster" />
+          <NavigationProperty Name="ProjectMaster" Relationship="Self.FK_ProjectAssign_ProjectMaster" FromRole="ProjectAssign" ToRole="ProjectMaster" />
+          <NavigationProperty Name="UserMaster" Relationship="Self.FK_ProjectAssign_UserMaster" FromRole="ProjectAssign" ToRole="UserMaster" />
+        </EntityType>
+        <EntityType Name="ProjectMaster">
+          <Key>
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="ProjectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="ProjectName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="DeadLine" Type="DateTime" Precision="3" />
+          <Property Name="EstimationHour" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="EntryUser" Type="Int32" />
+          <Property Name="ModifiedUser" Type="Int32" />
+          <Property Name="EntryDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="CompanyMaster" Relationship="Self.FK_ProjectMaster_CompanyMaster" FromRole="ProjectMaster" ToRole="CompanyMaster" />
+          <NavigationProperty Name="DailySummaries" Relationship="Self.FK_DailySummary_ProjectMaster" FromRole="ProjectMaster" ToRole="DailySummary" />
+          <NavigationProperty Name="DailyTimeDetails" Relationship="Self.FK_DailyTimeDetails_ProjectMaster" FromRole="ProjectMaster" ToRole="DailyTimeDetails" />
+          <NavigationProperty Name="ManualTimes" Relationship="Self.FK_ManualTime_ProjectMaster" FromRole="ProjectMaster" ToRole="ManualTime" />
+          <NavigationProperty Name="ProjectAssigns" Relationship="Self.FK_ProjectAssign_ProjectMaster" FromRole="ProjectMaster" ToRole="ProjectAssign" />
+          <NavigationProperty Name="ScreenShots" Relationship="Self.FK_ScreenShots_ProjectMaster" FromRole="ProjectMaster" ToRole="ScreenShots" />
+          <NavigationProperty Name="TaskAssigns" Relationship="Self.FK_TaskAssign_ProjectMaster" FromRole="ProjectMaster" ToRole="TaskAssign" />
+          <NavigationProperty Name="TaskMasters" Relationship="Self.FK_TaskMaster_ProjectMaster" FromRole="ProjectMaster" ToRole="TaskMaster" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyId" Type="Int32" />
+          <NavigationProperty Name="CompanyMaster" Relationship="Self.FK_Role_CompanyMaster" FromRole="Role" ToRole="CompanyMaster" />
+          <NavigationProperty Name="UserMasters" Relationship="Self.FK_UserMaster_Role" FromRole="Role" ToRole="UserMaster" />
+        </EntityType>
+        <EntityType Name="ScreenShot">
+          <Key>
+            <PropertyRef Name="ScreenShotId" />
+          </Key>
+          <Property Name="ScreenShotId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="ProjectId" Type="Int32" />
+          <Property Name="TaskId" Type="Int32" />
+          <Property Name="FileName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="StartTime" Type="DateTime" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" />
+          <Property Name="ScreenShotTime" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="CompanyMaster" Relationship="Self.FK_ScreenShots_CompanyMaster" FromRole="ScreenShots" ToRole="CompanyMaster" />
+          <NavigationProperty Name="ProjectMaster" Relationship="Self.FK_ScreenShots_ProjectMaster" FromRole="ScreenShots" ToRole="ProjectMaster" />
+          <NavigationProperty Name="TaskMaster" Relationship="Self.FK_ScreenShots_TaskMaster" FromRole="ScreenShots" ToRole="TaskMaster" />
+          <NavigationProperty Name="UserMaster" Relationship="Self.FK_ScreenShots_UserMaster" FromRole="ScreenShots" ToRole="UserMaster" />
+        </EntityType>
+        <EntityType Name="StateMaster">
+          <Key>
+            <PropertyRef Name="StateId" />
+          </Key>
+          <Property Name="StateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StateName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CityMasters" Relationship="Self.FK_CityMaster_StateMaster" FromRole="StateMaster" ToRole="CityMaster" />
+          <NavigationProperty Name="CompanyMasters" Relationship="Self.FK_CompanyMaster_StateMaster" FromRole="StateMaster" ToRole="CompanyMaster" />
+        </EntityType>
+        <EntityType Name="StatusMaster">
+          <Key>
+            <PropertyRef Name="StatusId" />
+          </Key>
+          <Property Name="StatusId" Type="Int32" Nullable="false" />
+          <Property Name="StatusName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TaskMasters" Relationship="Self.FK_TaskMaster_StatusMaster" FromRole="StatusMaster" ToRole="TaskMaster" />
+        </EntityType>
+        <EntityType Name="TaskAssign">
+          <Key>
+            <PropertyRef Name="TaskAssignId" />
+          </Key>
+          <Property Name="TaskAssignId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TaskId" Type="Int32" Nullable="false" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="EntryUser" Type="Int32" />
+          <Property Name="ModifiedUser" Type="Int32" />
+          <Property Name="EntryDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="CompanyMaster" Relationship="Self.FK_TaskAssign_CompanyMaster" FromRole="TaskAssign" ToRole="CompanyMaster" />
+          <NavigationProperty Name="ProjectMaster" Relationship="Self.FK_TaskAssign_ProjectMaster" FromRole="TaskAssign" ToRole="ProjectMaster" />
+          <NavigationProperty Name="TaskMaster" Relationship="Self.FK_TaskAssign_TaskMaster" FromRole="TaskAssign" ToRole="TaskMaster" />
+          <NavigationProperty Name="UserMaster" Relationship="Self.FK_TaskAssign_UserMaster" FromRole="TaskAssign" ToRole="UserMaster" />
+        </EntityType>
+        <EntityType Name="TaskMaster">
+          <Key>
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="TaskId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="TaskName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="Deadline" Type="DateTime" Precision="3" />
+          <Property Name="StatusId" Type="Int32" />
+          <Property Name="PriorityId" Type="Int32" />
+          <Property Name="TaskNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EntryUser" Type="Int32" />
+          <Property Name="ModifiedUser" Type="Int32" />
+          <Property Name="EntryDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="CompanyMaster" Relationship="Self.FK_TaskMaster_CompanyMaster" FromRole="TaskMaster" ToRole="CompanyMaster" />
+          <NavigationProperty Name="DailySummaries" Relationship="Self.FK_DailySummary_TaskMaster" FromRole="TaskMaster" ToRole="DailySummary" />
+          <NavigationProperty Name="DailyTimeDetails" Relationship="Self.FK_DailyTimeDetails_TaskMaster" FromRole="TaskMaster" ToRole="DailyTimeDetails" />
+          <NavigationProperty Name="ManualTimes" Relationship="Self.FK_ManualTime_TaskMaster" FromRole="TaskMaster" ToRole="ManualTime" />
+          <NavigationProperty Name="PriorityMaster" Relationship="Self.FK_TaskMaster_PriorityMaster" FromRole="TaskMaster" ToRole="PriorityMaster" />
+          <NavigationProperty Name="ProjectMaster" Relationship="Self.FK_TaskMaster_ProjectMaster" FromRole="TaskMaster" ToRole="ProjectMaster" />
+          <NavigationProperty Name="ScreenShots" Relationship="Self.FK_ScreenShots_TaskMaster" FromRole="TaskMaster" ToRole="ScreenShots" />
+          <NavigationProperty Name="StatusMaster" Relationship="Self.FK_TaskMaster_StatusMaster" FromRole="TaskMaster" ToRole="StatusMaster" />
+          <NavigationProperty Name="TaskAssigns" Relationship="Self.FK_TaskAssign_TaskMaster" FromRole="TaskMaster" ToRole="TaskAssign" />
+        </EntityType>
+        <EntityType Name="UserMaster">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="DepartmentId" Type="Int32" />
+          <Property Name="DesignationId" Type="Int32" />
+          <Property Name="RoleId" Type="Int32" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ConfirmPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="JobTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Additionalinfo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="JoiningDate" Type="DateTime" Precision="3" />
+          <Property Name="ResetPasswordCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="EntryUser" Type="Int32" />
+          <Property Name="ModifiedUser" Type="Int32" />
+          <Property Name="EntryDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="CompanyMaster" Relationship="Self.FK_UserMaster_CompanyMaster" FromRole="UserMaster" ToRole="CompanyMaster" />
+          <NavigationProperty Name="DailySummaries" Relationship="Self.FK_DailySummary_UserMaster" FromRole="UserMaster" ToRole="DailySummary" />
+          <NavigationProperty Name="DailyTimeDetails" Relationship="Self.FK_DailyTimeDetails_UserMaster" FromRole="UserMaster" ToRole="DailyTimeDetails" />
+          <NavigationProperty Name="Department" Relationship="Self.FK_UserMaster_Department" FromRole="UserMaster" ToRole="Department" />
+          <NavigationProperty Name="Designation" Relationship="Self.FK_UserMaster_Designation" FromRole="UserMaster" ToRole="Designation" />
+          <NavigationProperty Name="ManualTimes" Relationship="Self.FK_ManualTime_UserMaster" FromRole="UserMaster" ToRole="ManualTime" />
+          <NavigationProperty Name="ProjectAssigns" Relationship="Self.FK_ProjectAssign_UserMaster" FromRole="UserMaster" ToRole="ProjectAssign" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_UserMaster_Role" FromRole="UserMaster" ToRole="Role" />
+          <NavigationProperty Name="ScreenShots" Relationship="Self.FK_ScreenShots_UserMaster" FromRole="UserMaster" ToRole="ScreenShots" />
+          <NavigationProperty Name="TaskAssigns" Relationship="Self.FK_TaskAssign_UserMaster" FromRole="UserMaster" ToRole="TaskAssign" />
+        </EntityType>
+        <EntityType Name="AllCompanyDetail">
+          <Key>
+            <PropertyRef Name="CompanyId" />
+            <PropertyRef Name="CompanyName" />
+            <PropertyRef Name="CompanyEmail" />
+          </Key>
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CompanyLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyEmail" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CompanyPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StateId" Type="Int32" />
+          <Property Name="CityId" Type="Int32" />
+          <Property Name="StreetAddress" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNo" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNo" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Extension" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="EntryDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="StateName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="AllDeptDetail">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="DepartmentId" Type="Int32" />
+          <Property Name="DepartmentName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsDeleted" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="AllDesDetail">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="DesignationId" Type="Int32" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="DesignationName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="AllRoleDetail">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="CompanyName" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AttendenceDetail">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+            <PropertyRef Name="DesignationId" />
+          </Key>
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="DesignationId" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="101" FixedLength="false" Unicode="false" />
+          <Property Name="TotalSecond" Type="Int32" />
+          <Property Name="StartTime" Type="DateTime" Precision="3" />
+          <Property Name="StopTime" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK_CityMaster_StateMaster">
+          <End Role="StateMaster" Type="Self.StateMaster" Multiplicity="0..1" />
+          <End Role="CityMaster" Type="Self.CityMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StateMaster">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="CityMaster">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyMaster_CityMaster">
+          <End Role="CityMaster" Type="Self.CityMaster" Multiplicity="0..1" />
+          <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CityMaster">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="CompanyMaster">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyMaster_StateMaster">
+          <End Role="StateMaster" Type="Self.StateMaster" Multiplicity="0..1" />
+          <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StateMaster">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="CompanyMaster">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DailySummary_CompanyMaster">
+          <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="0..1" />
+          <End Role="DailySummary" Type="Self.DailySummary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyMaster">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="DailySummary">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DailyTimeDetails_CompanyMaster">
+          <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="0..1" />
+          <End Role="DailyTimeDetails" Type="Self.DailyTimeDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyMaster">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="DailyTimeDetails">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Department_CompanyMaster">
+          <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="0..1" />
+          <End Role="Department" Type="Self.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyMaster">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Designation_CompanyMaster">
+          <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="0..1" />
+          <End Role="Designation" Type="Self.Designation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyMaster">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="Designation">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManualTime_CompanyMaster">
+          <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="0..1" />
+          <End Role="ManualTime" Type="Self.ManualTime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyMaster">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="ManualTime">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectAssign_CompanyMaster">
+          <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="0..1" />
+          <End Role="ProjectAssign" Type="Self.ProjectAssign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyMaster">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="ProjectAssign">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectMaster_CompanyMaster">
+          <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="0..1" />
+          <End Role="ProjectMaster" Type="Self.ProjectMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyMaster">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="ProjectMaster">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Role_CompanyMaster">
+          <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="0..1" />
+          <End Role="Role" Type="Self.Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyMaster">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="Role">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScreenShots_CompanyMaster">
+          <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="0..1" />
+          <End Role="ScreenShots" Type="Self.ScreenShot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyMaster">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="ScreenShots">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskAssign_CompanyMaster">
+          <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="1" />
+          <End Role="TaskAssign" Type="Self.TaskAssign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyMaster">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="TaskAssign">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskMaster_CompanyMaster">
+          <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="0..1" />
+          <End Role="TaskMaster" Type="Self.TaskMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyMaster">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="TaskMaster">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserMaster_CompanyMaster">
+          <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="0..1" />
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyMaster">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="UserMaster">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DailySummary_ProjectMaster">
+          <End Role="ProjectMaster" Type="Self.ProjectMaster" Multiplicity="0..1" />
+          <End Role="DailySummary" Type="Self.DailySummary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectMaster">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="DailySummary">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DailySummary_TaskMaster">
+          <End Role="TaskMaster" Type="Self.TaskMaster" Multiplicity="0..1" />
+          <End Role="DailySummary" Type="Self.DailySummary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskMaster">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="DailySummary">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DailySummary_UserMaster">
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="0..1" />
+          <End Role="DailySummary" Type="Self.DailySummary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DailySummary">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DailyTimeDetails_ProjectMaster">
+          <End Role="ProjectMaster" Type="Self.ProjectMaster" Multiplicity="0..1" />
+          <End Role="DailyTimeDetails" Type="Self.DailyTimeDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectMaster">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="DailyTimeDetails">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DailyTimeDetails_TaskMaster">
+          <End Role="TaskMaster" Type="Self.TaskMaster" Multiplicity="0..1" />
+          <End Role="DailyTimeDetails" Type="Self.DailyTimeDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskMaster">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="DailyTimeDetails">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DailyTimeDetails_UserMaster">
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="0..1" />
+          <End Role="DailyTimeDetails" Type="Self.DailyTimeDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DailyTimeDetails">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserMaster_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="UserMaster">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserMaster_Designation">
+          <End Role="Designation" Type="Self.Designation" Multiplicity="0..1" />
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Designation">
+              <PropertyRef Name="DesignationId" />
+            </Principal>
+            <Dependent Role="UserMaster">
+              <PropertyRef Name="DesignationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManualTime_ProjectMaster">
+          <End Role="ProjectMaster" Type="Self.ProjectMaster" Multiplicity="0..1" />
+          <End Role="ManualTime" Type="Self.ManualTime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectMaster">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ManualTime">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManualTime_TaskMaster">
+          <End Role="TaskMaster" Type="Self.TaskMaster" Multiplicity="0..1" />
+          <End Role="ManualTime" Type="Self.ManualTime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskMaster">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="ManualTime">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManualTime_UserMaster">
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="0..1" />
+          <End Role="ManualTime" Type="Self.ManualTime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ManualTime">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskMaster_PriorityMaster">
+          <End Role="PriorityMaster" Type="Self.PriorityMaster" Multiplicity="0..1" />
+          <End Role="TaskMaster" Type="Self.TaskMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PriorityMaster">
+              <PropertyRef Name="PriorityId" />
+            </Principal>
+            <Dependent Role="TaskMaster">
+              <PropertyRef Name="PriorityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectAssign_ProjectMaster">
+          <End Role="ProjectMaster" Type="Self.ProjectMaster" Multiplicity="0..1" />
+          <End Role="ProjectAssign" Type="Self.ProjectAssign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectMaster">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ProjectAssign">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectAssign_UserMaster">
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="0..1" />
+          <End Role="ProjectAssign" Type="Self.ProjectAssign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ProjectAssign">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScreenShots_ProjectMaster">
+          <End Role="ProjectMaster" Type="Self.ProjectMaster" Multiplicity="0..1" />
+          <End Role="ScreenShots" Type="Self.ScreenShot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectMaster">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ScreenShots">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskAssign_ProjectMaster">
+          <End Role="ProjectMaster" Type="Self.ProjectMaster" Multiplicity="1" />
+          <End Role="TaskAssign" Type="Self.TaskAssign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectMaster">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="TaskAssign">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskMaster_ProjectMaster">
+          <End Role="ProjectMaster" Type="Self.ProjectMaster" Multiplicity="0..1" />
+          <End Role="TaskMaster" Type="Self.TaskMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectMaster">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="TaskMaster">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserMaster_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="UserMaster">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScreenShots_TaskMaster">
+          <End Role="TaskMaster" Type="Self.TaskMaster" Multiplicity="0..1" />
+          <End Role="ScreenShots" Type="Self.ScreenShot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskMaster">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="ScreenShots">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScreenShots_UserMaster">
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="0..1" />
+          <End Role="ScreenShots" Type="Self.ScreenShot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ScreenShots">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskMaster_StatusMaster">
+          <End Role="StatusMaster" Type="Self.StatusMaster" Multiplicity="0..1" />
+          <End Role="TaskMaster" Type="Self.TaskMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusMaster">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="TaskMaster">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskAssign_TaskMaster">
+          <End Role="TaskMaster" Type="Self.TaskMaster" Multiplicity="1" />
+          <End Role="TaskAssign" Type="Self.TaskAssign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskMaster">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="TaskAssign">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskAssign_UserMaster">
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="1" />
+          <End Role="TaskAssign" Type="Self.TaskAssign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="TaskAssign">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TrackerAppEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CityMasters" EntityType="Self.CityMaster" />
+          <EntitySet Name="CompanyMasters" EntityType="Self.CompanyMaster" />
+          <EntitySet Name="DailySummaries" EntityType="Self.DailySummary" />
+          <EntitySet Name="DailyTimeDetails" EntityType="Self.DailyTimeDetail" />
+          <EntitySet Name="Departments" EntityType="Self.Department" />
+          <EntitySet Name="Designations" EntityType="Self.Designation" />
+          <EntitySet Name="ManualTimes" EntityType="Self.ManualTime" />
+          <EntitySet Name="PriorityMasters" EntityType="Self.PriorityMaster" />
+          <EntitySet Name="ProjectAssigns" EntityType="Self.ProjectAssign" />
+          <EntitySet Name="ProjectMasters" EntityType="Self.ProjectMaster" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="ScreenShots" EntityType="Self.ScreenShot" />
+          <EntitySet Name="StateMasters" EntityType="Self.StateMaster" />
+          <EntitySet Name="StatusMasters" EntityType="Self.StatusMaster" />
+          <EntitySet Name="TaskAssigns" EntityType="Self.TaskAssign" />
+          <EntitySet Name="TaskMasters" EntityType="Self.TaskMaster" />
+          <EntitySet Name="UserMasters" EntityType="Self.UserMaster" />
+          <EntitySet Name="AllCompanyDetails" EntityType="Self.AllCompanyDetail" />
+          <EntitySet Name="AllDeptDetails" EntityType="Self.AllDeptDetail" />
+          <EntitySet Name="AllDesDetails" EntityType="Self.AllDesDetail" />
+          <EntitySet Name="AllRoleDetails" EntityType="Self.AllRoleDetail" />
+          <EntitySet Name="AttendenceDetails" EntityType="Self.AttendenceDetail" />
+          <AssociationSet Name="FK_CityMaster_StateMaster" Association="Self.FK_CityMaster_StateMaster">
+            <End Role="StateMaster" EntitySet="StateMasters" />
+            <End Role="CityMaster" EntitySet="CityMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyMaster_CityMaster" Association="Self.FK_CompanyMaster_CityMaster">
+            <End Role="CityMaster" EntitySet="CityMasters" />
+            <End Role="CompanyMaster" EntitySet="CompanyMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyMaster_StateMaster" Association="Self.FK_CompanyMaster_StateMaster">
+            <End Role="StateMaster" EntitySet="StateMasters" />
+            <End Role="CompanyMaster" EntitySet="CompanyMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DailySummary_CompanyMaster" Association="Self.FK_DailySummary_CompanyMaster">
+            <End Role="CompanyMaster" EntitySet="CompanyMasters" />
+            <End Role="DailySummary" EntitySet="DailySummaries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DailyTimeDetails_CompanyMaster" Association="Self.FK_DailyTimeDetails_CompanyMaster">
+            <End Role="CompanyMaster" EntitySet="CompanyMasters" />
+            <End Role="DailyTimeDetails" EntitySet="DailyTimeDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Department_CompanyMaster" Association="Self.FK_Department_CompanyMaster">
+            <End Role="CompanyMaster" EntitySet="CompanyMasters" />
+            <End Role="Department" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Designation_CompanyMaster" Association="Self.FK_Designation_CompanyMaster">
+            <End Role="CompanyMaster" EntitySet="CompanyMasters" />
+            <End Role="Designation" EntitySet="Designations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManualTime_CompanyMaster" Association="Self.FK_ManualTime_CompanyMaster">
+            <End Role="CompanyMaster" EntitySet="CompanyMasters" />
+            <End Role="ManualTime" EntitySet="ManualTimes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectAssign_CompanyMaster" Association="Self.FK_ProjectAssign_CompanyMaster">
+            <End Role="CompanyMaster" EntitySet="CompanyMasters" />
+            <End Role="ProjectAssign" EntitySet="ProjectAssigns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectMaster_CompanyMaster" Association="Self.FK_ProjectMaster_CompanyMaster">
+            <End Role="CompanyMaster" EntitySet="CompanyMasters" />
+            <End Role="ProjectMaster" EntitySet="ProjectMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Role_CompanyMaster" Association="Self.FK_Role_CompanyMaster">
+            <End Role="CompanyMaster" EntitySet="CompanyMasters" />
+            <End Role="Role" EntitySet="Roles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScreenShots_CompanyMaster" Association="Self.FK_ScreenShots_CompanyMaster">
+            <End Role="CompanyMaster" EntitySet="CompanyMasters" />
+            <End Role="ScreenShots" EntitySet="ScreenShots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskAssign_CompanyMaster" Association="Self.FK_TaskAssign_CompanyMaster">
+            <End Role="CompanyMaster" EntitySet="CompanyMasters" />
+            <End Role="TaskAssign" EntitySet="TaskAssigns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskMaster_CompanyMaster" Association="Self.FK_TaskMaster_CompanyMaster">
+            <End Role="CompanyMaster" EntitySet="CompanyMasters" />
+            <End Role="TaskMaster" EntitySet="TaskMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserMaster_CompanyMaster" Association="Self.FK_UserMaster_CompanyMaster">
+            <End Role="CompanyMaster" EntitySet="CompanyMasters" />
+            <End Role="UserMaster" EntitySet="UserMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DailySummary_ProjectMaster" Association="Self.FK_DailySummary_ProjectMaster">
+            <End Role="ProjectMaster" EntitySet="ProjectMasters" />
+            <End Role="DailySummary" EntitySet="DailySummaries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DailySummary_TaskMaster" Association="Self.FK_DailySummary_TaskMaster">
+            <End Role="TaskMaster" EntitySet="TaskMasters" />
+            <End Role="DailySummary" EntitySet="DailySummaries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DailySummary_UserMaster" Association="Self.FK_DailySummary_UserMaster">
+            <End Role="UserMaster" EntitySet="UserMasters" />
+            <End Role="DailySummary" EntitySet="DailySummaries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DailyTimeDetails_ProjectMaster" Association="Self.FK_DailyTimeDetails_ProjectMaster">
+            <End Role="ProjectMaster" EntitySet="ProjectMasters" />
+            <End Role="DailyTimeDetails" EntitySet="DailyTimeDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DailyTimeDetails_TaskMaster" Association="Self.FK_DailyTimeDetails_TaskMaster">
+            <End Role="TaskMaster" EntitySet="TaskMasters" />
+            <End Role="DailyTimeDetails" EntitySet="DailyTimeDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DailyTimeDetails_UserMaster" Association="Self.FK_DailyTimeDetails_UserMaster">
+            <End Role="UserMaster" EntitySet="UserMasters" />
+            <End Role="DailyTimeDetails" EntitySet="DailyTimeDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserMaster_Department" Association="Self.FK_UserMaster_Department">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="UserMaster" EntitySet="UserMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserMaster_Designation" Association="Self.FK_UserMaster_Designation">
+            <End Role="Designation" EntitySet="Designations" />
+            <End Role="UserMaster" EntitySet="UserMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManualTime_ProjectMaster" Association="Self.FK_ManualTime_ProjectMaster">
+            <End Role="ProjectMaster" EntitySet="ProjectMasters" />
+            <End Role="ManualTime" EntitySet="ManualTimes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManualTime_TaskMaster" Association="Self.FK_ManualTime_TaskMaster">
+            <End Role="TaskMaster" EntitySet="TaskMasters" />
+            <End Role="ManualTime" EntitySet="ManualTimes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManualTime_UserMaster" Association="Self.FK_ManualTime_UserMaster">
+            <End Role="UserMaster" EntitySet="UserMasters" />
+            <End Role="ManualTime" EntitySet="ManualTimes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskMaster_PriorityMaster" Association="Self.FK_TaskMaster_PriorityMaster">
+            <End Role="PriorityMaster" EntitySet="PriorityMasters" />
+            <End Role="TaskMaster" EntitySet="TaskMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectAssign_ProjectMaster" Association="Self.FK_ProjectAssign_ProjectMaster">
+            <End Role="ProjectMaster" EntitySet="ProjectMasters" />
+            <End Role="ProjectAssign" EntitySet="ProjectAssigns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectAssign_UserMaster" Association="Self.FK_ProjectAssign_UserMaster">
+            <End Role="UserMaster" EntitySet="UserMasters" />
+            <End Role="ProjectAssign" EntitySet="ProjectAssigns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScreenShots_ProjectMaster" Association="Self.FK_ScreenShots_ProjectMaster">
+            <End Role="ProjectMaster" EntitySet="ProjectMasters" />
+            <End Role="ScreenShots" EntitySet="ScreenShots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskAssign_ProjectMaster" Association="Self.FK_TaskAssign_ProjectMaster">
+            <End Role="ProjectMaster" EntitySet="ProjectMasters" />
+            <End Role="TaskAssign" EntitySet="TaskAssigns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskMaster_ProjectMaster" Association="Self.FK_TaskMaster_ProjectMaster">
+            <End Role="ProjectMaster" EntitySet="ProjectMasters" />
+            <End Role="TaskMaster" EntitySet="TaskMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserMaster_Role" Association="Self.FK_UserMaster_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="UserMaster" EntitySet="UserMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScreenShots_TaskMaster" Association="Self.FK_ScreenShots_TaskMaster">
+            <End Role="TaskMaster" EntitySet="TaskMasters" />
+            <End Role="ScreenShots" EntitySet="ScreenShots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScreenShots_UserMaster" Association="Self.FK_ScreenShots_UserMaster">
+            <End Role="UserMaster" EntitySet="UserMasters" />
+            <End Role="ScreenShots" EntitySet="ScreenShots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskMaster_StatusMaster" Association="Self.FK_TaskMaster_StatusMaster">
+            <End Role="StatusMaster" EntitySet="StatusMasters" />
+            <End Role="TaskMaster" EntitySet="TaskMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskAssign_TaskMaster" Association="Self.FK_TaskAssign_TaskMaster">
+            <End Role="TaskMaster" EntitySet="TaskMasters" />
+            <End Role="TaskAssign" EntitySet="TaskAssigns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskAssign_UserMaster" Association="Self.FK_TaskAssign_UserMaster">
+            <End Role="UserMaster" EntitySet="UserMasters" />
+            <End Role="TaskAssign" EntitySet="TaskAssigns" />
+          </AssociationSet>
+          <FunctionImport Name="AllCompanyDetailsSp" ReturnType="Collection(TrackerAppModel.AllCompanyDetailsSp_Result)">
+            <Parameter Name="cid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AllDepartmentDetailsSp" ReturnType="Collection(TrackerAppModel.AllDepartmentDetailsSp_Result)">
+            <Parameter Name="cid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AllDesignationDetailsSp" ReturnType="Collection(TrackerAppModel.AllDesignationDetailsSp_Result)">
+            <Parameter Name="cid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AllProjectDetailsSp" ReturnType="Collection(TrackerAppModel.AllProjectDetailsSp_Result)">
+            <Parameter Name="cid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AllRoleDetailsSp" ReturnType="Collection(TrackerAppModel.AllRoleDetailsSp_Result)">
+            <Parameter Name="cid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AllTaskDetailsSp" ReturnType="Collection(TrackerAppModel.AllTaskDetailsSp_Result)">
+            <Parameter Name="cid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AllUserDetailSp" ReturnType="Collection(TrackerAppModel.AllUserDetailSp_Result)">
+            <Parameter Name="cid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AttendenceSp" ReturnType="Collection(TrackerAppModel.AttendenceSp_Result)">
+            <Parameter Name="cid" Mode="In" Type="Int32" />
+            <Parameter Name="uid" Mode="In" Type="Int32" />
+            <Parameter Name="did" Mode="In" Type="Int32" />
+            <Parameter Name="desid" Mode="In" Type="Int32" />
+            <Parameter Name="sdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="DailySummaryInsertSP">
+            <Parameter Name="sid" Mode="In" Type="Int32" />
+            <Parameter Name="stime" Mode="In" Type="DateTime" />
+            <Parameter Name="etime" Mode="In" Type="DateTime" />
+            <Parameter Name="ddiff" Mode="In" Type="DateTime" />
+            <Parameter Name="tdiff" Mode="In" Type="DateTime" />
+            <Parameter Name="sec" Mode="In" Type="Int32" />
+            <Parameter Name="pid" Mode="In" Type="Int32" />
+            <Parameter Name="tid" Mode="In" Type="Int32" />
+            <Parameter Name="uid" Mode="In" Type="Int32" />
+            <Parameter Name="cid" Mode="In" Type="Int32" />
+            <Parameter Name="flag" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DailyTimeInsertSP">
+            <Parameter Name="did" Mode="In" Type="Int32" />
+            <Parameter Name="uid" Mode="In" Type="Int32" />
+            <Parameter Name="key" Mode="In" Type="Int32" />
+            <Parameter Name="mouse" Mode="In" Type="Int32" />
+            <Parameter Name="app" Mode="In" Type="String" />
+            <Parameter Name="stime" Mode="In" Type="DateTime" />
+            <Parameter Name="projid" Mode="In" Type="Int32" />
+            <Parameter Name="tid" Mode="In" Type="Int32" />
+            <Parameter Name="cid" Mode="In" Type="Int32" />
+            <Parameter Name="flag" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="FillProjectComboSP" ReturnType="Collection(TrackerAppModel.FillProjectComboSP_Result)">
+            <Parameter Name="cid" Mode="In" Type="Int32" />
+            <Parameter Name="uid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="FillTaskComboSP" ReturnType="Collection(TrackerAppModel.FillTaskComboSP_Result)">
+            <Parameter Name="pid" Mode="In" Type="Int32" />
+            <Parameter Name="cid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetDailyContractsSP">
+            <Parameter Name="current" Mode="In" Type="DateTime" />
+            <Parameter Name="uid" Mode="In" Type="Int32" />
+            <Parameter Name="cid" Mode="In" Type="Int32" />
+            <Parameter Name="sec" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetDailySummarySP">
+            <Parameter Name="current" Mode="In" Type="DateTime" />
+            <Parameter Name="pid" Mode="In" Type="Int32" />
+            <Parameter Name="tid" Mode="In" Type="Int32" />
+            <Parameter Name="uid" Mode="In" Type="Int32" />
+            <Parameter Name="cid" Mode="In" Type="Int32" />
+            <Parameter Name="sec" Mode="InOut" Type="Int32" />
+            <Parameter Name="min" Mode="InOut" Type="Int32" />
+            <Parameter Name="hour" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetTotalDailyTimeSp" ReturnType="Collection(String)">
+            <Parameter Name="cid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetTotalWeeklyTimeSp" ReturnType="Collection(String)">
+            <Parameter Name="cid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetWeeklyContractsSP">
+            <Parameter Name="uid" Mode="In" Type="Int32" />
+            <Parameter Name="cid" Mode="In" Type="Int32" />
+            <Parameter Name="sdate" Mode="InOut" Type="DateTime" />
+            <Parameter Name="edate" Mode="InOut" Type="DateTime" />
+            <Parameter Name="sec" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetWeeklySummarySP">
+            <Parameter Name="pid" Mode="In" Type="Int32" />
+            <Parameter Name="tid" Mode="In" Type="Int32" />
+            <Parameter Name="uid" Mode="In" Type="Int32" />
+            <Parameter Name="cid" Mode="In" Type="Int32" />
+            <Parameter Name="sdate" Mode="InOut" Type="DateTime" />
+            <Parameter Name="edate" Mode="InOut" Type="DateTime" />
+            <Parameter Name="sec" Mode="InOut" Type="Int32" />
+            <Parameter Name="min" Mode="InOut" Type="Int32" />
+            <Parameter Name="hour" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="LoginDetailSp" ReturnType="Collection(TrackerAppModel.LoginDetailSp_Result)">
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="pass" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Project_AssignSP" ReturnType="Collection(TrackerAppModel.Project_AssignSP_Result)">
+            <Parameter Name="email" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ProjectReportSp">
+            <Parameter Name="Cid" Mode="In" Type="Int32" />
+            <Parameter Name="Pid" Mode="In" Type="Int32" />
+            <Parameter Name="Todate" Mode="In" Type="DateTime" />
+            <Parameter Name="fromdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="ScreenShotInsertSP">
+            <Parameter Name="ss_id" Mode="In" Type="Int32" />
+            <Parameter Name="cid" Mode="In" Type="Int32" />
+            <Parameter Name="stime" Mode="In" Type="DateTime" />
+            <Parameter Name="etime" Mode="In" Type="DateTime" />
+            <Parameter Name="sstime" Mode="In" Type="DateTime" />
+            <Parameter Name="filename" Mode="In" Type="String" />
+            <Parameter Name="projid" Mode="In" Type="Int32" />
+            <Parameter Name="tid" Mode="In" Type="Int32" />
+            <Parameter Name="uid" Mode="In" Type="Int32" />
+            <Parameter Name="isdelete" Mode="In" Type="Boolean" />
+            <Parameter Name="flag" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="TaskReportSp" ReturnType="Collection(TrackerAppModel.TaskReportSp_Result)">
+            <Parameter Name="Cid" Mode="In" Type="Int32" />
+            <Parameter Name="Pid" Mode="In" Type="Int32" />
+            <Parameter Name="departid" Mode="In" Type="Int32" />
+            <Parameter Name="desigid" Mode="In" Type="Int32" />
+            <Parameter Name="sdate" Mode="In" Type="DateTime" />
+            <Parameter Name="edate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="TeamReportSp">
+            <Parameter Name="Cid" Mode="In" Type="Int32" />
+            <Parameter Name="Uid" Mode="In" Type="Int32" />
+            <Parameter Name="Todate" Mode="In" Type="DateTime" />
+            <Parameter Name="fromdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UserReportSP">
+            <Parameter Name="Cid" Mode="In" Type="Int32" />
+            <Parameter Name="Uid" Mode="In" Type="Int32" />
+            <Parameter Name="designid" Mode="In" Type="Int32" />
+            <Parameter Name="deptid" Mode="In" Type="Int32" />
+            <Parameter Name="Todate" Mode="In" Type="DateTime" />
+            <Parameter Name="fromdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="AllCompanyDetailsSp_Result">
+          <Property Type="Int32" Name="CompanyId" Nullable="false" />
+          <Property Type="String" Name="CompanyName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="CompanyLastName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CompanyEmail" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="CompanyPassword" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="StateId" Nullable="true" />
+          <Property Type="Int32" Name="CityId" Nullable="true" />
+          <Property Type="String" Name="StreetAddress" Nullable="true" MaxLength="70" />
+          <Property Type="String" Name="MobileNo" Nullable="true" MaxLength="11" />
+          <Property Type="String" Name="PhoneNo" Nullable="true" MaxLength="11" />
+          <Property Type="Int32" Name="Extension" Nullable="true" />
+          <Property Type="Boolean" Name="IsActive" Nullable="true" />
+          <Property Type="DateTime" Name="EntryDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="AllDepartmentDetailsSp_Result">
+          <Property Type="String" Name="DepartmentName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="TotalUser" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="AllDesignationDetailsSp_Result">
+          <Property Type="String" Name="DesignationName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="TotalUser" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="AllProjectDetailsSp_Result">
+          <Property Type="String" Name="ProjectName" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="TotalTime" Nullable="true" MaxLength="7" />
+        </ComplexType>
+        <ComplexType Name="AllRoleDetailsSp_Result">
+          <Property Type="String" Name="RoleName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CompanyName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="TotalUser" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="AllTaskDetailsSp_Result">
+          <Property Type="String" Name="TaskName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="TotalTime" Nullable="true" MaxLength="7" />
+        </ComplexType>
+        <ComplexType Name="AllUserDetailSp_Result">
+          <Property Type="Int32" Name="CompanyId" Nullable="true" />
+          <Property Type="Int32" Name="UserId" Nullable="true" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="101" />
+          <Property Type="String" Name="TotalTime" Nullable="true" MaxLength="7" />
+        </ComplexType>
+        <ComplexType Name="AttendenceSp_Result">
+          <Property Type="Int32" Name="CompanyId" Nullable="true" />
+          <Property Type="Int32" Name="UserId" Nullable="true" />
+          <Property Type="Int32" Name="DepartmentId" Nullable="false" />
+          <Property Type="Int32" Name="DesignationId" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="101" />
+          <Property Type="String" Name="TotalTime" Nullable="true" MaxLength="7" />
+          <Property Type="DateTime" Name="StartTime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="StopTime" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="FillProjectComboSP_Result">
+          <Property Type="Int32" Name="ProjectId" Nullable="true" />
+          <Property Type="String" Name="ProjectName" Nullable="true" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="FillTaskComboSP_Result">
+          <Property Type="Int32" Name="TaskId" Nullable="false" />
+          <Property Type="Int32" Name="ProjectId" Nullable="true" />
+          <Property Type="Int32" Name="CompanyId" Nullable="true" />
+          <Property Type="Boolean" Name="IsActive" Nullable="true" />
+          <Property Type="String" Name="TaskName" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="Deadline" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="StatusId" Nullable="true" />
+          <Property Type="Int32" Name="PriorityId" Nullable="true" />
+          <Property Type="String" Name="TaskNotes" Nullable="true" />
+          <Property Type="Int32" Name="EntryUser" Nullable="true" />
+          <Property Type="Int32" Name="ModifiedUser" Nullable="true" />
+          <Property Type="DateTime" Name="EntryDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="LoginDetailSp_Result">
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="CompanyId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Project_AssignSP_Result">
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="Int32" Name="CompanyId" Nullable="true" />
+          <Property Type="Int32" Name="DepartmentId" Nullable="true" />
+          <Property Type="Int32" Name="DesignationId" Nullable="true" />
+          <Property Type="Int32" Name="RoleId" Nullable="true" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="80" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ConfirmPassword" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="JobTitle" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PhoneNo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Additionalinfo" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="JoiningDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ResetPasswordCode" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="IsActive" Nullable="true" />
+          <Property Type="Int32" Name="EntryUser" Nullable="true" />
+          <Property Type="Int32" Name="ModifiedUser" Nullable="true" />
+          <Property Type="DateTime" Name="EntryDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="true" />
+          <Property Type="Int32" Name="ProjectAssignId" Nullable="false" />
+          <Property Type="Int32" Name="ProjectId" Nullable="true" />
+          <Property Type="Int32" Name="CompanyId1" Nullable="true" />
+          <Property Type="Int32" Name="UserId1" Nullable="true" />
+          <Property Type="Int32" Name="WeeklyLimit" Nullable="true" />
+          <Property Type="Int32" Name="Rate" Nullable="true" />
+          <Property Type="Int32" Name="EntryUser1" Nullable="true" />
+          <Property Type="Int32" Name="ModifiedUser1" Nullable="true" />
+          <Property Type="DateTime" Name="EntryDate1" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="ModifiedDate1" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="IsDeleted1" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="TaskReportSp_Result">
+          <Property Type="String" Name="ProjectName" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="TaskName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="User" Nullable="true" MaxLength="101" />
+          <Property Type="String" Name="Date" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="Duration" Nullable="true" MaxLength="5" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TrackerAppModelStoreContainer" CdmEntityContainer="TrackerAppEntities">
+          <EntitySetMapping Name="CityMasters">
+            <EntityTypeMapping TypeName="TrackerAppModel.CityMaster">
+              <MappingFragment StoreEntitySet="CityMaster">
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyMasters">
+            <EntityTypeMapping TypeName="TrackerAppModel.CompanyMaster">
+              <MappingFragment StoreEntitySet="CompanyMaster">
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="CompanyLastName" ColumnName="CompanyLastName" />
+                <ScalarProperty Name="CompanyEmail" ColumnName="CompanyEmail" />
+                <ScalarProperty Name="CompanyPassword" ColumnName="CompanyPassword" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="StreetAddress" ColumnName="StreetAddress" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DailySummaries">
+            <EntityTypeMapping TypeName="TrackerAppModel.DailySummary">
+              <MappingFragment StoreEntitySet="DailySummary">
+                <ScalarProperty Name="DailySummaryId" ColumnName="DailySummaryId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="StopTime" ColumnName="StopTime" />
+                <ScalarProperty Name="DateDifference" ColumnName="DateDifference" />
+                <ScalarProperty Name="TimeDifference" ColumnName="TimeDifference" />
+                <ScalarProperty Name="TotalSecond" ColumnName="TotalSecond" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DailyTimeDetails">
+            <EntityTypeMapping TypeName="TrackerAppModel.DailyTimeDetail">
+              <MappingFragment StoreEntitySet="DailyTimeDetails">
+                <ScalarProperty Name="DailyTimeId" ColumnName="DailyTimeId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="KeyHit" ColumnName="KeyHit" />
+                <ScalarProperty Name="MouseHit" ColumnName="MouseHit" />
+                <ScalarProperty Name="AppName" ColumnName="AppName" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="TrackerAppModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EntryUser" ColumnName="EntryUser" />
+                <ScalarProperty Name="ModifiedUser" ColumnName="ModifiedUser" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Designations">
+            <EntityTypeMapping TypeName="TrackerAppModel.Designation">
+              <MappingFragment StoreEntitySet="Designation">
+                <ScalarProperty Name="DesignationId" ColumnName="DesignationId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="DesignationName" ColumnName="DesignationName" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EntryUser" ColumnName="EntryUser" />
+                <ScalarProperty Name="ModifiedUser" ColumnName="ModifiedUser" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ManualTimes">
+            <EntityTypeMapping TypeName="TrackerAppModel.ManualTime">
+              <MappingFragment StoreEntitySet="ManualTime">
+                <ScalarProperty Name="ManualId" ColumnName="ManualId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="EntryUser" ColumnName="EntryUser" />
+                <ScalarProperty Name="ModifiedUser" ColumnName="ModifiedUser" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PriorityMasters">
+            <EntityTypeMapping TypeName="TrackerAppModel.PriorityMaster">
+              <MappingFragment StoreEntitySet="PriorityMaster">
+                <ScalarProperty Name="PriorityId" ColumnName="PriorityId" />
+                <ScalarProperty Name="PriorityName" ColumnName="PriorityName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectAssigns">
+            <EntityTypeMapping TypeName="TrackerAppModel.ProjectAssign">
+              <MappingFragment StoreEntitySet="ProjectAssign">
+                <ScalarProperty Name="ProjectAssignId" ColumnName="ProjectAssignId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="WeeklyLimit" ColumnName="WeeklyLimit" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="EntryUser" ColumnName="EntryUser" />
+                <ScalarProperty Name="ModifiedUser" ColumnName="ModifiedUser" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectMasters">
+            <EntityTypeMapping TypeName="TrackerAppModel.ProjectMaster">
+              <MappingFragment StoreEntitySet="ProjectMaster">
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="DeadLine" ColumnName="DeadLine" />
+                <ScalarProperty Name="EstimationHour" ColumnName="EstimationHour" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="EntryUser" ColumnName="EntryUser" />
+                <ScalarProperty Name="ModifiedUser" ColumnName="ModifiedUser" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="TrackerAppModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScreenShots">
+            <EntityTypeMapping TypeName="TrackerAppModel.ScreenShot">
+              <MappingFragment StoreEntitySet="ScreenShots">
+                <ScalarProperty Name="ScreenShotId" ColumnName="ScreenShotId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="ScreenShotTime" ColumnName="ScreenShotTime" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StateMasters">
+            <EntityTypeMapping TypeName="TrackerAppModel.StateMaster">
+              <MappingFragment StoreEntitySet="StateMaster">
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StatusMasters">
+            <EntityTypeMapping TypeName="TrackerAppModel.StatusMaster">
+              <MappingFragment StoreEntitySet="StatusMaster">
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskAssigns">
+            <EntityTypeMapping TypeName="TrackerAppModel.TaskAssign">
+              <MappingFragment StoreEntitySet="TaskAssign">
+                <ScalarProperty Name="TaskAssignId" ColumnName="TaskAssignId" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="EntryUser" ColumnName="EntryUser" />
+                <ScalarProperty Name="ModifiedUser" ColumnName="ModifiedUser" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskMasters">
+            <EntityTypeMapping TypeName="TrackerAppModel.TaskMaster">
+              <MappingFragment StoreEntitySet="TaskMaster">
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="TaskName" ColumnName="TaskName" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Deadline" ColumnName="Deadline" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="PriorityId" ColumnName="PriorityId" />
+                <ScalarProperty Name="TaskNotes" ColumnName="TaskNotes" />
+                <ScalarProperty Name="EntryUser" ColumnName="EntryUser" />
+                <ScalarProperty Name="ModifiedUser" ColumnName="ModifiedUser" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserMasters">
+            <EntityTypeMapping TypeName="TrackerAppModel.UserMaster">
+              <MappingFragment StoreEntitySet="UserMaster">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="DesignationId" ColumnName="DesignationId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="ConfirmPassword" ColumnName="ConfirmPassword" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Additionalinfo" ColumnName="Additionalinfo" />
+                <ScalarProperty Name="JoiningDate" ColumnName="JoiningDate" />
+                <ScalarProperty Name="ResetPasswordCode" ColumnName="ResetPasswordCode" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EntryUser" ColumnName="EntryUser" />
+                <ScalarProperty Name="ModifiedUser" ColumnName="ModifiedUser" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AllCompanyDetails">
+            <EntityTypeMapping TypeName="TrackerAppModel.AllCompanyDetail">
+              <MappingFragment StoreEntitySet="AllCompanyDetails">
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="CompanyLastName" ColumnName="CompanyLastName" />
+                <ScalarProperty Name="CompanyEmail" ColumnName="CompanyEmail" />
+                <ScalarProperty Name="CompanyPassword" ColumnName="CompanyPassword" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="StreetAddress" ColumnName="StreetAddress" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AllDeptDetails">
+            <EntityTypeMapping TypeName="TrackerAppModel.AllDeptDetail">
+              <MappingFragment StoreEntitySet="AllDeptDetails">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AllDesDetails">
+            <EntityTypeMapping TypeName="TrackerAppModel.AllDesDetail">
+              <MappingFragment StoreEntitySet="AllDesDetails">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="DesignationId" ColumnName="DesignationId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DesignationName" ColumnName="DesignationName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AllRoleDetails">
+            <EntityTypeMapping TypeName="TrackerAppModel.AllRoleDetail">
+              <MappingFragment StoreEntitySet="AllRoleDetails">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AttendenceDetails">
+            <EntityTypeMapping TypeName="TrackerAppModel.AttendenceDetail">
+              <MappingFragment StoreEntitySet="AttendenceDetails">
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="DesignationId" ColumnName="DesignationId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="TotalSecond" ColumnName="TotalSecond" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="StopTime" ColumnName="StopTime" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AllCompanyDetailsSp" FunctionName="TrackerAppModel.Store.AllCompanyDetailsSp">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TrackerAppModel.AllCompanyDetailsSp_Result">
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="CompanyLastName" ColumnName="CompanyLastName" />
+                <ScalarProperty Name="CompanyEmail" ColumnName="CompanyEmail" />
+                <ScalarProperty Name="CompanyPassword" ColumnName="CompanyPassword" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="StreetAddress" ColumnName="StreetAddress" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AllDepartmentDetailsSp" FunctionName="TrackerAppModel.Store.AllDepartmentDetailsSp">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TrackerAppModel.AllDepartmentDetailsSp_Result">
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+                <ScalarProperty Name="TotalUser" ColumnName="TotalUser" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AllDesignationDetailsSp" FunctionName="TrackerAppModel.Store.AllDesignationDetailsSp">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TrackerAppModel.AllDesignationDetailsSp_Result">
+                <ScalarProperty Name="DesignationName" ColumnName="DesignationName" />
+                <ScalarProperty Name="TotalUser" ColumnName="TotalUser" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AllProjectDetailsSp" FunctionName="TrackerAppModel.Store.AllProjectDetailsSp">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TrackerAppModel.AllProjectDetailsSp_Result">
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="TotalTime" ColumnName="TotalTime" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AllRoleDetailsSp" FunctionName="TrackerAppModel.Store.AllRoleDetailsSp">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TrackerAppModel.AllRoleDetailsSp_Result">
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="TotalUser" ColumnName="TotalUser" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AllTaskDetailsSp" FunctionName="TrackerAppModel.Store.AllTaskDetailsSp">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TrackerAppModel.AllTaskDetailsSp_Result">
+                <ScalarProperty Name="TaskName" ColumnName="TaskName" />
+                <ScalarProperty Name="TotalTime" ColumnName="TotalTime" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AllUserDetailSp" FunctionName="TrackerAppModel.Store.AllUserDetailSp">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TrackerAppModel.AllUserDetailSp_Result">
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="TotalTime" ColumnName="TotalTime" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AttendenceSp" FunctionName="TrackerAppModel.Store.AttendenceSp">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TrackerAppModel.AttendenceSp_Result">
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="DesignationId" ColumnName="DesignationId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="TotalTime" ColumnName="TotalTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="StopTime" ColumnName="StopTime" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DailySummaryInsertSP" FunctionName="TrackerAppModel.Store.DailySummaryInsertSP" />
+          <FunctionImportMapping FunctionImportName="DailyTimeInsertSP" FunctionName="TrackerAppModel.Store.DailyTimeInsertSP" />
+          <FunctionImportMapping FunctionImportName="FillProjectComboSP" FunctionName="TrackerAppModel.Store.FillProjectComboSP">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TrackerAppModel.FillProjectComboSP_Result">
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="FillTaskComboSP" FunctionName="TrackerAppModel.Store.FillTaskComboSP">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TrackerAppModel.FillTaskComboSP_Result">
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="TaskName" ColumnName="TaskName" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Deadline" ColumnName="Deadline" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="PriorityId" ColumnName="PriorityId" />
+                <ScalarProperty Name="TaskNotes" ColumnName="TaskNotes" />
+                <ScalarProperty Name="EntryUser" ColumnName="EntryUser" />
+                <ScalarProperty Name="ModifiedUser" ColumnName="ModifiedUser" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetDailyContractsSP" FunctionName="TrackerAppModel.Store.GetDailyContractsSP" />
+          <FunctionImportMapping FunctionImportName="GetDailySummarySP" FunctionName="TrackerAppModel.Store.GetDailySummarySP" />
+          <FunctionImportMapping FunctionImportName="GetTotalDailyTimeSp" FunctionName="TrackerAppModel.Store.GetTotalDailyTimeSp" />
+          <FunctionImportMapping FunctionImportName="GetTotalWeeklyTimeSp" FunctionName="TrackerAppModel.Store.GetTotalWeeklyTimeSp" />
+          <FunctionImportMapping FunctionImportName="GetWeeklyContractsSP" FunctionName="TrackerAppModel.Store.GetWeeklyContractsSP" />
+          <FunctionImportMapping FunctionImportName="GetWeeklySummarySP" FunctionName="TrackerAppModel.Store.GetWeeklySummarySP" />
+          <FunctionImportMapping FunctionImportName="LoginDetailSp" FunctionName="TrackerAppModel.Store.LoginDetailSp">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TrackerAppModel.LoginDetailSp_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Project_AssignSP" FunctionName="TrackerAppModel.Store.Project_AssignSP">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TrackerAppModel.Project_AssignSP_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="DesignationId" ColumnName="DesignationId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="ConfirmPassword" ColumnName="ConfirmPassword" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Additionalinfo" ColumnName="Additionalinfo" />
+                <ScalarProperty Name="JoiningDate" ColumnName="JoiningDate" />
+                <ScalarProperty Name="ResetPasswordCode" ColumnName="ResetPasswordCode" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EntryUser" ColumnName="EntryUser" />
+                <ScalarProperty Name="ModifiedUser" ColumnName="ModifiedUser" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="ProjectAssignId" ColumnName="ProjectAssignId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="CompanyId1" ColumnName="CompanyId1" />
+                <ScalarProperty Name="UserId1" ColumnName="UserId1" />
+                <ScalarProperty Name="WeeklyLimit" ColumnName="WeeklyLimit" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="EntryUser1" ColumnName="EntryUser1" />
+                <ScalarProperty Name="ModifiedUser1" ColumnName="ModifiedUser1" />
+                <ScalarProperty Name="EntryDate1" ColumnName="EntryDate1" />
+                <ScalarProperty Name="ModifiedDate1" ColumnName="ModifiedDate1" />
+                <ScalarProperty Name="IsDeleted1" ColumnName="IsDeleted1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ProjectReportSp" FunctionName="TrackerAppModel.Store.ProjectReportSp" />
+          <FunctionImportMapping FunctionImportName="ScreenShotInsertSP" FunctionName="TrackerAppModel.Store.ScreenShotInsertSP" />
+          <FunctionImportMapping FunctionImportName="TaskReportSp" FunctionName="TrackerAppModel.Store.TaskReportSp">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TrackerAppModel.TaskReportSp_Result">
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="TaskName" ColumnName="TaskName" />
+                <ScalarProperty Name="User" ColumnName="User" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TeamReportSp" FunctionName="TrackerAppModel.Store.TeamReportSp" />
+          <FunctionImportMapping FunctionImportName="UserReportSP" FunctionName="TrackerAppModel.Store.UserReportSP" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
